@@ -8,8 +8,7 @@
 
     require("bd.php");
 
-    $res = $mysqli->query("SELECT COUNT(*) as count FROM products WHERE name LIKE '%$product_name_search%'");
-
+    $res = $mysqli->query("SELECT COUNT(*) as count FROM products WHERE title LIKE '%$product_name_search%'");
     $products_count = $res->fetch_assoc();
     
 
@@ -22,10 +21,10 @@
     $p_page_max = intdiv($products_count['count'], $products_on_page) + 1;
     }
 
-    $res = $mysqli->query("SELECT products.id, products.name, products.price, "
+    $res = $mysqli->query("SELECT products.id, products.title, products.price, "
             . "categories.title AS category_name FROM products "
             . "INNER JOIN categories ON products.category_id=categories.id "
-            . "WHERE products.name LIKE  '%$product_name_search%' "
+            . "WHERE products.title LIKE  '%$product_name_search%' "
             . "ORDER BY products.id "
             . "LIMIT $products_on_page "
             . "OFFSET " . ($p_page - 1) * $products_on_page);
