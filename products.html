@@ -19,7 +19,7 @@
             <?php
                 if ($res) 
                 {
-                    for ($i = 0; $i < $products_on_page / 2; $i++) 
+                    for ($i = 0; $i < $products_on_page; $i++) 
                     {
                         $res->data_seek($i);
                         $product = $res->fetch_assoc();
@@ -43,7 +43,7 @@
             <?php
                 if ($res) 
                 {
-                    for ($i = 0; $i < $products_on_page / 2; $i++) 
+                    for ($i = 0; $i < $products_on_page; $i++) 
                     {
                         $res->data_seek($i);
                         $product = $res->fetch_assoc();
@@ -62,57 +62,6 @@
                     }
                 }
             ?>
-
-        </div>
-        <div class="col-2 text-left">
-            <?php
-                if ($res) 
-                {
-                    for ($i = $products_on_page / 2; $i < $products_on_page; $i++) 
-                    {
-                        $res->data_seek($i);
-                        $product = $res->fetch_assoc();
-                       
-                        if ($product['id']) 
-                        {
-                            echo ('id: <br>');
-                            echo ('Название: <br>');
-                            echo ('цена: <br>');
-                            echo ('Категория: <br><br><br>');
-                        } else 
-                        {
-                            continue;
-                        }
-                    }
-                }
-            ?>
-
-        </div>
-        <div class="col-2 text-left">
-            <?php
-                if ($res) 
-                {
-                    for ($i = $products_on_page / 2  ; $i < $products_on_page; $i++) 
-                    {
-                        $res->data_seek($i);
-                        $product = $res->fetch_assoc();
-                       
-                        if ($product['id']) 
-                        {
-                            echo ($product['id'] . '<br>');
-                            echo ($product['title'] . '<br>');
-                            echo ($product['price'] . '<br>');
-                            echo ($product['category_name']) . '<br><br><br>';
-                        } else 
-                        {
-                            continue;
-                        }
-                    }
-                }
-            ?>
-
-        </div>
-        <div class="col-2">
 
         </div>
     </div>    
