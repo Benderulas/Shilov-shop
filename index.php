@@ -15,7 +15,7 @@ $url = explode('/', $url);
 
 require("top.html");
 
-require("user_message.html");
+//require("user_message.html");
 
 require("router.php");
 
