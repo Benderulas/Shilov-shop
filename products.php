@@ -18,7 +18,7 @@
     }
     else
     {
-    $p_page_max = intdiv($products_count['count'], $products_on_page) + 1;
+        $p_page_max = intdiv($products_count['count'], $products_on_page) + 1;
     }
 
     $res = $mysqli->query("SELECT products.id, products.title, products.price, "
