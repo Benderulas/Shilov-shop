@@ -1,0 +1,20 @@
+<?php require("product_search_form.php"); ?>
+
+
+<form name="product_search" method="GET" action="products">
+    <input type="hidden" name="page" value="1">
+    <label>Название: <input class="justify-content-center" type="text" name="title" value="<?php
+        echo (htmlspecialchars($productSearcher->title)); 
+        ?>"></label>
+    <label>Мин цена: <input type="text" name="priceMin" value="<?php
+        echo (htmlspecialchars($productSearcher->priceMin)); 
+        ?>"></label>
+    <label>Макс цена: <input type="text" name="priceMax" value="<?php
+        echo (htmlspecialchars($productSearcher->priceMax));             
+        ?>"></label>
+    <?php
+    	require("select_module.php");
+    ?>
+    	
+    <input type="submit" value="Поиск">
+</form>

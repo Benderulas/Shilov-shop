@@ -1,12 +1,61 @@
-<div class="text-center" style="height: 500px;">
-<ul> <li> <h1> hello </h1> </li> </ul>
+<div class="container-fluid">
+    <br>
+    <div>
+        <?php require("test.php"); ?>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <?php require("product_search_form.html"); ?>
+        </div>
+        <div class="col-2 text-left">
+            <?php
+                if ($products) 
+                {
+                    for ($i = 0; $i < $productSearcher->productsCount; $i++) 
+                    {                                
+                        if (isset($products[$i])) 
+                        {
+                            echo ('ID: <br>');
+                            echo ('Название: <br>');
+                            echo ('цена: <br>');
+                            echo ('Категория: <br>');
+                            echo ('Цвет: <br>');
+                            echo ('Бренд: <br>');
+                            echo ('Пол: <br>');
+                            echo ('Скидка: <br>');
+                            echo ('Размер: <br>');
+                            echo ('Размер: <br><br><br>');
+                        } 
+                    }
+                }
+            ?>
+        </div>
+        <div class="col-2 text-left">
+            <?php
+                if ($products) 
+                {
+                    for ($i = 0; $i < $productSearcher->productsCount; $i++) 
+                    {                      
+                        if (isset($products[$i])) 
+                        {
+                            echo ($products[$i]['id'] . '<br>');
+                            echo ($products[$i]['title'] . '<br>');
+                            echo ($products[$i]['price'] . '<br>');
+                            echo ($products[$i]['category_title']) . '<br>';
+                            echo ($products[$i]['color_title']) . '<br>';
+                            echo ($products[$i]['company_title']) . '<br>';
+                            echo ($products[$i]['sex_title']) . '<br>';
+                            echo ($products[$i]['discount']) . '<br>';
+                            echo ($products[$i]['size_title']) . '<br>';
+                            echo ($products[$i]['size_number']) . '<br><br><br>';
+                        }
+                    }
+                }
+            ?>
+        </div>
+    </div>    
 </div>
-<?php 
-require("authorization.php");
-?>
 
-<script>
-	(function (){
-		var link = $('h1');
-	});
-</script>
+<div class="container-fluid text-center">
+    
+</div>
