@@ -1,0 +1,45 @@
+<?php 
+require('bd.php'); 
+$res = $mysqli->query("SELECT * FROM categories ORDER BY id");
+if (!$res)
+{
+    $n = 0;
+}
+else 
+{
+    $n = $res->num_rows;
+}
+
+?>
+<br>
+<div class="d-flex justify-content-center">
+    <form name="new_product" method="POST" action="/incert_product">
+      <div class="form-group d-flex justify-content-center">
+        <label>Название товара: <input type="text" name="product_name"></label> <br>
+      </div>
+      <div class="form-group d-flex justify-content-center">
+        <label>Цена: <input type="text" name="product_price"></label> <br>
+      </div>
+      <div class="form-group d-flex justify-content-center">
+        <input type="hidden" name="type" value="incert_product">
+      </div>
+      <div class="form-group d-flex justify-content-center">
+        <select name="category_id" required>
+            <?php 
+            for ($i = 0; $i < $n; $i++)
+            {
+                $res->data_seek($i);
+                
+                $category = $res->fetch_assoc();
+                echo("<option value=$category[id]>$category[title]</option>");
+            }
+            ?>
+        </select>
+      </div>
+      <div class="form-group d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+</div>
+
+    
