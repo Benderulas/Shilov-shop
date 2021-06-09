@@ -10,7 +10,6 @@
 
 	            for ($i = 0; $i < intdiv($newsCount, 2); $i++) 
 	            {
-	            	var_dump($i);
 	                echo ($news[$i]->title . '<br>');
 	                echo ($news[$i]->text . '<br><br><br>');
 	            }
@@ -23,8 +22,7 @@
 	        if ($res) 
 	        {
 	            for ($i = intdiv($newsCount, 2); $i < $newsCount; $i++) 
-	            {
-	            	var_dump($i);	   
+	            {   
 	                echo ($news[$i]->title . '<br>');
 	                echo ($news[$i]->text . '<br><br><br>');
 	            }

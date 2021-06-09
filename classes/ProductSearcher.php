@@ -16,7 +16,7 @@ class ProductSearcher
 	public $productsOnPage = 8;
 	
 
-	public function SearchProductsInBD()
+	public function SearchProductsByFilters()
 	{
 		$request = "SELECT "
 			. "products.id, "

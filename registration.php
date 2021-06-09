@@ -1,35 +1,36 @@
 <?php
 
+require_once ("classes/UserSearcher.php");
+
+$user = new User();
+$user->SetByPOST($_POST);
+
+$userSearcher = new UserSearcher();
+$userSearcher->login = $user->login;
+$userSearcher->email = $user->email;
 
 
-$login = $_POST['login'];
-$pass = $_POST['password'];
-$hash = '2';
-$ip = '2';
-$first_name = $_POST['first_name'];
-$second_name = $_POST['second_name'];
-$email = $_POST['email'];
-
-
-
-$res = $mysqli->query("SELECT login "
-            . "FROM users "
-            . "WHERE login = '" . $login . "'");
-
-	
-$res = $res->fetch_assoc();
-
-if ($login == $res['login']) 
+if ($userSearcher->FindUserByLogin()->id) 
 {
 	echo("login is used already, please, select new one.");
 }
+if ($userSearcher->FindUserByEmail()->id) 
+{
+	echo("email is used already, please, select new one.");
+}
 else 
 {
-	$mysqli->query("INSERT INTO users(login, password, hash, ip, first_name, second_name, email) "
-        . "VALUES('$login', '$pass', '$hash', '$ip', '$first_name', '$second_name', '$email')");
+	if ($user->Insert())
+	{
+		$_SESSION['is_auth'] = true;
+		$_SESSION['login'] = $user->login;
+		header("Location: http://shilov-shop/");
+	}
+	else
+	{
+		echo("error");
+	}
 
-	$_SESSION['is_auth'] = true;
-	$_SESSION['login'] = $login;
-	header("Location: http://test/");
+	
 }
 ?>

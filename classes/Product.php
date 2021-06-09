@@ -41,7 +41,7 @@ class Product
 
 	public function SetFromDB($_product)
 	{
-		if (isset($_product['id'])) $this->id = $_product['id'];
+		$this->id = $_product['id'];
 		$this->title = $_product['title'];
 		$this->price = $_product['price'];
 		$this->discount = $_product['discount'];
@@ -61,7 +61,7 @@ class Product
 		$this->sexTitle = $_product['sexTitle'];
 	}
 
-	public function IsProductExist()
+	public function DoesProductExist()
 	{
 		require("bd.php");
 		if ($res = $mysqli->query("SELECT COUNT(*) as count FROM products WHERE id = $this->id"))

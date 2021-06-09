@@ -3,6 +3,6 @@
 $_SESSION['is_auth'] = false;
 $user = false;
 
-header("Location: http://test/");
+header("Location: http://shilov-shop/");
 
 ?>

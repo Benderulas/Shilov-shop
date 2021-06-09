@@ -4,16 +4,16 @@ session_start();
 require('bd.php');
 
 if(isset($_SESSION['is_auth']) == false) $_SESSION['is_auth'] = false;
+
 if($_SESSION['is_auth']) 
 {
-	$res = $mysqli->query("SELECT id, login, first_name, second_name, email, admin "
-            . "FROM users "
-            . "WHERE login = '" . $_SESSION['login'] . "'");
-	if($res) 
-	{
-		$user = $res->fetch_assoc();
-	}
-	else echo("Identifier ERROR, can't find user in bd");
+	require("classes/UserSearcher.php");
+	$userSearcher = new UserSearcher();
+	$userSearcher->login = $_SESSION['login'];
+
+
+	$user = $userSearcher->FindUserByLogin();
+	if (!$user) echo("Identifier ERROR, can't find user in DB");
 }
 else
 {

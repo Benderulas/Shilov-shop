@@ -22,13 +22,13 @@ class News
 
 	public function SetFromDB($_news)
 	{
-		if (isset($_news['id'])) $this->id = $_news['id'];
+		$this->id = $_news['id'];
 		$this->title = $_news['title'];
 		$this->text = $_news['text'];
 		$this->immage = $_news['immage'];
 	}
 
-	public function IsNewsExist()
+	public function DoesNewsExist()
 	{
 		require("bd.php");
 		if ($res = $mysqli->query("SELECT COUNT(*) as count FROM news WHERE id = $this->id"))
