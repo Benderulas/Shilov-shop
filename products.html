@@ -11,21 +11,20 @@
             <?php
                 if ($products) 
                 {
-                    for ($i = 0; $i < $productSearcher->productsCount; $i++) 
-                    {                                
-                        if (isset($products[$i])) 
-                        {
-                            echo ('ID: <br>');
-                            echo ('Название: <br>');
-                            echo ('цена: <br>');
-                            echo ('Категория: <br>');
-                            echo ('Цвет: <br>');
-                            echo ('Бренд: <br>');
-                            echo ('Пол: <br>');
-                            echo ('Скидка: <br>');
-                            echo ('Размер: <br>');
-                            echo ('Размер: <br><br><br>');
-                        } 
+                    $i = 0;
+                    while(isset($products[$i])) 
+                    {
+                        echo ('ID: <br>');
+                        echo ('Название: <br>');
+                        echo ('цена: <br>');
+                        echo ('Категория: <br>');
+                        echo ('Цвет: <br>');
+                        echo ('Бренд: <br>');
+                        echo ('Пол: <br>');
+                        echo ('Скидка: <br>');
+                        echo ('Размер: <br>');
+                        echo ('Размер: <br><br><br>');
+                        $i++;
                     }
                 }
             ?>
@@ -34,21 +33,20 @@
             <?php
                 if ($products) 
                 {
-                    for ($i = 0; $i < $productSearcher->productsCount; $i++) 
-                    {                      
-                        if (isset($products[$i])) 
-                        {
-                            echo ($products[$i]['id'] . '<br>');
-                            echo ($products[$i]['title'] . '<br>');
-                            echo ($products[$i]['price'] . '<br>');
-                            echo ($products[$i]['category_title']) . '<br>';
-                            echo ($products[$i]['color_title']) . '<br>';
-                            echo ($products[$i]['company_title']) . '<br>';
-                            echo ($products[$i]['sex_title']) . '<br>';
-                            echo ($products[$i]['discount']) . '<br>';
-                            echo ($products[$i]['size_title']) . '<br>';
-                            echo ($products[$i]['size_number']) . '<br><br><br>';
-                        }
+                    $i = 0;
+                    while(isset($products[$i]))
+                    {
+                        echo ($products[$i]->id . '<br>');
+                        echo ($products[$i]->title . '<br>');
+                        echo ($products[$i]->price . '<br>');
+                        echo ($products[$i]->categoryTitle) . '<br>';
+                        echo ($products[$i]->colorTitle) . '<br>';
+                        echo ($products[$i]->colorTitle) . '<br>';
+                        echo ($products[$i]->sexTitle) . '<br>';
+                        echo ($products[$i]->discount) . '<br>';
+                        echo ($products[$i]->sizeTitle) . '<br>';
+                        echo ($products[$i]->sizeNumber) . '<br><br><br>';
+                        $i++;
                     }
                 }
             ?>
