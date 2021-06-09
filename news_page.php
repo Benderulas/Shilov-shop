@@ -1,6 +1,6 @@
 <?php
 
-require("News.php");
+require("classes/News.php");
 
 $res = $mysqli->query("SELECT * FROM news");
 

@@ -1,5 +1,5 @@
 <?php
-    require("ProductSearcher.php");
+    require("classes/ProductSearcher.php");
 
     $productSearcher = new ProductSearcher();
     $productSearcher->SetFiltersByGET();
