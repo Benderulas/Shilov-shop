@@ -16,6 +16,9 @@ header('Content-Type: text/html; charset=utf-8');
 require('authorization.php');
 if (isset($_POST['type']))  require('POST_router.php');
 
+
+
+
 require("top.html");
 
 require("router.php");

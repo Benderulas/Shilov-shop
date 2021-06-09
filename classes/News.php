@@ -39,7 +39,7 @@ class News
 		}
 		else 
 		{
-			echo ("IsNewsExist request error");
+			echo ("DoesNewsExist request error");
 			return false;
 		}
 	}
