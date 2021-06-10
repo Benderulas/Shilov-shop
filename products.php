@@ -4,5 +4,5 @@
     $productSearcher = new ProductSearcher();
     $productSearcher->SetFiltersByGET();
 
-    $products = $productSearcher->SearchProductsByFilters();
+    $products = $productSearcher->SearchByFilters();
 ?>

@@ -1,11 +1,14 @@
 <?php 
-class Product
+
+require_once("Object.php");
+
+class Product extends Object
 {
-	public $id;
 	public $title;
 	public $price;
 	public $discount;
 	public $immage;
+	public $count;
 
 	public $colorID;
 	public $sizeID;
@@ -20,6 +23,8 @@ class Product
 	public $companyTitle;
 	public $sexTitle;
 
+	public const tableName = 'products';
+
 	
 
 
@@ -31,6 +36,7 @@ class Product
 		$this->price = $_product['price'];
 		$this->discount = $_product['discount'];
 		$this->immage = $_product['immage'];
+		$this->count = $_product['count'];
 
 		$this->colorID = $_product['colorID'];
 		$this->sizeID = $_product['sizeID'];
@@ -46,6 +52,8 @@ class Product
 		$this->price = $_product['price'];
 		$this->discount = $_product['discount'];
 		$this->immage = $_product['immage'];
+		$this->count = $_product['count'];
+
 
 		$this->colorID = $_product['colorID'];
 		$this->sizeID = $_product['sizeID'];
@@ -61,31 +69,16 @@ class Product
 		$this->sexTitle = $_product['sexTitle'];
 	}
 
-	public function DoesProductExist()
-	{
-		require("bd.php");
-		if ($res = $mysqli->query("SELECT COUNT(*) as count FROM products WHERE id = $this->id"))
-		{
-			$res = $res->fetch_assoc();
-			if ($res['count']) return true;
-			else return false;
-		}
-		else 
-		{
-			echo ("IsProductExist request error");
-			return false;
-		}
-	}
-
 	public function Insert()
 	{
 		require("bd.php");
 
-		$res = $mysqli->query("INSERT INTO products (title, colorID, price, sizeID, categoryID, companyID, sexID, discount, immage) "
-				. "VALUES ('$this->title', $this->colorID, $this->price, $this->sizeID, $this->categoryID, $this->companyID, $this->sexID, $this->discount, $this->immage)");
+		$res = $mysqli->query("INSERT INTO products (title, colorID, price, sizeID, categoryID, companyID, sexID, discount, immage, count) "
+				. "VALUES ('$this->title', $this->colorID, $this->price, $this->sizeID, $this->categoryID, $this->companyID, $this->sexID, $this->discount, $this->immage, $this->count)");
 
 		return $res;
 	}
+
 
 	public function Edit()
 	{
@@ -101,15 +94,40 @@ class Product
 				 . "sexID = $this->sexID, "
 				 . "discount = $this->discount, "
 				 . "immage = '$this->immage' "
+				 . "count = $this->count "
 				 . "WHERE id = $this->id";
 		$res = $mysqli->query($request);
 		return $res;
 	}
 
-	public static function Delete($_id)
+	public function InsertInOrder($_orderID)
 	{
 		require("bd.php");
-		$res = $mysqli->query("DELETE FROM products WHERE id = $_id");
+		$request = "INSERT INTO products_in_orders (productID, orderID, count) 
+											VALUES ($this->id, $_orderID, $this->count)";
+
+		$res = $mysqli->query($request);
+
+	}
+
+	public function EditInOrder($_orderID)
+	{
+		require("bd.php");
+
+		$request = "UPDATE products_in_orders SET "
+				 . "count = $this->count "
+				 . "WHERE orderID = $_orderID "
+				 . "AND productID = $this->id";
+		$res = $mysqli->query($request);
+		return $res;
+	}
+
+	public function DeleteFromOrder($_orderID)
+	{
+		require("bd.php");
+		$res = $mysqli->query("DELETE FROM products_in_orders" 
+			. "WHERE orderID = $_orderID "
+			. "AND productID = $this->id");
 
 		return $res;
 	}

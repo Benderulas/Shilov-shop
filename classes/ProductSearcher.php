@@ -1,22 +1,24 @@
 <?php
 
-require("Product.php");
+require_once("Searcher.php");
+require_once("Product.php");
 
-class ProductSearcher
+class ProductSearcher extends Searcher
 {
-	public $title = '';
-	public $colorID = false;
-	public $priceMin = 0;
-	public $priceMax = 1000000;
-	public $sizeID = false;
-	public $categoryID = false;
-	public $companyID = false;
-	public $sexID = false;
+	public $title;
+	public $colorID;
+	public $priceMin;
+	public $priceMax;
+	public $sizeID;
+	public $categoryID;
+	public $companyID;
+	public $sexID;
+
 	public $page = 1;
 	public $productsOnPage = 8;
 	
 
-	public function SearchProductsByFilters()
+	public function SearchByFilters()
 	{
 		$request = "SELECT "
 			. "products.id, "
@@ -24,13 +26,14 @@ class ProductSearcher
 			. "products.price, "
 			. "products.discount, "
 			. "products.immage, "
+			. "products.count, "
 
 			. "products.colorID, "
 			. "products.sizeID, "
 			. "products.categoryID, "
 			. "products.companyID, "
 			. "products.sexID, "
-			
+
             . "categories.title AS categoryTitle, "
             . "colors.title AS colorTitle, "
             . "sizes.title AS sizeTitle, "
@@ -45,16 +48,18 @@ class ProductSearcher
             . "INNER JOIN sizes ON products.sizeID = sizes.id "
             . "INNER JOIN companies ON products.companyID = companies.id "
             . "INNER JOIN sex ON products.sexID = sex.id "
+            . "WHERE 1 ";
 
-            . "WHERE products.title LIKE '%$this->title%' "
-            . "AND products.price < $this->priceMax "
-            . "AND products.price > $this->priceMin ";
+        if (isset($this->title)) $request = $request . "AND products.title LIKE '%$this->title%' ";
 
-        if ($this->colorID) $request = $request . "AND products.colorID = $this->colorID ";
-        if ($this->sizeID) $request = $request . "AND products.sizeID = $this->sizeID ";
-        if ($this->categoryID) $request = $request . "AND products.categoryID = $this->categoryID ";
-        if ($this->companyID) $request = $request . "AND products.companyID = $this->companyID ";
-        if ($this->sexID) $request = $request . "AND products.sexID = $this->sexID ";
+        if (isset($this->priceMax)) $request = $request . "AND products.price < $this->priceMax ";
+        if (isset($this->priceMin)) $request = $request . "AND products.price > $this->priceMin ";
+
+        if (isset($this->colorID)) $request = $request . "AND products.colorID = $this->colorID ";
+        if (isset($this->sizeID)) $request = $request . "AND products.sizeID = $this->sizeID ";
+        if (isset($this->categoryID)) $request = $request . "AND products.categoryID = $this->categoryID ";
+        if (isset($this->companyID)) $request = $request . "AND products.companyID = $this->companyID ";
+        if (isset($this->sexID)) $request = $request . "AND products.sexID = $this->sexID ";
 
 
         $request = $request
@@ -89,6 +94,52 @@ class ProductSearcher
 			echo("Ошибка запроса");
 		}		
 		return $products;
+	}
+
+	public function GetById($_id)
+	{
+		require("bd.php");
+		$request = "SELECT "
+			. "products.id, "
+			. "products.title, "
+			. "products.price, "
+			. "products.discount, "
+			. "products.immage, "
+			. "products.count, "
+
+			. "products.colorID, "
+			. "products.sizeID, "
+			. "products.categoryID, "
+			. "products.companyID, "
+			. "products.sexID, "
+
+            . "categories.title AS categoryTitle, "
+            . "colors.title AS colorTitle, "
+            . "sizes.title AS sizeTitle, "
+            . "sizes.number AS sizeNumber, "
+            . "companies.title AS companyTitle, "
+            . "sex.title AS sexTitle "
+
+            . "FROM products "
+
+            . "INNER JOIN categories ON products.categoryID = categories.id "
+            . "INNER JOIN colors ON products.colorID = colors.id "       
+            . "INNER JOIN sizes ON products.sizeID = sizes.id "
+            . "INNER JOIN companies ON products.companyID = companies.id "
+            . "INNER JOIN sex ON products.sexID = sex.id "
+
+            . "WHERE products.id = $this->id ";
+
+		$res = $mysqli($request);
+
+		if($res->num_rows)
+		{
+			$product = new Product();
+			$product->SetFromDB($res->fetch_assoc());
+			return $product;
+		}
+		else return false;
+
 	}
 
 	public function SetFiltersByGET()

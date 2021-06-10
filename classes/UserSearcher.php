@@ -1,8 +1,10 @@
 <?php
 
+
+require_once("Searcher.php");
 require("User.php");
 
-class UserSearcher
+class UserSearcher extends Searcher
 {
 	public $login = '',
 		$firstName = '',
@@ -12,7 +14,50 @@ class UserSearcher
 		$count = 1;
 
 
-	public function FindUserByLogin()
+
+	public function GetById($_id)
+	{
+		require("bd.php");
+		$request = "SELECT "
+			. "users.id, "
+			. "users.login, "
+			. "users.password, "
+			. "users.hash, "
+			. "users.ip, "
+
+			. "users.firstName, "
+			. "users.secondName, "
+			. "users.rightsID, "
+			. "users.email, "
+			. "users.immage, "
+			
+            . "rights.title AS rightsTitle, "
+            . "rights.level AS rightsLevel "
+
+            . "FROM users "
+
+            . "INNER JOIN rights ON users.rightsID = rights.id "
+
+            . "WHERE users.id = '$_id'";		
+
+		$res = $mysqli->query($request);
+
+		if ($res)
+		{
+			$user = new User();
+			$user->SetFromDB($res->fetch_assoc());
+			return $user;			
+		}
+		else 
+		{
+			echo("Ошибка запроса " . self::class . " GetById ");
+			return false;
+		}
+
+	}
+
+
+	public function GetByLogin($_login)
 	{
 		$request = "SELECT "
 			. "users.id, "
@@ -34,7 +79,7 @@ class UserSearcher
 
             . "INNER JOIN rights ON users.rightsID = rights.id "
 
-            . "WHERE users.login = '$this->login'";		
+            . "WHERE users.login = '$_login'";		
 
 		require("bd.php");
 		$res = $mysqli->query($request);
@@ -53,7 +98,7 @@ class UserSearcher
 	}
 
 
-	public function FindUserByEmail()
+	public function GetByEmail()
 	{
 		$request = "SELECT "
 			. "users.id, "
@@ -94,7 +139,7 @@ class UserSearcher
 		
 	}
 
-	public function SearchUsersByFilters()
+	public function SearchByFilters()
 	{
 		$request = "SELECT "
 			. "users.id, "

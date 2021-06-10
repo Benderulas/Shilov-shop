@@ -1,8 +1,10 @@
 <?php
-class User 
+
+require_once("Object.php");
+
+class User extends Object
 {
-	public $id,
-		$login,
+	public $login,
 		$password,
 		$hash,
 		$ip,
@@ -10,9 +12,11 @@ class User
 		$secondName = '',
 		$immage = '',
 		$rightsID = 2,
-		$rightsTitle,
-		$rightsLevel,
+		$rightsTitle ='',
+		$rightsLevel ='',
 		$email;
+
+	public const tableName = 'users';
 
 
 
@@ -43,25 +47,7 @@ class User
 		if (isset($_user['secondName'])) $this->secondName = $_user['secondName'];
 		if (isset($_user['immage'])) $this->immage = $_user['immage'];
 		if (isset($_user['rightsID'])) $this->rightsID = $_user['rightsID'];
-		if (isset($_user['rightsTitle'])) $this->rightsTitle = $_user['rightsTitle'];
-		if (isset($_user['rightsLevel'])) $this->rightsLevel = $_user['rightsLevel'];
 		$this->email = $_user['email'];
-	}
-
-	public function DoesUserExist()
-	{
-		require("bd.php");
-		if ($res = $mysqli->query("SELECT COUNT(*) as count FROM users WHERE id = $this->id"))
-		{
-			$res = $res->fetch_assoc();
-			if ($res['count']) return true;
-			else return false;
-		}
-		else 
-		{
-			echo ("DoesUserExist request error");
-			return false;
-		}
 	}
 
 	public function Insert()
@@ -101,14 +87,6 @@ class User
 				 . "WHERE id = $this->id";
 
 		$res = $mysqli->query($request);
-
-		return $res;
-	}
-
-	public static function Delete($_id)
-	{
-		require("bd.php");
-		$res = $mysqli->query("DELETE FROM users WHERE id = $_id");
 
 		return $res;
 	}
