@@ -3,12 +3,13 @@
 session_start();
 require('bd.php');
 
-if($_SESSION['is_auth']) 
+if(isset($_SESSION['is_auth']) == false) $_SESSION['is_auth'] = false;
+if($_SESSION['is_auth'])
 {
 	$res = $mysqli->query("SELECT id, login, first_name, second_name, email, admin "
             . "FROM users "
             . "WHERE login = '" . $_SESSION['login'] . "'");
-	if($res) 
+	if($res)
 	{
 		$user = $res->fetch_assoc();
 	}

@@ -1,19 +1,69 @@
 <html>
 <head>
-    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
+
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+
     <meta charset="UTF-8">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
+
+    <style>
+        <?php echo file_get_contents("my_style.css"); ?>
+        <?php echo file_get_contents("button_style.css"); ?>
+    </style>
     <script src="jquery-3.5.1.js"></script>
 
     <meta charset="UTF-8">
-    
+
     <title>Сайт из клешней</title>
 </head>
 <body class="bg-light">
-    <div>
+<header>
+    <div class="wrapper-header">
+        <div class="up-header">
+            <div class="sex">
+                <button>Женское</button>
+                <button>Мужское</button>
+            </div>
+            <div class="image"><img src="https://fotoseif.ru/images/2021/06/9xpr8yoij0nin1xqn1oc.png" alt="Соблазн" class="log-img"></div>
+            <div class="butt">
+                <button>Профиль</button>
+                <button>Корзина</button>
+            </div>
+        </div>
+        <div class="down-header">
+            <input type="search" class="search" placeholder="Поиск товаров"/>
+        </div>
+    </div>
+</header>
+
+    <!-- <div class="navbar navbar-gradient">
+        <div class="container bord-button">
+
+                <div class="button-left">
+                    <button type="button", class="btn but">Женское</button>
+                    <button type="button", class="btn btn-outline-primary but-marg-left">Мужское</button>
+                    <button type="button", class="but"> Унисекс </button>
+                </div>
+                <div>
+                    <img src="https://fotoseif.ru/images/2021/06/9xpr8yoij0nin1xqn1oc.png", alt="Соблазн", class="log-img">
+                </div>
+                <div class="button-right">
+                    <button type="button", class="btn btn-outline-primary but-marg-right">Личный кабинет<img src=""></button>
+                    <button type="button", class="btn btn-outline-danger">Корзина<img src=""></button>
+                </div>
+
+        </div>
+        <div class="container">
+            <div class="col-11">
+                <input class="form-control me-2" type="search" placeholder="Поиск товара"/>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
             <div class="navbar-header">
                 <a href="main" class="navbar-brand">
@@ -31,9 +81,9 @@
                     <li class="nav-item"><a class="nav-link <?php if($url[0] == 'incert_product') echo('active'); ?>" href="incert_product">Добавить товар</a></li>
                     <li class="nav-item"><a class="nav-link <?php if($url[0] == 'incert_cathegory') echo('active'); ?>" href="incert_cathegory">Добавить категорию</a></li>
 
-                    <li class="nav-item"><a class="nav-link <?php if($url[0] == 'test_page') echo('active'); ?>" href="test_page">test</a></li>                              
+                    <li class="nav-item"><a class="nav-link <?php if($url[0] == 'test_page') echo('active'); ?>" href="test_page">test</a></li>
                 </ul>
-            </div> 
+            </div>
             <?php require("authorization_menu.html");?>
         </nav>
-    </div>
+    </div> -->
