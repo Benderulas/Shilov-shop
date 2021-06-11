@@ -35,7 +35,7 @@ a{
 
 header{
 	padding-top: 15px;
-	padding-bottom: 44px;
+	padding-bottom: 40px;
 	background: #ffe5b4;
 }
 
@@ -45,7 +45,7 @@ header{
 }
 
 .down-header{
-	margin-top: 21px;
+	margin-top: 15px;
 }
 
 .search{
@@ -66,11 +66,11 @@ header{
 }
 
 footer{
-	padding-top:40px;
-	padding-bottom: 30px;
+	padding-top:30px;
+	padding-bottom: 20px;
 	padding-left: 260px;
 	padding-right: 311px;
-	background: black;
+	background: #DEB887;
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
@@ -84,23 +84,24 @@ footer{
 }
 .nav-footer>a:not(:last-child){
 	margin-bottom: 1em;
-	color: white;
+	color: #ffe5b4;
+	font-family: 'Balsamiq Sans', cursive;
+	font-size: 14px;
 }
 
 .nav-footer>a:visited{
-	color: white;
+	color: #740505;
 }
 
 .content-footer{
-	color: white;
+	color: #740505;
+	font-family: 'Balsamiq Sans', cursive;
+	font-size: 14px;
 }
 
-.social-network-footer{
-
-}
 .social-network-footer img{
-	weight:55px;
-	height: 55px;
+	weight:45px;
+	height: 45px;
 	margin-top: 80px;
 	margin-right: 20px;
 	margin-left: 20px;
@@ -125,7 +126,6 @@ footer{
 	grid-gap: 1006px 334px;
 	margin-bottom: 192px;
 	margin-top: 172px;
-
 }
 .new{
 	grid-auto-columns: 340px;
@@ -134,3 +134,50 @@ footer{
 	grid-auto-columns:334px;
 
 }
+
+.modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	display: none;
+	pointer-events: none;
+}
+.modalDialog:target {
+	display: block;
+	pointer-events: auto;
+}
+.modalDialog > div {
+	margin: 40px 15%;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #999;
+}
+.close {
+	background:none;
+	line-height: 25px;
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+	border: 2px solid black;
+	padding-left: 10px;
+	padding-right: 10px;
+
+}
+
+.modalDialog .login{
+	display: flex;
+	flex-direction: column;
+}
+.modalDialog .login>a{
+	align-self: start;
+}
+
+.close:hover { background: #00d9ff; }

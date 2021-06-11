@@ -45,7 +45,10 @@
 	color:#ffe5b4;
 }
 
-
+.butt>button{
+	background: none;
+	border:0px;
+}
 
 
 
