@@ -1,5 +1,5 @@
 <?php
 
-require($_POST['type'] . ".php");
+require( "POST/" . $_POST['type'] . ".php");
 
 ?>

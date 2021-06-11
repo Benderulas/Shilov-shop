@@ -1,12 +1,11 @@
 <?php
 
-require("classes/UserSearcher.php");
-$userSearcher = new UserSearcher();
-$userSearcher->login = $_POST['login'];
+require("classes/User.php");
 
-$user = $userSearcher->FindUserByLogin();
+$user = new User();
+$user->SetByLogin($_POST['login']);
 
-if ($user)
+if ($user->id)
 {
 	if ($user->password == $_POST['password']) 
 	{
@@ -17,6 +16,9 @@ if ($user)
 	else 
 	{
 		echo("password is wrong<br>");
+		var_dump($user);
+		echo ("<br><br>");
+		var_dump($_POST['password']);
 	}
 }
 else echo("can't find user with the login");

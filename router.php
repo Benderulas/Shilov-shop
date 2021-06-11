@@ -10,8 +10,8 @@
 
 	if ($lastCatalog)
 	{
-		$filePath = $filePath . "/$file.html";
+		$filePath = $filePath . "/$lastCatalog.html";
 	}
-	else $filePath = $filepath . "/main/main.html";
+	else $filePath = $filePath . "/main/main.html";
 
 	require($filePath);
