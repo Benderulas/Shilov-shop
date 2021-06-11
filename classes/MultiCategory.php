@@ -8,21 +8,28 @@ class MultiCategory
 	const tableName = '';
 
 
-	public function SetByPOST($_multiCategory)
+	public function Set($_multiCategory)
 	{
 		if (isset($_multiCategory['id'])) $this->id = $_multiCategory['id'];
-		$this->title = $_multiCategory['title]'];
+		$this->title = $_multiCategory['title'];
 	}
 
-	public function SetFromDB($_multiCategory)
+	public function SetById($_id)
 	{
-		$this->id = $_multiCategory['id'];
-		$this->title = $_multiCategory['title'];
+		require("DataBase.php");
+		$request = "SELECT * from " . static::tableName . " WHERE id =  $_id";
+		$res = $mysqli->query($request);
+
+		if ($res)
+		{
+			$this->Set($res->fetch_assoc());
+		}
 	}
 
 	public function Exist()
 	{
-		require("bd.php");
+		if (isset($this->id)) return true;
+		require("DataBase.php");
 		if ($res = $mysqli->query("SELECT COUNT(*) as count FROM " . static::tableName . " WHERE title = '$this->title'"))
 		{
 			$res = $res->fetch_assoc();
@@ -38,7 +45,7 @@ class MultiCategory
 
 	public function Insert()
 	{
-		require("bd.php");
+		require("DataBase.php");
 
 		if ($this->Exist() == false)
 		{
@@ -51,7 +58,7 @@ class MultiCategory
 
 	public function Edit()
 	{
-		require("bd.php");
+		require("DataBase.php");
 
 		$request = "UPDATE " . static::tableName . " SET "
 				 . "title = '$this->title' "
@@ -60,17 +67,17 @@ class MultiCategory
 		return $res;
 	}
 
-	public static function Delete($_id)
+	public function Delete()
 	{
-		require("bd.php");
-		$res = $mysqli->query("DELETE FROM " . static::tableName . " WHERE id = $_id");
+		require("DataBase.php");
+		$res = $mysqli->query("DELETE FROM " . static::tableName . " WHERE id = $tihs->id");
 
 		return $res;
 	}
 
 	public static function GetAllFromDB()
 	{
-		require("bd.php");
+		require("DataBase.php");
 		$request = "SELECT * FROM " . static::tableName . " ORDER BY id";
 		$res = $mysqli->query($request);
 
@@ -80,13 +87,14 @@ class MultiCategory
 		}
 
 		$count = $res->num_rows;
+		$className = static::class;
 
 		for ($i = 0; $i < $count; $i++)
 		{
 			$res->data_seek($i);
-			$className = self::class;
+			
 			$myltiCategories[$i] = new $className();
-			$myltiCategories[$i]->SetFromDB($res->fetch_assoc());
+			$myltiCategories[$i]->Set($res->fetch_assoc());
 		}
 		return $myltiCategories;
 	}

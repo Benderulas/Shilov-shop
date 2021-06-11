@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require('bd.php');
+require("DataBase.php");
 
 if(isset($_SESSION['is_auth']) == false) $_SESSION['is_auth'] = false;
 

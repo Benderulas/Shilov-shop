@@ -9,19 +9,22 @@
         </div>
         <div class="col-2 text-left">
             <?php
-                if ($products) 
+                if ($productsForView) 
                 {
                     $i = 0;
-                    while(isset($products[$i])) 
+                    while(isset($productsForView[$i])) 
                     {
                         echo ('ID: <br>');
                         echo ('Название: <br>');
                         echo ('цена: <br>');
-                        echo ('Категория: <br>');
-                        echo ('Цвет: <br>');
+
+                        echo ('Категория: <br>');                       
                         echo ('Бренд: <br>');
                         echo ('Пол: <br>');
+
                         echo ('Скидка: <br>');
+
+                        echo ('Цвет: <br>');
                         echo ('Размер: <br>');
                         echo ('Размер: <br>');
                         echo ('Количество: <br><br><br>');
@@ -32,22 +35,35 @@
         </div>
         <div class="col-2 text-left">
             <?php
-                if ($products) 
+                if ($productsForView) 
                 {
                     $i = 0;
-                    while(isset($products[$i]))
+                    while(isset($productsForView[$i]))
                     {
-                        echo ($products[$i]->id . '<br>');
-                        echo ($products[$i]->title . '<br>');
-                        echo ($products[$i]->price . '<br>');
-                        echo ($products[$i]->categoryTitle) . '<br>';
-                        echo ($products[$i]->colorTitle) . '<br>';
-                        echo ($products[$i]->colorTitle) . '<br>';
-                        echo ($products[$i]->sexTitle) . '<br>';
-                        echo ($products[$i]->discount) . '<br>';
-                        echo ($products[$i]->sizeTitle) . '<br>';
-                        echo ($products[$i]->sizeNumber) . '<br>';
-                        echo ($products[$i]->count) . '<br><br><br>';
+                        echo ($productsForView[$i]->product->id . '<br>');
+                        echo ($productsForView[$i]->product->title . '<br>');
+                        echo ($productsForView[$i]->product->price . '<br>');
+
+                        echo ($productsForView[$i]->product->category->title) . '<br>';                    
+                        echo ($productsForView[$i]->product->company->title) . '<br>';
+                        echo ($productsForView[$i]->product->sex->title) . '<br>';
+
+                        echo ($productsForView[$i]->product->discount) . '<br>';
+
+
+                        for ($j = 0; $j < count($productsForView[$i]->productsToColorAndSize); $j++)
+                        {
+                            echo ($productsForView[$i]->productsToColorAndSize[$j]->color->title . '  ');
+                            echo ($productsForView[$i]->productsToColorAndSize[$j]->size->title . '  ');
+                            echo ($productsForView[$i]->productsToColorAndSize[$j]->size->number . '  ');
+                            echo ($productsForView[$i]->productsToColorAndSize[$j]->amount . '  ');
+
+                            echo ("<br>");
+                        }
+
+                        
+
+                        
                         $i++;
                     }
                 }

@@ -1,89 +1,96 @@
 <?php
 
 require_once("Object.php");
+require_once("Rights.php");
 
 class User extends Object
 {
 	public $login,
 		$password,
-		$hash,
-		$ip,
+		$email,
+
+		$img,
+		$phone,
 		$firstName,
-		$secondName = '',
-		$immage = '',
-		$rightsID = 2,
-		$rightsTitle ='',
-		$rightsLevel ='',
-		$email;
+		$secondName,
+
+		$rights;
+		
 
 	public const tableName = 'users';
 
 
 
-	public function SetFromDB($_user)
+	public function Set($_user)
 	{
 		$this->id = $_user['id'];
 		$this->login = $_user['login'];
 		$this->password = $_user['password'];
-		$this->hash = $_user['hash'];
-		$this->ip = $_user['ip'];
-		$this->firstName = $_user['firstName'];
-		$this->secondName = $_user['secondName'];
-		$this->immage = $_user['immage'];
-		$this->rightsID = $_user['rightsID'];
-		$this->rightsTitle = $_user['rightsTitle'];
-		$this->rightsLevel = $_user['rightsLevel'];
 		$this->email = $_user['email'];
-	}
 
-	public function SetByPOST($_user)
-	{
-		if (isset($_user['id'])) $this->id = $_user['id'];
-		$this->login = $_user['login'];
-		$this->password = $_user['password'];
-		$this->hash = $_user['hash'];
-		$this->ip = $_user['ip'];
-		$this->firstName = $_user['firstName'];
+		if (isset($_user['img'])) $this->img = $_user['img'];
+		if (isset($_user['phone'])) $this->phone = $_user['phone'];
+		if (isset($_user['firstName'])) $this->firstName = $_user['firstName'];
 		if (isset($_user['secondName'])) $this->secondName = $_user['secondName'];
-		if (isset($_user['immage'])) $this->immage = $_user['immage'];
-		if (isset($_user['rightsID'])) $this->rightsID = $_user['rightsID'];
-		$this->email = $_user['email'];
+
+		$this->rights = $_user['rights'];
 	}
 
+	public function SetById($_id)
+	{
+		require("DataBase.php");
+		$request = "SELECT * FROM " . static::tableName . " WHERE id = $_id";
+		$res = $mysqli->query($request);
+
+		if ($res)
+		{
+			$user = $res->fetch_assoc();
+
+			$user['rights'] = new Rights();
+			$user['rights']->SetById($user['rightsID']);
+
+			$this->Set($user);
+		}
+
+		return $res;
+	}
+
+	
 	public function Insert()
 	{
-		require("bd.php");
+		require("DataBase.php");
 
-		$res = $mysqli->query("INSERT INTO users (login, password, hash, ip, firstName, secondName, immage, rightsID, email) "
+		$request = "INSERT INTO " . static::tableName . " (login, password, email, img, phone, firstName, secondName, rightsID) "
 				. "VALUES ("
 				. "'$this->login', "
 				. "'$this->password', "
-				. "'$this->hash', "
-				. "'$this->ip', "
+				. "'$this->email', "
+				. "'$this->img', "
+				. "'$this->phone', "
 				. "'$this->firstName', "
 				. "'$this->secondName', "
-				. "'$this->immage', "
-				. "$this->rightsID, "
-				. "'$this->email')"
-			);
-		var_dump($mysqli->error);
-		return $res;
+				. $this->rights->id . " "
+				. ")";
+
+		$res = $mysqli->query($request);
+		$this->id = $mysqli->insert_id;
+
+		return $this->id;
 	}
 
 	public function Edit()
 	{
-		require("bd.php");
+		require("DataBase.php");
 
-		$request = "UPDATE users SET "
+		$request = "UPDATE " . static::tableName . " SET "
 				 . "login = '$this->login', "
 				 . "password = '$this->password', "
-				 . "hash = '$this->hash', "
-				 . "ip = '$this->ip', "
+				 . "email = '$this->email', "
+				 . "img = '$this->img', "
+				 . "phone = '$this->phone', "
 				 . "firstName = '$this->firstName', "
 				 . "secondName = '$this->secondName', "
-				 . "immage = '$this->immage', "
-				 . "rightsID = $this->rightsID, "
-				 . "email = '$this->email', "
+				 . "rightsID = " . $this->rights->id . " "
 				 . "WHERE id = $this->id";
 
 		$res = $mysqli->query($request);

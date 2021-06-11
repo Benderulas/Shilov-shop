@@ -4,23 +4,23 @@
 class Object
 {
 	public $id;
-	public const tableName = '';
+	protected const tableName = '';
 
 
 
-	public function SetFromDB($_object)
+	public function Set($_object)
 	{
 		echo("Undeclared method<br>");
 	}
 
-	public function SetByPOST($_object)
+	public function SetById($_id)
 	{
 		echo("Undeclared method<br>");
 	}
 
 	public function Exist()
 	{
-		require("bd.php");
+		require("DataBase.php");
 		if ($res = $mysqli->query("SELECT COUNT(*) as count FROM " . static::tableName . " WHERE id = $this->id"))
 		{
 			$res = $res->fetch_assoc();
@@ -46,7 +46,7 @@ class Object
 
 	public function Delete()
 	{
-		require("bd.php");
+		require("DataBase.php");
 		$res = $mysqli->query("DELETE FROM " . static::tableName . " WHERE id = $this->id");
 
 		return $res;
