@@ -58,7 +58,7 @@ class User extends Object
 	public function SetByEmail($_email)
 	{
 		require("DataBase.php");
-		$request = "SELECT * FROM " . static::tableName . " WHERE email = $_email";
+		$request = "SELECT * FROM " . static::tableName . " WHERE email = '$_email'";
 		$res = $mysqli->query($request);
 
 		if ($res)
@@ -77,7 +77,7 @@ class User extends Object
 	public function SetByLogin($_login)
 	{
 		require("DataBase.php");
-		$request = "SELECT * FROM " . static::tableName . " WHERE login = $_login";
+		$request = "SELECT * FROM " . static::tableName . " WHERE login = '$_login'";
 		$res = $mysqli->query($request);
 
 		if ($res)

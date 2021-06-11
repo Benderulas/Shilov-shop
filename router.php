@@ -1,12 +1,17 @@
-
 <?php 
 
-if ($url[0] == '')
-{
-	$url[0] = 'main';
-}
+	$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-require($url[0] . '.html');
+	$cuttedPath = explode('/', $path);
 
+	$lastCatalog = end($cuttedPath);
 
-?>
+	$filePath = "pages" . $path;
+
+	if ($lastCatalog)
+	{
+		$filePath = $filePath . "/$lastCatalog.html";
+	}
+	else $filePath = $filePath . "/main/main.html";
+
+	require($filePath);
