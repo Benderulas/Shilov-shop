@@ -1,6 +1,6 @@
 <?php
 
-require("classes/User.php");
+require_once("classes/User.php");
 
 $user = new User();
 $user->SetByLogin($_POST['login']);
