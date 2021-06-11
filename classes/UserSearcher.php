@@ -6,175 +6,39 @@ require("User.php");
 
 class UserSearcher extends Searcher
 {
-	public $login = '',
-		$firstName = '',
-		$secondName = '',
-		$rightsID = false,
-		$email = '',
-		$count = 1;
+	public $login,
+		$password,
+		$email,
+		$phone,
+		$firstName,
+		$secondName,
 
+		$rightsID,
 
-
-	public function GetById($_id)
-	{
-		require("bd.php");
-		$request = "SELECT "
-			. "users.id, "
-			. "users.login, "
-			. "users.password, "
-			. "users.hash, "
-			. "users.ip, "
-
-			. "users.firstName, "
-			. "users.secondName, "
-			. "users.rightsID, "
-			. "users.email, "
-			. "users.immage, "
-			
-            . "rights.title AS rightsTitle, "
-            . "rights.level AS rightsLevel "
-
-            . "FROM users "
-
-            . "INNER JOIN rights ON users.rightsID = rights.id "
-
-            . "WHERE users.id = '$_id'";		
-
-		$res = $mysqli->query($request);
-
-		if ($res)
-		{
-			$user = new User();
-			$user->SetFromDB($res->fetch_assoc());
-			return $user;			
-		}
-		else 
-		{
-			echo("Ошибка запроса " . self::class . " GetById ");
-			return false;
-		}
-
-	}
-
-
-	public function GetByLogin($_login)
-	{
-		$request = "SELECT "
-			. "users.id, "
-			. "users.login, "
-			. "users.password, "
-			. "users.hash, "
-			. "users.ip, "
-
-			. "users.firstName, "
-			. "users.secondName, "
-			. "users.rightsID, "
-			. "users.email, "
-			. "users.immage, "
-			
-            . "rights.title AS rightsTitle, "
-            . "rights.level AS rightsLevel "
-
-            . "FROM users "
-
-            . "INNER JOIN rights ON users.rightsID = rights.id "
-
-            . "WHERE users.login = '$_login'";		
-
-		require("bd.php");
-		$res = $mysqli->query($request);
-
-		if ($res)
-		{
-			$user = new User();
-			$user->SetFromDB($res->fetch_assoc());
-			return $user;			
-		}
-		else 
-		{
-			echo("Ошибка запроса SearchUsersInBD");
-			return false;
-		}
-	}
-
-
-	public function GetByEmail()
-	{
-		$request = "SELECT "
-			. "users.id, "
-			. "users.login, "
-			. "users.password, "
-			. "users.hash, "
-			. "users.ip, "
-
-			. "users.firstName, "
-			. "users.secondName, "
-			. "users.rightsID, "
-			. "users.email, "
-			. "users.immage, "
-			
-            . "rights.title AS rightsTitle, "
-            . "rights.level AS rightsLevel "
-
-            . "FROM users "
-
-            . "INNER JOIN rights ON users.rightsID = rights.id "
-
-            . "WHERE users.email = '$this->email'";		
-
-		require("bd.php");
-		$res = $mysqli->query($request);
-
-		if ($res)
-		{
-			$user = new User();
-			$user->SetFromDB($res->fetch_assoc());
-			return $user;			
-		}
-		else 
-		{
-			echo("Ошибка запроса SearchUsersInBD");
-			return false;
-		}		
-		
-	}
+		$usersOnPage = 8,
+		$page = 1;
 
 	public function SearchByFilters()
 	{
-		$request = "SELECT "
-			. "users.id, "
-			. "users.login, "
-			. "users.password, "
-			. "users.hash, "
-			. "users.ip, "
+		$request = "SELECT id FROM users WHERE 1 ";
 
-			. "users.firstName, "
-			. "users.secondName, "
-			. "users.rightsID, "
-			. "users.email, "
-			. "users.immage, "
-			
-            . "rights.title AS rightsTitle, "
-            . "rights.level AS rightsLevel "
-
-            . "FROM users "
-
-            . "INNER JOIN rights ON users.rightsID = rights.id "
-
-            . "WHERE users.login LIKE '%$this->login%' "
-            . "AND users.firstName LIKE '%$this->firstName%' "
-            . "AND users.secondName LIKE '%$this->secondName%' "
-            . "AND users.email LIKE '%$this->email%' ";
-
-        if ($this->rightsID) $request = $request . "AND users.rightsID = $this->rightsID ";
+        if (isset($this->login)) $request = $request . "AND login LIKE '%$this->login%' ";
+        if (isset($this->password)) $request = $request . "AND password LIKE '%$this->password%' ";
+        if (isset($this->email)) $request = $request . "AND email LIKE '%$this->email%' ";
+        if (isset($this->phone)) $request = $request . "AND phone LIKE '%$this->phone%' ";
+        if (isset($this->firstName)) $request = $request . "AND firstName LIKE '%$this->firstName%' ";
+        if (isset($this->secondName)) $request = $request . "AND secondName LIKE '%$this->secondName%' ";
+        if (isset($this->rightsID)) $request = $request . "AND rightsID = $this->rightsID ";
 
 
         $request = $request
-        	. "ORDER BY users.id "
-            . "LIMIT $this->count ";
+        	. "ORDER BY id "
+            . "LIMIT $this->usersOnPage "
+            . "OFFSET " . ($this->page - 1) * $this->usersOnPage;
+
 		
 
-		require("bd.php");
+		require("DataBase.php");
 		$res = $mysqli->query($request);
 
 
@@ -186,22 +50,15 @@ class UserSearcher extends Searcher
 				echo("Никто не найден");
 				return false;
 			}
-
-			if ($this->count == 1)
-			{
-				$user = new User(); 
-				$user->SetFromDP($res->fetch_assoc());
-				return $user;
-			}
 			else
 			{
 				for ($i = 0; $i < $usersCount; $i++)
 				{
 					$res->data_seek($i);
-		    		$user = $res->fetch_assoc();
+		    		$userID = $res->fetch_assoc();
 
 	    			$users[$i] = new User();
-	    			$users[$i]->SetFromDB($user);
+	    			$users[$i]->SetById($userID['id']);
 				}	
 				return $users;
 			}
@@ -218,29 +75,15 @@ class UserSearcher extends Searcher
 
 	public function SetFiltersByGET()
 	{
-		if (isset($_GET['login'])) 
-			{
-				if ($_GET['login']) $this->login = $_GET['login'];
-			}
-		if (isset($_GET['firstName'])) 
-			{
-				if ($_GET['firstName']) $this->firstName = $_GET['firstName'];
-			}
-		if (isset($_GET['secondName'])) 
-			{
-				if ($_GET['secondName']) $this->secondName = $_GET['secondName'];
-			}
-		if (isset($_GET['rightsID'])) 
-			{
-				if ($_GET['rightsID']) $this->rightsID = $_GET['rightsID'];
-			}
-		if (isset($_GET['email'])) 
-			{
-				if ($_GET['email']) $this->sizeID = $_GET['email'];
-			}
+		if (isset($_GET['login'])) $this->login = $_GET['login'];
+		if (isset($_GET['passwordpassword'])) $this->password = $_GET['password'];
+		if (isset($_GET['email'])) $this->email = $_GET['email'];
+		if (isset($_GET['phone'])) $this->phone = $_GET['phone'];
+		if (isset($_GET['firstName'])) $this->firstName = $_GET['firstName'];
+		if (isset($_GET['secondName'])) $this->secondName = $_GET['secondName'];
+		if (isset($_GET['rightsID'])) $this->rightsID = $_GET['rightsID'];
 	}
 }
-
 
 
 ?>

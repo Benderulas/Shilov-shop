@@ -55,6 +55,44 @@ class User extends Object
 		return $res;
 	}
 
+	public function SetByEmail($_email)
+	{
+		require("DataBase.php");
+		$request = "SELECT * FROM " . static::tableName . " WHERE email = $_email";
+		$res = $mysqli->query($request);
+
+		if ($res)
+		{
+			$user = $res->fetch_assoc();
+
+			$user['rights'] = new Rights();
+			$user['rights']->SetById($user['rightsID']);
+
+			$this->Set($user);
+		}
+
+		return $res;
+	}
+
+	public function SetByLogin($_login)
+	{
+		require("DataBase.php");
+		$request = "SELECT * FROM " . static::tableName . " WHERE login = $_login";
+		$res = $mysqli->query($request);
+
+		if ($res)
+		{
+			$user = $res->fetch_assoc();
+
+			$user['rights'] = new Rights();
+			$user['rights']->SetById($user['rightsID']);
+
+			$this->Set($user);
+		}
+
+		return $res;
+	}
+
 	
 	public function Insert()
 	{
