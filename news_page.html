@@ -5,30 +5,21 @@
 	</div>
 	<div class="col-4 text-center">
 	    <?php
-	        if ($res) 
-	        {
-
-	            for ($i = 0; $i < intdiv($newsCount, 2); $i++) 
-	            {
-	            	var_dump($i);
-	                echo ($news[$i]->title . '<br>');
-	                echo ($news[$i]->text . '<br><br><br>');
-	            }
+            for ($i = 0; $i < intdiv($newsCount, 2); $i++) 
+            {
+                echo ($news[$i]->title . '<br>');
+                echo ($news[$i]->text . '<br><br><br>');
 	        }
 	    ?>
 
 	</div>
 	<div class="col-4 text-center">
 	   <?php
-	        if ($res) 
-	        {
-	            for ($i = intdiv($newsCount, 2); $i < $newsCount; $i++) 
-	            {
-	            	var_dump($i);	   
-	                echo ($news[$i]->title . '<br>');
-	                echo ($news[$i]->text . '<br><br><br>');
-	            }
-	        }
+            for ($i = intdiv($newsCount, 2); $i < $newsCount; $i++) 
+            {   
+                echo ($news[$i]->title . '<br>');
+                echo ($news[$i]->text . '<br><br><br>');
+            }
 	    ?>
 
 	</div>

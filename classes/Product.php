@@ -1,119 +1,99 @@
 <?php 
-class Product
+
+require_once("Object.php");
+require_once("Category.php");
+require_once("Company.php");
+require_once("Sex.php");
+
+class Product extends Object
 {
-	public $id;
-	public $title;
-	public $price;
-	public $discount;
-	public $immage;
+	public $title,
+		$img,
+		$price,
+		$discount,
 
-	public $colorID;
-	public $sizeID;
-	public $categoryID;
-	public $companyID;
-	public $sexID;
+		$category,
+		$company,
+		$sex;
 
-	public $colorTitle;
-	public $sizeTitle;
-	public $sizeNumber;
-	public $categoryTitle;
-	public $companyTitle;
-	public $sexTitle;
-
-	
+	public const tableName = 'products';
 
 
-
-	public function SetByPOST($_product)
+	public function Set($_product)
 	{
 		if (isset($_product['id'])) $this->id = $_product['id'];
-		$this->title = $_product['title]'];
-		$this->price = $_product['price'];
-		$this->discount = $_product['discount'];
-		$this->immage = $_product['immage'];
-
-		$this->colorID = $_product['colorID'];
-		$this->sizeID = $_product['sizeID'];
-		$this->categoryID = $_product['categoryID'];
-		$this->companyID = $_product['companyID'];
-		$this->sexID = $_product['sexID'];
-	}
-
-	public function SetFromDB($_product)
-	{
-		if (isset($_product['id'])) $this->id = $_product['id'];
+		if (isset($_product['img'])) $this->img = $_product['img'];
+		if (isset($_product['discount'])) $this->discount = $_product['discount'];
 		$this->title = $_product['title'];
 		$this->price = $_product['price'];
-		$this->discount = $_product['discount'];
-		$this->immage = $_product['immage'];
 
-		$this->colorID = $_product['colorID'];
-		$this->sizeID = $_product['sizeID'];
-		$this->categoryID = $_product['categoryID'];
-		$this->companyID = $_product['companyID'];
-		$this->sexID = $_product['sexID'];
-
-		$this->colorTitle = $_product['colorTitle'];
-		$this->sizeTitle = $_product['sizeTitle'];
-		$this->sizeNumber = $_product['sizeNumber'];
-		$this->categoryTitle = $_product['categoryTitle'];
-		$this->companyTitle = $_product['companyTitle'];
-		$this->sexTitle = $_product['sexTitle'];
+		$this->category = $_product['category'];
+		$this->company = $_product['company'];
+		$this->sex = $_product['sex'];
 	}
 
-	public function IsProductExist()
+	public function SetById($_id)
 	{
-		require("bd.php");
-		if ($res = $mysqli->query("SELECT COUNT(*) as count FROM products WHERE id = $this->id"))
+		require("DataBase.php");
+		$request = "SELECT * FROM " . static::tableName . " WHERE id = $_id";
+		$res = $mysqli->query($request);
+
+		if ($res)
 		{
-			$res = $res->fetch_assoc();
-			if ($res['count']) return true;
-			else return false;
+			$product = $res->fetch_assoc();
+
+			$product['category'] = new Category();
+			$product['category']->SetById($product['categoryID']);
+
+			$product['company'] = new Company();
+			$product['company']->SetById($product['companyID']);
+
+			$product['sex'] = new Sex();
+			$product['sex']->SetById($product['sexID']);
+
+			$this->Set($product);
 		}
-		else 
-		{
-			echo ("IsProductExist request error");
-			return false;
-		}
+
 	}
 
 	public function Insert()
 	{
-		require("bd.php");
+		require("DataBase.php");
 
-		$res = $mysqli->query("INSERT INTO products (title, colorID, price, sizeID, categoryID, companyID, sexID, discount, immage) "
-				. "VALUES ('$this->title', $this->colorID, $this->price, $this->sizeID, $this->categoryID, $this->companyID, $this->sexID, $this->discount, $this->immage)");
+		$request = "INSERT INTO " . static::tableName . " (title, img, price, discount, categoryID, companyID, sexID) "
+				. "VALUES (
+				'$this->title', 
+				'$this->img', 
+				$this->price, 
+				$this->discount, "
+				. $this->category->id . ", "
+				. $this->company->id . ", " 
+				. $this->sex->id 
+				. ")";
 
-		return $res;
+		$res = $mysqli->query($request);
+		$this->id = $mysqli->insert_id;
+		return $this->id;
 	}
+
 
 	public function Edit()
 	{
-		require("bd.php");
+		require("DataBase.php");
 
 		$request = "UPDATE products SET "
 				 . "title = '$this->title', "
-				 . "colorID = $this->colorID, "
+				 . "img = '$this->img', "
 				 . "price = $this->price, "
-				 . "sizeID = $this->sizeID, "
-				 . "categoryID = $this->categoryID, "
-				 . "companyID = $this->companyID, "
-				 . "sexID = $this->sexID, "
 				 . "discount = $this->discount, "
-				 . "immage = '$this->immage' "
+				 . "categoryID = " . $this->category->id . ", "
+				 . "companyID = " . $this->company->id . ", "
+				 . "sexID = " . $this->sex->id. " "
 				 . "WHERE id = $this->id";
 		$res = $mysqli->query($request);
-		return $res;
+
+		return ($res);
 	}
-
-	public static function Delete($_id)
-	{
-		require("bd.php");
-		$res = $mysqli->query("DELETE FROM products WHERE id = $_id");
-
-		return $res;
-	}
-
 }
 
 

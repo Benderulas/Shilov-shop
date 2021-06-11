@@ -1,8 +1,8 @@
 <?php
-    require("classes/ProductSearcher.php");
+    require("classes/ProductForViewSearcher.php");
 
-    $productSearcher = new ProductSearcher();
+    $productSearcher = new ProductForViewSearcher();
     $productSearcher->SetFiltersByGET();
 
-    $products = $productSearcher->SearchProductsInBD();
+    $productsForView = $productSearcher->SearchByFilters();
 ?>

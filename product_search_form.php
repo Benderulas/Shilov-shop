@@ -1,5 +1,5 @@
 <?php 
-    require('bd.php'); 
+    require("DataBase.php");
     $numberOfCategories = 5;
 
     $categoriesTitles[0] = 'categories';

@@ -1,85 +1,52 @@
 <?php
-	
 
+require_once("MultiCategory.php");
 
-
-class News
+class News extends MultiCategory
 {
-	public $id;
-	public $title;
-	public $text;
-	public $immage;
+	public $text,
+		$img;
 
+	public const tableName = 'news';
 
-
-	public function SetByPOST($_news)
+	public function Set($_news)
 	{
 		if (isset($_news['id'])) $this->id = $_news['id'];
-		$this->title = $_news['title]'];
-		$this->text = $_news['text'];
-		$this->immage = $_news['immage'];
-	}
-
-	public function SetFromDB($_news)
-	{
-		if (isset($_news['id'])) $this->id = $_news['id'];
+		if (isset($_news['text'])) $this->text = $_news['text'];
+		if (isset($_news['img'])) $this->img = $_news['img'];
 		$this->title = $_news['title'];
-		$this->text = $_news['text'];
-		$this->immage = $_news['immage'];
-	}
-
-	public function IsNewsExist()
-	{
-		require("bd.php");
-		if ($res = $mysqli->query("SELECT COUNT(*) as count FROM news WHERE id = $this->id"))
-		{
-			$res = $res->fetch_assoc();
-			if ($res['count']) return true;
-			else return false;
-		}
-		else 
-		{
-			echo ("IsNewsExist request error");
-			return false;
-		}
 	}
 
 	public function Insert()
 	{
-		require("bd.php");
+		require("DataBase.php");
 
-		$res = $mysqli->query("INSERT INTO news (title, text, immage) "
-				. "VALUES ('$this->title', '$this->text', '$this->immage')");
+		if ($this->Exist() == false)
+		{
+			$request = "INSERT INTO " . static::tableName . " (title, img, text) "
+				. "VALUES ('$this->title', '$this->img', '$this->text')";
 
-		return $res;
+			$res = $mysqli->query($request);
+			return $res;
+		}
+		else return false;
 	}
 
 	public function Edit()
 	{
-		require("bd.php");
+		require("DataBase.php");
 
-		$request = "UPDATE news SET "
-				 . "title = '$this->title', "
-				 . "text = '$this->text', "
-				 . "immage = '$this->immage' "
+		$request = "UPDATE " . static::tableName . " SET "
+				 . "title = '$this->title' "
+				 . "img = '$this->img' "
+				 . "text = '$this->text' "
 				 . "WHERE id = $this->id";
+
 		$res = $mysqli->query($request);
 		return $res;
 	}
 
-	public static function Delete($_id)
-	{
-		require("bd.php");
-		$res = $mysqli->query("DELETE FROM news WHERE id = $_id");
-
-		return $res;
-	}
 }
-
-
-
-
-
 
 
 ?>
