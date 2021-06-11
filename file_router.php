@@ -18,6 +18,14 @@
 		echo file_get_contents($path);
 		die();
 	}
+
+	if ($fileExtention == 'png') 
+	{
+		header("Content-Type: image/png");
+		echo file_get_contents($path);
+		die();
+	}
+
 	if ($fileExtention == 'css') 
 	{
 		header("Content-Type: text/css");
