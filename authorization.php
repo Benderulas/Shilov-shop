@@ -12,7 +12,7 @@ if($_SESSION['is_auth'])
 	$user = new User();
 	$user->SetByLogin($_SESSION['login']);
 
-	if ($user->id == NULL) echo("Identifier ERROR, can't find user in DB");
+	if ($user->id == NULL) $exception = "Authorization ERROR, can't find user in DB";
 }
 else
 {

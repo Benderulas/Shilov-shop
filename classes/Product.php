@@ -18,6 +18,27 @@ class Product extends Object
 
 	public const tableName = 'products';
 
+	function __construct()
+	{
+		$this->category = new Category();
+		$this->company = new Company();
+		$this->sex = new Sex();
+	}
+
+
+	public function SetByPOST()
+	{
+		if (isset($_POST['product_id'])) $this->id = $_POST['product_id'];
+		if (isset($_POST['product_img'])) $this->img = $_POST['product_img'];
+		if (isset($_POST['product_discount'])) $this->discount = $_POST['product_discount'];
+		$this->title = $_POST['product_title'];
+		$this->price = $_POST['product_price'];
+
+		$this->category = $_POST['product_categoryID'];
+		$this->company = $_POST['product_companyID'];
+		$this->sex = $_POST['product_sexiD'];
+	}
+
 
 	public function Set($_product)
 	{

@@ -10,6 +10,24 @@ class ProductForView
 		$productsToColorAndSize;
 
 
+	function __construct()
+	{
+		$this->product = new Product();
+	}
+
+
+	public function SetByPOST()
+	{
+		$this->product->SetByPOST();
+		
+		for ($i = 0; $i < $_POST['productsToColorAndSize_amount']; $i++)
+		{
+			$this->productsToColorAndSize[$i] = new ProductToColorAndSize();
+			$this->productsToColorAndSize[$i]->SetByPOST($i);
+		}
+	}
+
+
 	public function Set($_product)
 	{
 		$this->product = $_product['product'];

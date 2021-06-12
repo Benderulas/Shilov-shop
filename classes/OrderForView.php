@@ -9,6 +9,25 @@ class OrderForView
 		$productsInOrder;
 
 
+	function __construct()
+	{
+		$this->order = new Order();
+	}
+
+	public function SetByPOST()
+	{
+		$this->order = new Order();
+		$this->order->SetByPOST();
+
+		for ($i = 0; $i < $_POST['productsInOrder_Amount']; $i++)
+		{
+			$productsInOrder = new ProductInOrder();
+			$productsInOrder[$i]->SetByPOST($i);
+		}
+
+	}
+
+
 	public function Set($_orderForView)
 	{
 		$this->order = $_orderForView['order'];
@@ -17,7 +36,6 @@ class OrderForView
 
 	public function SetById($_id)
 	{
-		$this->order = new Order();
 		$this->order->SetById($_id);
 
 		$this->productsInOrder = ProductInOrder::GetByOrderId($_id);
@@ -32,7 +50,6 @@ class OrderForView
 			$productInOrder->order = $this->order;
 			$productInOrder->Insert();
 		}
-
 	}
 
 

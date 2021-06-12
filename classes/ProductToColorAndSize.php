@@ -17,6 +17,26 @@ class ProductToColorAndSize extends Object
 		$amount;
 
 
+	function __construct()
+	{
+		$this->product = new Product();
+		$this->size = new Size();
+		$this->color = new Color();
+	}
+
+
+	public function SetByPOST($_number)
+	{
+		if (isset($_POST['productToColorAndSize_id_' . $number])) $this->id = $_POST['productToColorAndSize_id_' . $number];
+
+		$this->product->id = $_POST['productToColorAndSize_productID_' . $number];
+		$this->size->id = $_POST['productToColorAndSize_sizeID_' . $number];
+		$this->color->id = $_POST['productToColorAndSize_colorID_' . $number];
+
+		$this->amount = $_POST['productToColorAndSize_amount_' . $number];
+	}
+
+
 	public function Set($_object)
 	{
 		if (isset($_object['id'])) $this->id = $_object['id'];

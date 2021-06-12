@@ -15,10 +15,7 @@ if ($user->id)
 	}
 	else 
 	{
-		echo("password is wrong<br>");
-		var_dump($user);
-		echo ("<br><br>");
-		var_dump($_POST['password']);
+		$exception = "password is wrong<br>";
 	}
 }
 else echo("can't find user with the login");

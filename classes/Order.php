@@ -21,12 +21,36 @@ class Order extends Object
 
 	public const tableName = 'orders';
 
+	function __construct()
+	{
+		$this->user = new User();
+		$this->status = new OrderStatus();
+		$this->deliveryCompany = new DeliveryCompany();
+	}
 
+
+
+	public function SetByPOST()
+	{
+		if(isset($_POST['order_id'])) $this->id = $_POST['order_id'];
+
+		$this->user->id = $_POST['order_userID'];
+		$this->status->id = $_POST['order_statusID'];
+		$this->deliveryCompany->id = $_order['order_deliveryCompanyID'];
+
+		$this->firstName = $_POST['order_firstName'];
+		$this->secondName = $_POST['order_secondName'];
+		$this->phoneNumber = $_POST['order_phoneNumber'];
+		$this->country = $_POST['order_country'];
+		$this->city = $_POST['order_city'];
+		$this->address = $_POST['order_address'];
+		$this->postIndex = $_POST['order_postIndex'];
+	}
 
 
 	public function Set($_order)
 	{
-		if(isset($_order['id'])) $this->id = $_order['id'];
+		$this->id = $_order['id'];
 
 		$this->user = $_order['user'];
 		$this->status = $_order['status'];
@@ -39,8 +63,8 @@ class Order extends Object
 		$this->city = $_order['city'];
 		$this->address = $_order['address'];
 		$this->postIndex = $_order['postIndex'];
-
 	}
+
 	public function SetById($_id)
 	{
 		require("DataBase.php");

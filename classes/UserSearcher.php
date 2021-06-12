@@ -2,7 +2,7 @@
 
 
 require_once("Searcher.php");
-require("User.php");
+require_once("User.php");
 
 class UserSearcher extends Searcher
 {

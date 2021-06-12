@@ -15,9 +15,25 @@ class ProductInOrder extends Object
 		$amount;
 
 
+	fucntion __construct()
+	{
+		$this->order = new Order;
+		$this->productToColorAndSize = new ProductToColorAndSize();
+	}
+
+
+
+	public function SetByPOST($_number)
+	{
+		if (isset($_POST['productInOrder_id_' . $number])) $this->id = $_POST['productInOrder_id_' . $number];
+
+		$this->productToColorAndSize->id = $_POST['productInOrder_productToColorAndSizeID_' . $number];
+		$this->amount = $_POST['productInOrder_amount_' . $number];
+	}
+
 	public function Set($_object)
 	{
-		if (isset($_object['id'])) $this->id = $_object['id'];
+		$this->id = $_object['id'];
 
 		$this->order = $_object['order'];
 		$this->productToColorAndSize = $_object['productToColorAndSize'];

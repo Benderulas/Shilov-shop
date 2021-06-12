@@ -20,6 +20,30 @@ class User extends Object
 	public const tableName = 'users';
 
 
+	function __construct()
+	{
+		$this->rights = new Rights();
+	}
+
+
+	public function SetByPOST()
+	{
+		if (isset($_POST['user_id'])) $this->id = $_POST['user_id'];
+		$this->login = $_POST['user_login'];
+		$this->password = $_POST['user_password'];
+		$this->email = $_POST['user_email'];
+
+		if (isset($_POST['user_img'])) $this->img = $_POST['user_img'];
+		if (isset($_POST['user_phone'])) $this->phone = $_POST['user_phone'];
+		if (isset($_POST['user_firstName'])) $this->firstName = $_POST['user_firstName'];
+		if (isset($_POST['user_secondName'])) $this->secondName = $_POST['user_secondName'];
+
+		
+		if (isset($_POST['user_rightsID'])) $this->rights->id = $_POST['user_rightsID'];
+		else $this->rights->id = 2;
+	}
+
+
 
 	public function Set($_user)
 	{
@@ -92,6 +116,40 @@ class User extends Object
 
 		return $res;
 	}
+
+	public function ExistByLogin()
+	{
+		require("DataBase.php");
+		if ($res = $mysqli->query("SELECT COUNT(*) as count FROM " . static::tableName . " WHERE login = '$this->login'"))
+		{
+			$res = $res->fetch_assoc();
+			if ($res['count']) return true;
+			else return false;
+		}
+		else 
+		{
+			echo (static::class . " ExistByLogin request error");
+			return false;
+		}
+	}
+
+
+	public function ExistByEmail()
+	{
+		require("DataBase.php");
+		if ($res = $mysqli->query("SELECT COUNT(*) as count FROM " . static::tableName . " WHERE email = '$this->email'"))
+		{
+			$res = $res->fetch_assoc();
+			if ($res['count']) return true;
+			else return false;
+		}
+		else 
+		{
+			echo (static::class . " ExistByEmail request error");
+			return false;
+		}
+	}
+
 
 	
 	public function Insert()
