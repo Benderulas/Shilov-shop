@@ -4,6 +4,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
 
+    var triggerTabList = [].slice.call(document.querySelectorAll('#myTab a'))
+    triggerTabList.forEach(function (triggerEl) {
+      var tabTrigger = new bootstrap.Tab(triggerEl)
+
+      triggerEl.addEventListener('click', function (event) {
+        event.preventDefault()
+        tabTrigger.show()
+      })
+    })
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -30,14 +39,35 @@
             </div>
             <div class="image"><img src="https://fotoseif.ru/images/2021/06/9xpr8yoij0nin1xqn1oc.png" alt="Соблазн" class="log-img"></div>
             <div class="butt">
+
                 <a href="#openModal"><img src="https://fotoseif.ru/images/2021/06/445ujivfkqn6toynxulv.png"></a> <!-- авторизация и регистрация -->
                 <div id="openModal" class="modalDialog">
                     <div class="login">
-                        <h2>Модальное окно</h2>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad ratione adipisci in, quae, cupiditate beatae sed. Voluptates quidem iusto reiciendis! Inventore blanditiis dolore illum ab rerum, odit tenetur quos eius!
-                        Expedita aspernatur praesentium dicta officia tempora maxime, tempore harum, ducimus obcaecati corrupti esse fugiat, hic dolor distinctio quasi necessitatibus reiciendis voluptas quisquam eligendi! Labore quis in odio. Corrupti, tenetur esse?
-                        Quisquam omnis in exercitationem sunt cum, ducimus sequi ipsam perspiciatis. Debitis ducimus asperiores molestiae praesentium doloribus quia et eum, libero omnis possimus, alias odio porro veritatis accusantium voluptate numquam odit.
-                        <a href="#close" title="Закрыть" class="close">Close</a>
+                        <nav>
+                            <form action="" class="registration"> <!-- авторизация -->
+                                <H1>Авторизация</H1>
+                                <label for="">Логин</label>
+                                <input type="text" placeholder="Введите ваш логин">
+                                <label for="">Пароль</label>
+                                <input type="password" placeholder="Введите ваш пароль">
+                                <button cclass="button_authorization">Войти</button>
+                            </form>
+                        </nav>
+                        <nav>
+                            <form action="" class="registration"> <!-- регистрация -->
+                                <H1>Регистрация</H1>
+                                <label for="">Логин</label>
+                                <input type="text" placeholder="Введите логин">
+                                <label for="">Пароль</label>
+                                <input type="password" placeholder="Введите пароль">
+                                <label for="">Имя</label>
+                                <input type="text" placeholder="Введите ваше имя">
+                                <label for="">E-mail</label>
+                                <input type="email" placeholder="Введите ваш e-mail">
+                                <button>Зарегистрироваться</button>
+                            </form>
+                        </nav>
+                        <a href="#close" title="Закрыть" class="close"><img src="https://fotoseif.ru/images/2021/06/fsftgb2101wswa7iryv5.png"></a>
                     </div>
                 </div>
                 <button><img src="https://fotoseif.ru/images/2021/06/uda34j799zhluln5sr09.png"></button> <!-- КОРЗИНА -->
@@ -48,6 +78,7 @@
         </div>
     </div>
 </header>
+
 
     <!-- <div class="navbar navbar-gradient">
         <div class="container bord-button">

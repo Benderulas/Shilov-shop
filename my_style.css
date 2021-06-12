@@ -27,27 +27,23 @@ a{
 	margin-right: 50px;
 }
 
-.up-header{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
 header{
 	padding-top: 15px;
 	padding-bottom: 40px;
 	background: #ffe5b4;
 }
-
+.up-header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 .wrapper-header{
 	margin-left:459px;
 	margin-right:457px;
 }
-
 .down-header{
 	margin-top: 15px;
 }
-
 .search{
 	background:none;
 	color:#740505;
@@ -74,31 +70,25 @@ footer{
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-
-
 }
-
 .nav-footer{
 	display: flex;
 	flex-direction: column;
 }
 .nav-footer>a:not(:last-child){
 	margin-bottom: 1em;
-	color: #ffe5b4;
+	color: #740505;
 	font-family: 'Balsamiq Sans', cursive;
 	font-size: 14px;
 }
-
 .nav-footer>a:visited{
 	color: #740505;
 }
-
 .content-footer{
 	color: #740505;
 	font-family: 'Balsamiq Sans', cursive;
 	font-size: 14px;
 }
-
 .social-network-footer img{
 	weight:45px;
 	height: 45px;
@@ -107,11 +97,13 @@ footer{
 	margin-left: 20px;
 }
 
+.neww{
+	background-color: #F0FFFF;
+}
 .wrapper-news{
 	margin-left: 458px;
 	margin-left: 458px;
 }
-
 .news{
 	display: grid;
 	justify-content: space-between;
@@ -132,7 +124,6 @@ footer{
 	grid-auto-rows: 228px;
 	grid-auto-rows: 1006px;
 	grid-auto-columns:334px;
-
 }
 
 .modalDialog {
@@ -144,9 +135,6 @@ footer{
 	left: 0;
 	background: rgba(0,0,0,0.8);
 	z-index: 99999;
-	-webkit-transition: opacity 400ms ease-in;
-	-moz-transition: opacity 400ms ease-in;
-	transition: opacity 400ms ease-in;
 	display: none;
 	pointer-events: none;
 }
@@ -155,23 +143,18 @@ footer{
 	pointer-events: auto;
 }
 .modalDialog > div {
-	margin: 40px 15%;
-	padding: 5px 20px 13px 20px;
+	align:center;
+	width: 40%;
+	margin: 40px 30%;
+	padding: 20px 20px 20px 20px;
 	border-radius: 10px;
-	background: #999;
+	background: linear-gradient(150deg,#fffbf4,#ffce71);
+	border:5px solid #800000;
 }
 .close {
-	background:none;
-	line-height: 25px;
-	text-align: center;
-	text-decoration: none;
-	font-weight: bold;
-	border: 2px solid black;
-	padding-left: 10px;
-	padding-right: 10px;
-
+	margin-left: 600px;
+	position: absolute;
 }
-
 .modalDialog .login{
 	display: flex;
 	flex-direction: column;
@@ -179,5 +162,38 @@ footer{
 .modalDialog .login>a{
 	align-self: start;
 }
-
-.close:hover { background: #00d9ff; }
+.registration{
+	display: flex;
+	flex-direction: column;
+}
+.registration>input{
+	width: 60%;
+	margin-left: 20%;
+	border:1px solid black;
+	border-radius: 3px;
+	height: 40px;
+	padding-left: 15px;
+}
+.registration>input::placeholder{
+	color:grey;
+	font-size: 16px;
+}
+.registration>label{
+	margin-left: 20%;
+	font-family: 'Balsamiq Sans', cursive;
+	font-size: 20px;
+	margin-top: 20px;
+	color: #800000;
+}
+.registration>button{
+	border:2px solid black;
+	background-color: white;
+	width: 40%;
+	padding-top:5px;
+	padding-bottom: 5px;
+	margin-left: 30%;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	border-radius: 10px;
+	font-size: 20px;
+}
