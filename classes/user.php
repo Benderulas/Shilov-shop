@@ -43,6 +43,23 @@ class User extends Object
 		else $this->rights->id = 2;
 	}
 
+	public function SetByJSON($_user)
+	{
+		if (isset($_user->id)) $this->id = $_user->id;
+		$this->login = $_user->login;
+		$this->password = $_user->password;
+		$this->email = $_user->email;
+
+		if (isset($_user->img)) $this->img = $_user->img;
+		if (isset($_user->phone)) $this->phone = $_user->phone;
+		if (isset($_user->firstName)) $this->firstName = $_user->firstName;
+		if (isset($_user->secondName)) $this->secondName = $_user->secondName;
+
+		
+		if (isset($_user->rightsID)) $this->rights->id = $_user->rightsID;
+		else $this->rights->id = 2;
+	}
+
 
 
 	public function Set($_user)

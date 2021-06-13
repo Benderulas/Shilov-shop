@@ -4,7 +4,10 @@ require("file_router.php");
 
 require('authorization.php');
 
-if (isset($_POST['type']))  require('POST_router.php');
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST")  require('POST_router.php');
+
 else
 {
 	error_reporting(-1);

@@ -2,21 +2,36 @@
 
 require_once("classes/User.php");
 
+$json = file_get_contents('php://input');
+
+$data = json_decode($json);
+
 $user = new User();
-$user->SetByLogin($_POST['login']);
+$user->SetByLogin($data->login);
+
 
 if ($user->id)
 {
-	if ($user->password == $_POST['password']) 
+	if ($user->password == $data->password) 
 	{
 		$_SESSION['is_auth'] = true;
 		$_SESSION['login'] = $user->login;
-		header("Location: http://shilov-shop/");
+		//header("Location: http://shilov-shop/");
+
+		$response['status'] = true;
+		$response['data'] = $user;
 	}
 	else 
 	{
-		$exception = "password is wrong<br>";
+		$response['status'] = false;
+		$response['message'] = "password is wrong";
 	}
 }
-else echo("can't find user with the login");
+else 
+{
+	$response['status'] = false;
+	$response['message'] = "login is wrong";
+}
+
+echo(json_encode($response));
 ?>
