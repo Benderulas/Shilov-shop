@@ -1,7 +1,8 @@
-$.getScript("/JavaScript/requests.js");
+import { POST_JSON_request } from "/JavaScript/requests.js";
 
 async function SendLogInForm()
 {
+  let path = "/POST/user/log_in.php";
   let form = document.forms.login;
   
 
@@ -13,7 +14,7 @@ async function SendLogInForm()
   if (user['login'] &&
    user['password'] )
   {
-    let response = await POST_JSON_request("/user/log_in", user);
+    let response = await POST_JSON_request(path, user);
 
     if (response.status == true) window.location.href = "http://shilov-shop";
     else alert(response.message);
@@ -25,6 +26,12 @@ async function SendLogInForm()
   }
 }
 
-let button = document.getElementsByName("SendLogInForm")[0];
+function test()
+{
+  let button = document.getElementsByName("SendLogInForm")[0];
 
-button.onclick = SendLogInForm;
+  button.onclick = SendLogInForm;
+}
+
+
+test();

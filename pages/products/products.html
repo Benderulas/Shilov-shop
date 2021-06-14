@@ -1,77 +1,98 @@
 <div class="container-fluid">
     <br>
-    <div>
-        <?php require("products.php"); ?>
-    </div>
     <div class="row">
         <div class="col-2">
             <?php require("product_search_form.html"); ?>
         </div>
-        <div class="col-2 text-left">
-            <?php
-                if ($productsForView) 
-                {
-                    $i = 0;
-                    while(isset($productsForView[$i])) 
-                    {
-                        echo ('ID: <br>');
-                        echo ('Название: <br>');
-                        echo ('цена: <br>');
+        <div class="col-4 text-left">
 
-                        echo ('Категория: <br>');                       
-                        echo ('Бренд: <br>');
-                        echo ('Пол: <br>');
-
-                        echo ('Скидка: <br>');
-
-                        echo ('Цвет: <br>');
-                        echo ('Размер: <br>');
-                        echo ('Размер: <br>');
-                        echo ('Количество: <br><br><br>');
-                        $i++;
-                    }
-                }
-            ?>
+            <div name="product">
+                <div name="title"></div>
+                <div name="category"></div>
+                <div name="company"></div>
+                <div name="price"></div>
+                <div name="color"></div>
+                <div name="size"></div>
+            </div>
+            <br><br>
+            <div name="product">
+                <div name="title"></div>
+                <div name="category"></div>
+                <div name="company"></div>
+                <div name="price"></div>
+                <div name="color"></div>
+                <div name="size"></div>
+            </div>
+            <br><br>
+            <div name="product">
+                <div name="title"></div>
+                <div name="category"></div>
+                <div name="company"></div>
+                <div name="price"></div>
+                <div name="color"></div>
+                <div name="size"></div>
+            </div>
+            <br><br>
+            <div name="product">
+                <div name="title"></div>
+                <div name="category"></div>
+                <div name="company"></div>
+                <div name="price"></div>
+                <div name="color"></div>
+                <div name="size"></div>
+            </div>
+        
         </div>
-        <div class="col-2 text-left">
-            <?php
-                if ($productsForView) 
-                {
-                    $i = 0;
-                    while(isset($productsForView[$i]))
-                    {
-                        echo ($productsForView[$i]->product->id . '<br>');
-                        echo ($productsForView[$i]->product->title . '<br>');
-                        echo ($productsForView[$i]->product->price . '<br>');
+        <div class="col-4 text-left">
 
-                        echo ($productsForView[$i]->product->category->title) . '<br>';                    
-                        echo ($productsForView[$i]->product->company->title) . '<br>';
-                        echo ($productsForView[$i]->product->sex->title) . '<br>';
-
-                        echo ($productsForView[$i]->product->discount) . '<br>';
-
-
-                        for ($j = 0; $j < count($productsForView[$i]->productsToColorAndSize); $j++)
-                        {
-                            echo ($productsForView[$i]->productsToColorAndSize[$j]->color->title . '  ');
-                            echo ($productsForView[$i]->productsToColorAndSize[$j]->size->title . '  ');
-                            echo ($productsForView[$i]->productsToColorAndSize[$j]->size->number . '  ');
-                            echo ($productsForView[$i]->productsToColorAndSize[$j]->amount . '  ');
-
-                            echo ("<br>");
-                        }
-
-                        
-
-                        
-                        $i++;
-                    }
-                }
-            ?>
+            <div name="product">
+                <div name="title"></div>
+                <div name="category"></div>
+                <div name="company"></div>
+                <div name="price"></div>
+                <div name="color"></div>
+                <div name="size"></div>
+            </div>
+            <br><br>
+            <div name="product">
+                <div name="title"></div>
+                <div name="category"></div>
+                <div name="company"></div>
+                <div name="price"></div>
+                <div name="color"></div>
+                <div name="size"></div>
+            </div>
+            <br><br>
+            <div name="product">
+                <div name="title"></div>
+                <div name="category"></div>
+                <div name="company"></div>
+                <div name="price"></div>
+                <div name="color"></div>
+                <div name="size"></div>
+            </div>
+            <br><br>
+            <div name="product">
+                <div name="title"></div>
+                <div name="category"></div>
+                <div name="company"></div>
+                <div name="price"></div>
+                <div name="color"></div>
+                <div name="size"></div>
+            </div>
+            
         </div>
     </div>    
 </div>
 
 <div class="container-fluid text-center">
-    
+    <button name="pageButton"><</button>
+    <button name="pageButton">1</button>
+    <button name="pageButton">2</button>
+    <button name="pageButton">3</button>
+    <button name="pageButton">4</button>
+    <button name="pageButton">5</button>
+    <button name="pageButton">></button>
 </div>
+
+<script type="module" src="scripts/products/products.js"></script>

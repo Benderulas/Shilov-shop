@@ -1,7 +1,8 @@
-$.getScript("/JavaScript/requests.js");
+import { POST_JSON_request } from "/JavaScript/requests.js";
 
 async function SendRegistrationForm()
 {
+  let path = "POST/user/registration.php";
   let form = document.forms.registration;
   
 
@@ -15,7 +16,7 @@ async function SendRegistrationForm()
    user['password'] && 
    user['email']) 
   {
-    let response = await POST_JSON_request("/user/registration", user);
+    let response = await POST_JSON_request(path, user);
 
     if (response.status == true) window.location.href = "http://shilov-shop";
     else alert(response.message);

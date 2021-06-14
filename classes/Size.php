@@ -7,6 +7,8 @@ class Size extends MultiCategory
 	public $number;
 
 	public const tableName = 'sizes';
+	const nameInOtherTable = 'sizeID';
+	const otherTableName = 'products_to_color_and_size';
 
 
 	public function Set($_multiCategory)

@@ -5,9 +5,10 @@ header('Content-Type: application/json; charset=utf-8');
 
 
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$path = substr($path, 1);
 
-if (isset($_POST['type'])) $path = $path . '/' . $_POST['type'];
+require($path);
 
-require( "POST" . $path . ".php");
+die();
 
 ?>

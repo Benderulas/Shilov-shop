@@ -1,4 +1,4 @@
-async function POST_JSON_request(path, data)
+export async function POST_JSON_request(path, data)
 {
 
   let response = await fetch(path, {

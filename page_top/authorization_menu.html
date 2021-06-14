@@ -2,8 +2,7 @@
     <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link <?php if($_SESSION['is_auth']) echo(' d-none');?>" href="log_in">Вход</a></li>
         <li class="nav-item"><a class="nav-link <?php if($_SESSION['is_auth']) echo(' d-none');?>" href="registration">Регистрация</a></li>
-        <form name="log_out" method="POST" action="/user">
-        <input type="hidden" name="type" value="log_out">
+        <form name="log_out" method="POST" action="POST/user/log_out.php">
             <li  class="nav-item"><button type="submit" class=" nav-link btn <?php if($_SESSION['is_auth'] == false) echo('d-none'); ?>">Выход</button></li>
         </form>
     </ul>

@@ -6,6 +6,8 @@ class MultiCategory
 	public $id,
 		$title;
 	const tableName = '';
+	const nameInOtherTable = '';
+	const otherTableName = '';
 
 
 	public function Set($_multiCategory)
@@ -97,6 +99,51 @@ class MultiCategory
 			$myltiCategories[$i]->Set($res->fetch_assoc());
 		}
 		return $myltiCategories;
+	}
+
+	public static function GetWithFilters($_filters)
+	{
+		require("DataBase.php");
+		$request = "SELECT DISTINCT " . static::otherTableName . "." . static::nameInOtherTable . " as id FROM products_to_color_and_size "
+		. "INNER JOIN products ON products_to_color_and_size.productID = products.id "
+		. "WHERE products.id > 0 ";
+
+		if (isset($_filters->title)) $request = $request . "AND products.title LIKE '%$_filters->title%' ";
+
+		if (isset($_filters->priceMin)) $request = $request . "AND products.price > $_filters->priceMin ";
+		if (isset($_filters->priceMax)) $request = $request . "AND products.price < $_filters->priceMax ";
+
+		if (isset($_filters->categoryID)) $request = $request . "AND products.categoryID = $_filters->categoryID ";
+		if (isset($_filters->sexID)) $request = $request . "AND products.sexID = $_filters->sexID ";
+		if (isset($_filters->companyID)) $request = $request . "AND products.companyID = $_filters->companyID ";
+		if (isset($_filters->discount)) $request = $request . "AND products.discount = $_filters->discount ";
+
+		if (isset($_filters->colorID)) $request = $request . "AND products_to_color_and_size.colorID = $_filters->colorID ";
+		if (isset($_filters->sizeID)) $request = $request . "AND products_to_color_and_size.sizeID = $_filters->sizeID ";
+
+		$request = $request . "ORDER BY " . static::otherTableName . "." . static::nameInOtherTable;
+
+		$response = $mysqli->query($request);
+
+		if ($mysqli->error)
+		{
+			$exception = $mysqli->error;
+			var_dump($exception); echo ("<br><br>");
+			return $exception;
+		}
+		else 
+		{
+			$className = static::class;
+
+			for ($i = 0; $i < $response->num_rows; $i++)
+			{
+				$response->data_seek($i);
+				$multiCategory[$i] = new $className();
+				$multiCategory[$i]->SetById($response->fetch_assoc()['id']);
+			}
+			
+			return $multiCategory;
+		}
 	}
 }
 
