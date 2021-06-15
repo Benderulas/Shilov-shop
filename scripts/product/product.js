@@ -18,7 +18,7 @@ function Delete()
 function Initialize()
 {
 	let button = document.getElementById("edit");
-	if (button) button.onclick = Edit;
+	//if (button) button.onclick = Edit;
 
 	button = document.getElementById("saveChanges");
 	if (button) button.onclick = SaveChanges;

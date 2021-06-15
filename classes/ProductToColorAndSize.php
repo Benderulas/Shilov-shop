@@ -118,14 +118,33 @@ class ProductToColorAndSize extends Object
 	{
 
 		$request = "UPDATE " . static::tableName . " SET "
-				 . "productID = " . $this->product->id . ", "
-				 . "sizeID = " . $this->size->id . ", "
-				 . "colorID = " . $this->color->id . ", "
-				 . "amount = $this->amount "
-				 . "WHERE id = $this->id";
+				. "amount = $this->amount "
+				. "WHERE productID = " . $this->product->id . " "
+				. "AND colorID = " . $this->color->id . " "
+				. "AND sizeID = " . $this->size->id;
 		$res = $_mysqli->query($request);
 
 		return ($res);
+	}
+
+	public function ExistByIds($_mysqli)
+	{
+		$request = "SELECT COUNT(*) as count FROM " . static::tableName . " " 
+			. "WHERE productID = " . $this->product->id . " "
+			. "AND colorID = " . $this->color->id . " "
+			. "AND sizeID = " . $this->size->id;
+
+		if ($res = $_mysqli->query($request))
+		{
+			$res = $res->fetch_assoc();
+			if ($res['count']) return true;
+			else return false;
+		}
+		else 
+		{
+			echo (static::class . " ExistByIds request error");
+			return false;
+		}
 	}
 }
 

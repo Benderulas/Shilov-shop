@@ -10,6 +10,12 @@ async function GetSelectsFromDb()
 }
 function isProductReady(_product)
 {
+	if (_product.id == false || Number.isInteger(_product.id) == false) 
+	{
+		alert("Нет ID");
+		return false;
+	}
+
 	if (_product.title == false) 
 	{
 		alert("Укажите название товара");
@@ -81,12 +87,12 @@ function isProductReady(_product)
 
 }
 
-
-async function InsertProduct()
+async function EditProduct()
 {
-	console.log("AddProduct");
+	console.log("EditProduct");
 
 	let product = {
+		id: Number(document.getElementById("id").value),
 		title: document.getElementById("title").value,
 		price: Number(document.getElementById("price").value),
 		discount: Number(document.getElementById("discount").value),
@@ -111,9 +117,10 @@ async function InsertProduct()
 
 	if (isProductReady(product)) 
 	{
-		let path = "POST/product/insertProductForView.php";
+		let path = "POST/product/editProductForView.php";
 		let response = await POST_JSON_request(path, product);
 		alert (response['message']);
+		console.log(product);
 	}
 }
 
@@ -126,39 +133,52 @@ async function AddColorAndSizeField()
 	let text = document.createTextNode("1 ");
 
 	label.appendChild(text);
+	let option;
+
+
+
 
 	let colorSelectItem = document.createElement("select");
 	colorSelectItem.name = "color";
 
-	let option = document.createElement("option");
+	
+	option = document.createElement("option");
 	option.value = 'null';
 	option.selected = "selected";
 	colorSelectItem.add(option);
+	
+	
 
 	for (let i in response['colors'])
 	{
 		option = document.createElement("option");
 		option.text = response['colors'][i].title;
 		option.value = response['colors'][i].id;
+		
 
 		colorSelectItem.add(option);
 	}
 
-	let sizeSelecctItem = document.createElement("select");
-	sizeSelecctItem.name = "size";
 
+
+
+	let sizeSelectItem = document.createElement("select");
+	sizeSelectItem.name = "size";
+
+	
 	option = document.createElement("option");
 	option.value = 'null';
 	option.selected = "selected";
-	sizeSelecctItem.add(option);
+	sizeSelectItem.add(option);
+	
 
 	for (let i in response['sizes'])
 	{
 		option = document.createElement("option");
 		option.text = response['sizes'][i].title;
 		option.value = response['sizes'][i].id;
-
-		sizeSelecctItem.add(option);
+		
+		sizeSelectItem.add(option);
 	}
 
 	let amountItem = document.createElement("input");
@@ -168,7 +188,7 @@ async function AddColorAndSizeField()
 
 
 	label.appendChild(colorSelectItem);
-	label.appendChild(sizeSelecctItem);
+	label.appendChild(sizeSelectItem);
 	label.appendChild(amountItem);
 
 
@@ -177,6 +197,95 @@ async function AddColorAndSizeField()
 	let brItem = document.createElement("br");
 	colorsAndSizes.appendChild(brItem);
 }
+
+
+
+async function InitializeColorAndSizeFields(_productToColorAndSize)
+{
+	console.log(_productToColorAndSize);
+	let response = await GetSelectsFromDb();
+	
+	let colorsAndSizes = document.getElementById("colorsAndSizes");
+	let label = document.createElement("label");
+	let text = document.createTextNode("1 ");
+
+	label.appendChild(text);
+	let option;
+
+
+
+
+	let colorSelectItem = document.createElement("select");
+	colorSelectItem.name = "color";
+
+	if (_productToColorAndSize == 0)
+	{
+		option = document.createElement("option");
+		option.value = 'null';
+		option.selected = "selected";
+		colorSelectItem.add(option);
+	}
+	
+
+	for (let i in response['colors'])
+	{
+		option = document.createElement("option");
+		option.text = response['colors'][i].title;
+		option.value = response['colors'][i].id;
+		if (_productToColorAndSize) 
+		{
+			if (option.value == _productToColorAndSize.color.id) option.selected = "selected";
+		}
+
+		colorSelectItem.add(option);
+	}
+
+
+
+
+	let sizeSelectItem = document.createElement("select");
+	sizeSelectItem.name = "size";
+
+	if (_productToColorAndSize == 0)
+	{
+		option = document.createElement("option");
+		option.value = 'null';
+		option.selected = "selected";
+		sizeSelectItem.add(option);
+	}
+
+	for (let i in response['sizes'])
+	{
+		option = document.createElement("option");
+		option.text = response['sizes'][i].title;
+		option.value = response['sizes'][i].id;
+		if (_productToColorAndSize) 
+		{
+			if (option.value == _productToColorAndSize.size.id) option.selected = "selected";
+		}
+
+		sizeSelectItem.add(option);
+	}
+
+	let amountItem = document.createElement("input");
+	amountItem.type = "text";
+	amountItem.name = "amount";
+	if (_productToColorAndSize) amountItem.value = _productToColorAndSize.amount;
+
+
+
+	label.appendChild(colorSelectItem);
+	label.appendChild(sizeSelectItem);
+	label.appendChild(amountItem);
+
+
+
+	colorsAndSizes.appendChild(label);
+	let brItem = document.createElement("br");
+	colorsAndSizes.appendChild(brItem);
+}
+
+
 
 function DeleteColorAndSizeField()
 {
@@ -188,58 +297,52 @@ function DeleteColorAndSizeField()
 	colorsAndSizes.removeChild(lastElement);
 }
 
-function InitializeCategories(_categories)
+function InitializeCategories(_categories, _productForView)
 {
 	let selectItem = document.getElementById("category");
 
-	let option = document.createElement("option");
-	option.value = 'null';
-	option.selected = "selected";
-	selectItem.add(option);
+	let option;
 
 	for (let i in _categories)
 	{
 		option = document.createElement("option");
 		option.text = _categories[i].title;
 		option.value = _categories[i].id;
+		if (_productForView.product.category.id == option.value) option.selected = "selected";
 
 		selectItem.add(option);
 	}
 }
 
-function InitializeCompanies(_companies)
+function InitializeCompanies(_companies, _productForView)
 {
 	let selectItem = document.getElementById("company");
 
-	let option = document.createElement("option");
-	option.value = 'null';
-	option.selected = "selected";
-	selectItem.add(option);
+	let option;
 
 	for (let i in _companies)
 	{
 		option = document.createElement("option");
 		option.text = _companies[i].title;
 		option.value = _companies[i].id;
+		if (_productForView.product.company.id == option.value) option.selected = "selected";
 
 		selectItem.add(option);
 	}
 }
 
-function InitializeSex(_sex)
+function InitializeSex(_sex, _productForView)
 {
 	let selectItem = document.getElementById("sex");
 
-	let option = document.createElement("option");
-	option.value = 'null';
-	option.selected = "selected";
-	selectItem.add(option);
+	let option;
 
 	for (let i in _sex)
 	{
 		option = document.createElement("option");
 		option.text = _sex[i].title;
 		option.value = _sex[i].id;
+		if (_productForView.product.sex.id == option.value) option.selected = "selected";
 
 		selectItem.add(option);
 	}
@@ -248,22 +351,54 @@ function InitializeSex(_sex)
 
 
 
-async function InitializeSelects()
+async function InitializeSelects(_productForView)
 {
 	let response = await GetSelectsFromDb();
 	
-	InitializeCategories(response['categories']);
-	InitializeCompanies(response['companies']);
-	InitializeSex(response['sex']);
+	InitializeCategories(response['categories'], _productForView);
+	InitializeCompanies(response['companies'], _productForView);
+	InitializeSex(response['sex'], _productForView);
+
+	for (let i = 0; i < _productForView.productsToColorAndSize.length; i++)
+	{
+		await InitializeColorAndSizeFields(_productForView.productsToColorAndSize[i]);
+	}
+}
+
+function InitializeProduct(_productForView)
+{
+	let id = document.getElementById("id");
+	id.value = _productForView.product.id;
+
+	let title = document.getElementById("title");
+	title.value = _productForView.product.title;
+
+	let price = document.getElementById("price");
+	price.value = _productForView.product.price;
+
+	let discount = document.getElementById("discount");
+	discount.value = _productForView.product.discount;
+
+	InitializeSelects(_productForView);
 }
 
 
 
 
-function Initialize()
+async function Initialize()
 {
-	let button = document.getElementById("addProduct");
-	button.onclick = InsertProduct;
+	let path = "POST/product/getById.php";
+	let url = new URL (window.location.href);
+	let id = url.searchParams.get("id");
+
+	let productForView = await POST_JSON_request(path, id);
+
+	console.log(productForView);
+
+
+
+	let button = document.getElementById("editProduct");
+	button.onclick = EditProduct;
 
 	button = document.getElementById("addColorAndSize");
 	button.onclick = AddColorAndSizeField;
@@ -271,7 +406,9 @@ function Initialize()
 	button = document.getElementById("deleteColorAndSize");
 	button.onclick = DeleteColorAndSizeField;
 
-	InitializeSelects();
+	InitializeProduct(productForView);
+
+	
 
 }
 

@@ -6,7 +6,7 @@
         <?php 
             if ($user && $user->rights->level == 10) echo ("
             <br>
-            <button id='edit'>Изменить</button>
+            <a href='http://shilov-shop/product/edit?id=" . $productForView->product->id . "' id='edit'>Изменить</a>
             <button id='saveChanges'>Сохранить</button>
             <br>
             <br>

@@ -73,7 +73,7 @@ class ProductForView
 		foreach ($this->productsToColorAndSize as $productToColorAndSize)
 		{
 			$productToColorAndSize->product = $this->product;
-			if ($productToColorAndSize->Exist($_mysqli)) $productToColorAndSize->Edit($_mysqli);
+			if ($productToColorAndSize->ExistByIds($_mysqli)) $productToColorAndSize->Edit($_mysqli);
 			else $productToColorAndSize->Insert($_mysqli);
 		}
 

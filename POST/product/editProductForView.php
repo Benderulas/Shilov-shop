@@ -1,18 +1,27 @@
 <?php
 
-	require_once("classes/ProductForView.php")
+	require_once("classes/ProductForView.php");
 
 
 	if ($user->rights->level == 10)
 	{
+		$json = file_get_contents('php://input');
+   		$data = json_decode($json);
+
 		$newProductForView = new ProductForView();
-		
-		$newProductForView->SetByPOST();
+		$newProductForView->SetByJSON($data);
 
-		$exception = $newProductForView->Edit();
+		$newProductForView->Edit($mysqli);
+
+		$response['status'] = true;
+		$response['message'] = "Изменено";
 	}
-	else $exception = "You don't have permissions to do that";
+	else 
+	{
+		$response['status'] = false;
+		$response['message'] = "You don't have permissions to do that.";
+	}
 
-
+	echo(json_encode($response));
 
 ?>
