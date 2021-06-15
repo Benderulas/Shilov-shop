@@ -18,28 +18,26 @@ class Size extends MultiCategory
 		$this->number = $_multiCategory['number'];
 	}
 
-	public function Insert()
+	public function Insert($_mysqli)
 	{
-		require("DataBase.php");
 
-		if ($this->Exist() == false)
+		if ($this->Exist($_mysqli) == false)
 		{
-			$res = $mysqli->query("INSERT INTO " . static::tableName . " (title, number) "
+			$res = $_mysqli->query("INSERT INTO " . static::tableName . " (title, number) "
 				. "VALUES ('$this->title', $this->number)");
 			return $res;
 		}
 		else return false;
 	}
 
-	public function Edit()
+	public function Edit($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "UPDATE " . static::tableName . " SET "
 				 . "title = '$this->title', "
 				 . "number = $this->number "
 				 . "WHERE id = $this->id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 		return $res;
 	}
 

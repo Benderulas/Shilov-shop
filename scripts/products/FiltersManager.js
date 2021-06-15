@@ -31,6 +31,17 @@ export class FiltersManager
 	  return response;  
 	}
 
+	static async GetSelectsFromDb()
+	{
+	  let path = "POST/products/GetSearchFilters.php";
+
+	  let response = await POST_JSON_request(path); 
+
+	  return response;  
+	}
+
+
+
 	static PrepareFiltersForRequest(_filters)
 	{
 		_filters['colorID'] = Number(_filters['colorID']);

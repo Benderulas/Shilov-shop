@@ -7,7 +7,7 @@ $userToEdit->SetByPOST();
 
 if ($user->id == $userToEdit->id || $user->rigths->level == 10)
 {
-	$exception = $userToEdit->Edit();
+	$exception = $userToEdit->Edit($mysqli);
 }
 else $exception = "You don't have permissions to do that";
 

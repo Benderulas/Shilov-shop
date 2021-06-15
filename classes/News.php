@@ -17,7 +17,7 @@ class News extends MultiCategory
 		$this->title = $_news['title'];
 	}
 
-	public function Insert()
+	public function Insert($_mysqli)
 	{
 		require("DataBase.php");
 
@@ -32,7 +32,7 @@ class News extends MultiCategory
 		else return false;
 	}
 
-	public function Edit()
+	public function Edit($_mysqli)
 	{
 		require("DataBase.php");
 

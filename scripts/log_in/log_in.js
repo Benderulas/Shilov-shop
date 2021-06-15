@@ -2,7 +2,7 @@ import { POST_JSON_request } from "/JavaScript/requests.js";
 
 async function SendLogInForm()
 {
-  let path = "/POST/user/log_in.php";
+  let path = "POST/user/log_in.php";
   let form = document.forms.login;
   
 

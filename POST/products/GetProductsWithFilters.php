@@ -8,8 +8,8 @@
     $productSearcher = new ProductForViewSearcher();
     $productSearcher->SetFiltersByJSON($data);
 
-    $productsForView = $productSearcher->SearchByFilters();
-    $productsForView['amount'] = $productSearcher->GetPagesAmountByFilters();
+    $productsForView = $productSearcher->SearchByFilters($mysqli);
+    $productsForView['amount'] = $productSearcher->GetPagesAmountByFilters($mysqli);
 
     
     echo(json_encode($productsForView));

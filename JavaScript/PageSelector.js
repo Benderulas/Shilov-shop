@@ -1,14 +1,5 @@
-import { UrlManager } from "/scripts/products/UrlManager.js";
-
-
 export class PageSelector
 {
-
-	static InitializeButtons(_pagesAmount)
-	{
-		let page  = UrlManager.GetPageFromUrl();
-		this.UpdateButtons(page, _pagesAmount)
-	}
 	static UpdateButtons(_page, _pagesAmount)
 	{
 		_page = Number(_page);

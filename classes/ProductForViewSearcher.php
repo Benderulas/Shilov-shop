@@ -21,7 +21,7 @@ class ProductForViewSearcher extends Searcher
 		$page = 1,
 		$productsOnPage = 8;
 
-	public function GetPagesAmountByFilters()
+	public function GetPagesAmountByFilters($_mysqli)
 	{
 		$request = "SELECT COUNT(DISTINCT products_to_color_and_size.productID) "
             . "FROM " . ProductToColorAndSize::tableName . " "
@@ -42,17 +42,15 @@ class ProductForViewSearcher extends Searcher
         if (isset($this->colorID)) $request = $request . "AND products_to_color_and_size.colorID = $this->colorID ";
         if (isset($this->sizeID)) $request = $request . "AND products_to_color_and_size.sizeID = $this->sizeID";
 		
-
-		require("DataBase.php");
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		if ($res) return $res->fetch_assoc()['COUNT(DISTINCT products_to_color_and_size.productID)'];
-		else return $mysqli->error;
+		else return $_mysqli->error;
 
 
 	}
 
-	public function SearchByFilters()
+	public function SearchByFilters($_mysqli)
 	{
 		$request = "SELECT DISTINCT products_to_color_and_size.productID as productID "
             . "FROM " . ProductToColorAndSize::tableName . " "
@@ -80,8 +78,7 @@ class ProductForViewSearcher extends Searcher
             . "OFFSET " . ($this->page - 1) * $this->productsOnPage;
 		
 
-		require("DataBase.php");
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 		
 		if ($res) $productsCount = $res->num_rows;
 		else $productsCount = 0;
@@ -97,13 +94,13 @@ class ProductForViewSearcher extends Searcher
 				
 				$ProductsForView['status'] = true;
     			$ProductsForView[$i] = new ProductForView();
-    			$ProductsForView[$i]->SetById($res->fetch_assoc()['productID']);
+    			$ProductsForView[$i]->SetById($res->fetch_assoc()['productID'], $_mysqli);
 			}
 		}
 		else 
 		{
 			$ProductsForView['status'] = false;
-			$ProductsForView['message'] = $mysqli->error;
+			$ProductsForView['message'] = $_mysqli->error;
 		}		
 		return $ProductsForView;
 	}

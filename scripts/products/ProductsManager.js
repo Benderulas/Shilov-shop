@@ -25,7 +25,12 @@ export class ProductsManager
 	{
 		let product = document.getElementsByName("product")[_position];
 
-		let title = product.firstElementChild;
+		product.hidden ="";
+
+		let id = product.firstElementChild;
+		id.innerText = _productForView.product.id;
+
+		let title = id.nextElementSibling;
 		title.innerText = _productForView.product.title;
 
 		let category = title.nextElementSibling;
@@ -54,7 +59,7 @@ export class ProductsManager
 
 	static async GetProductsFromDB(_filters)
 	{
-		let path = "/POST/products/GetProductsWithFilters.php";
+		let path = "POST/products/GetProductsWithFilters.php";
 
 		let response = await POST_JSON_request(path, _filters); 
 
@@ -64,6 +69,10 @@ export class ProductsManager
 
 	static DeleteProduct(_position)
 	{
+		let product = document.getElementsByName("product")[_position];
+		product.hidden = "hidden";
+
+		let id = document.getElementsByName("id")[_position];
 		let title = document.getElementsByName("title")[_position];
 		let category = document.getElementsByName("category")[_position];
 		let company = document.getElementsByName("company")[_position];
@@ -71,7 +80,7 @@ export class ProductsManager
 		let color = document.getElementsByName("color")[_position];
 		let size = document.getElementsByName("size")[_position];
 
-		
+		id.innerText = " ";
 		title.innerText = " ";
 		category.innerText = " ";
 		company.innerText = " ";

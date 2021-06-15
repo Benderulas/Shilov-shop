@@ -1,0 +1,47 @@
+
+
+
+<div class="row">
+    <div class="col-2 text-center">
+        <?php 
+            if ($user && $user->rights->level == 10) echo ("
+            <br>
+            <button id='addProduct'>Добавить</button>       
+            ")
+        ?>
+        
+    </div>
+    <div class="col-8 text-left">
+
+        <div id="product">
+            <label>Название: <input type="text" id="title"></label><br>
+            <label>Цена: <input type="text" id="price"></label><br>
+            <label>Скидка: <input type="text" id="discount"></label><br>
+
+            <label>Категория: 
+            	<select id='category'>
+    			</select>
+    		</label><br>
+
+    		<label>Компания: 
+            	<select id='company'>
+    			</select>
+    		</label><br>
+
+    		<label>Пол: 
+            	<select id='sex'>
+    			</select>
+    		</label><br>
+
+    		<div id='colorsAndSizes'>
+    			<label>Цвет</label><label>Размер</label><label>Количество</label><br>
+            </div>
+            <button id="addColorAndSize">Добавить Цвет\размер</button>
+            <button id="deleteColorAndSize">Удалить Цвет\размер</button>
+        </div>
+    
+    </div>
+    <div class="col-2"></div>
+</div> 
+
+<script type="module" src="http://shilov-shop/scripts/product/insert.js"></script>   

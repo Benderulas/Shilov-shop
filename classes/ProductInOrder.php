@@ -40,32 +40,30 @@ class ProductInOrder extends Object
 		$this->amount = $_object['amount'];
 	}
 
-	public function SetById($_id)
+	public function SetById($_id, $_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT * FROM " . static::tableName . " WHERE id = $_id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		if ($res)
 		{
 			$productInOrder = $res->fetch_assoc();
 
 			$productInOrder['order'] = new Order();
-			$productInOrder['order']->SetById($productInOrder['orderID']);
+			$productInOrder['order']->SetById($productInOrder['orderID'], $_mysqli);
 
 			$productInOrder['productToColorAndSize'] = new ProductToColorAndSize();
-			$productInOrder['productToColorAndSize']->SetById($productInOrder['productToColorAndSizeID']);
+			$productInOrder['productToColorAndSize']->SetById($productInOrder['productToColorAndSizeID'], $_mysqli);
 
 			$this->Set($productInOrder);
 		}
 	}
 
-	public static function GetByOrderId($_id)
+	public static function GetByOrderId($_id, $_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT id FROM " . static::tableName . " WHERE orderID = $_id";
 
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		$count = $res->num_rows;
 
@@ -75,27 +73,25 @@ class ProductInOrder extends Object
 			$res->data_seek($i);
 
 			$productsInOrder[$i] = new ProductInOrder();
-			$productsInOrder[$i]->SetById($res->fetch_assoc()['id']);
+			$productsInOrder[$i]->SetById($res->fetch_assoc()['id'], $_mysqli);
 		}
 
 		return $productsInOrder;
 	}
 
-	public function Insert()
+	public function Insert($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "INSERT INTO " . static::tableName . " (orderID, productToColorAndSizeID, amount) "
 				. "VALUES (" . $this->order->id . ", " .$this->productToColorAndSize->id . ", $this->amount)";
 
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 		$this->id = $mysqli->insert_id;
 
 		return $this->id;
 	}
-	public function Edit()
+	public function Edit($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "UPDATE " . static::tableName . " SET "
 				 . "orderID = " . $this->order->id . ", "
@@ -103,7 +99,7 @@ class ProductInOrder extends Object
 				 . "amount = $this->amount "
 				 . "WHERE id = $this->id";
 
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		return ($res);
 	}

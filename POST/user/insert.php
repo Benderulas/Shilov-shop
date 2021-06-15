@@ -6,17 +6,17 @@ $newUser = new User();
 $newUser->SetByPOST();
 
 
-if ($newUser->ExistByLogin()) 
+if ($newUser->ExistByLogin($mysqli)) 
 {
 	$exception = "login is used already, please, select new one.";
 }
-else if ($newUser->ExistByEmail()) 
+else if ($newUser->ExistByEmail()$mysqli) 
 {
 	$exception = "email is used already, please, select new one.";
 }
 else 
 {
-	if ($newUser->Insert())
+	if ($newUser->Insert($mysqli))
 	{
 		$exception = "Done!";
 	}

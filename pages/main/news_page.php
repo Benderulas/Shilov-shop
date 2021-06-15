@@ -2,7 +2,7 @@
 
 require("classes/News.php");
 
-$news = News::GetAllFromDB();
+$news = News::GetAllFromDB($mysqli);
 
 $newsCount = count($news);
 

@@ -36,6 +36,16 @@ class ProductToColorAndSize extends Object
 		$this->amount = $_POST['productToColorAndSize_amount_' . $number];
 	}
 
+	public function SetByJSON($_colorAndSize)
+	{
+		if (isset($_colorAndSize->id)) $this->id = $_colorAndSize->id;
+
+		$this->size->id = $_colorAndSize->sizeID;
+		$this->color->id = $_colorAndSize->colorID;
+
+		$this->amount = $_colorAndSize->amount;
+	}
+
 
 	public function Set($_object)
 	{
@@ -47,35 +57,33 @@ class ProductToColorAndSize extends Object
 		$this->amount = $_object['amount'];
 	}
 
-	public function SetById($_id)
+	public function SetById($_id, $_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT * FROM " . static::tableName . " WHERE id = $_id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		if ($res)
 		{
 			$product = $res->fetch_assoc();
 
 			$product['product'] = new Product();
-			$product['product']->SetById($product['productID']);
+			$product['product']->SetById($product['productID'], $_mysqli);
 
 			$product['size'] = new Size();
-			$product['size']->SetById($product['sizeID']);
+			$product['size']->SetById($product['sizeID'], $_mysqli);
 
 			$product['color'] = new Color();
-			$product['color']->SetById($product['colorID']);
+			$product['color']->SetById($product['colorID'], $_mysqli);
 
 			$this->Set($product);
 		}
 	}
 
-	public static function GetByProductId($_id)
+	public static function GetByProductId($_id, $_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT id FROM " . static::tableName . " WHERE productID = $_id";
 
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		$count = $res->num_rows;
 
@@ -86,15 +94,14 @@ class ProductToColorAndSize extends Object
 			$res->data_seek($i);
 
 			$productsToColorAndSize[$i] = new ProductToColorAndSize();
-			$productsToColorAndSize[$i]->SetById($res->fetch_assoc()['id']);
+			$productsToColorAndSize[$i]->SetById($res->fetch_assoc()['id'], $_mysqli);
 		}
 
 		return $productsToColorAndSize;
 	}
 
-	public function Insert()
+	public function Insert($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "INSERT INTO " . static::tableName . " (productID, sizeID, colorID, amount) "
 				. "VALUES (" 
@@ -103,13 +110,12 @@ class ProductToColorAndSize extends Object
 				. $this->color->id . ", "
 				. "$this->amount)";
 
-		$res = $mysqli->query($request);
-		$this->id = $mysqli->insert_id;
+		$res = $_mysqli->query($request);
+		$this->id = $_mysqli->insert_id;
 		return $this->id;
 	}
-	public function Edit()
+	public function Edit($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "UPDATE " . static::tableName . " SET "
 				 . "productID = " . $this->product->id . ", "
@@ -117,7 +123,7 @@ class ProductToColorAndSize extends Object
 				 . "colorID = " . $this->color->id . ", "
 				 . "amount = $this->amount "
 				 . "WHERE id = $this->id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		return ($res);
 	}

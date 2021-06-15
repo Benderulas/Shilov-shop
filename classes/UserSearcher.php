@@ -18,7 +18,7 @@ class UserSearcher extends Searcher
 		$usersOnPage = 8,
 		$page = 1;
 
-	public function SearchByFilters()
+	public function SearchByFilters($_mysqli)
 	{
 		$request = "SELECT id FROM users WHERE 1 ";
 
@@ -38,8 +38,7 @@ class UserSearcher extends Searcher
 
 		
 
-		require("DataBase.php");
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 
 		if ($res)
@@ -58,7 +57,7 @@ class UserSearcher extends Searcher
 		    		$userID = $res->fetch_assoc();
 
 	    			$users[$i] = new User();
-	    			$users[$i]->SetById($userID['id']);
+	    			$users[$i]->SetById($userID['id'], $_mysqli);
 				}	
 				return $users;
 			}

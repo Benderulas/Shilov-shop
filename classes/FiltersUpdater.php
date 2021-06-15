@@ -50,13 +50,15 @@ class FiltersUpdater
 
 
 
-	public function GetFilters()
+	public function GetFilters($_mysqli)
 	{
-		$multiCategory['colors'] = Color::GetWithFilters($this->filters);
-		$multiCategory['sizes'] = Size::GetWithFilters($this->filters);
+		$multiCategory['colors'] = Color::GetWithFilters($this->filters, $_mysqli);
+		$multiCategory['sizes'] = Size::GetWithFilters($this->filters, $_mysqli);
 
-		$multiCategory['categories'] = Category::GetWithFilters($this->filters);
-		$multiCategory['companies'] = Company::GetWithFilters($this->filters);
+		$multiCategory['categories'] = Category::GetWithFilters($this->filters, $_mysqli);
+		$multiCategory['companies'] = Company::GetWithFilters($this->filters, $_mysqli);
+
+		$multiCategory['sex'] = Sex::GetWithFilters($this->filters, $_mysqli);
 
 		return $multiCategory;
 	}

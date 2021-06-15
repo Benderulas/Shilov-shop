@@ -77,18 +77,17 @@ class User extends Object
 		$this->rights = $_user['rights'];
 	}
 
-	public function SetById($_id)
+	public function SetById($_id, $_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT * FROM " . static::tableName . " WHERE id = $_id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		if ($res)
 		{
 			$user = $res->fetch_assoc();
 
 			$user['rights'] = new Rights();
-			$user['rights']->SetById($user['rightsID']);
+			$user['rights']->SetById($user['rightsID'], $_mysqli);
 
 			$this->Set($user);
 		}
@@ -96,18 +95,17 @@ class User extends Object
 		return $res;
 	}
 
-	public function SetByEmail($_email)
+	public function SetByEmail($_email, $_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT * FROM " . static::tableName . " WHERE email = '$_email'";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		if ($res)
 		{
 			$user = $res->fetch_assoc();
 
 			$user['rights'] = new Rights();
-			$user['rights']->SetById($user['rightsID']);
+			$user['rights']->SetById($user['rightsID'], $_mysqli);
 
 			$this->Set($user);
 		}
@@ -115,18 +113,17 @@ class User extends Object
 		return $res;
 	}
 
-	public function SetByLogin($_login)
+	public function SetByLogin($_login, $_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT * FROM " . static::tableName . " WHERE login = '$_login'";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		if ($res)
 		{
 			$user = $res->fetch_assoc();
 
 			$user['rights'] = new Rights();
-			$user['rights']->SetById($user['rightsID']);
+			$user['rights']->SetById($user['rightsID'], $_mysqli);
 
 			$this->Set($user);
 		}
@@ -134,10 +131,9 @@ class User extends Object
 		return $res;
 	}
 
-	public function ExistByLogin()
+	public function ExistByLogin($_mysqli)
 	{
-		require("DataBase.php");
-		if ($res = $mysqli->query("SELECT COUNT(*) as count FROM " . static::tableName . " WHERE login = '$this->login'"))
+		if ($res = $_mysqli->query("SELECT COUNT(*) as count FROM " . static::tableName . " WHERE login = '$this->login'"))
 		{
 			$res = $res->fetch_assoc();
 			if ($res['count']) return true;
@@ -151,10 +147,9 @@ class User extends Object
 	}
 
 
-	public function ExistByEmail()
+	public function ExistByEmail($_mysqli)
 	{
-		require("DataBase.php");
-		if ($res = $mysqli->query("SELECT COUNT(*) as count FROM " . static::tableName . " WHERE email = '$this->email'"))
+		if ($res = $_mysqli->query("SELECT COUNT(*) as count FROM " . static::tableName . " WHERE email = '$this->email'"))
 		{
 			$res = $res->fetch_assoc();
 			if ($res['count']) return true;
@@ -169,9 +164,8 @@ class User extends Object
 
 
 	
-	public function Insert()
+	public function Insert($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "INSERT INTO " . static::tableName . " (login, password, email, img, phone, firstName, secondName, rightsID) "
 				. "VALUES ("
@@ -185,15 +179,14 @@ class User extends Object
 				. $this->rights->id . " "
 				. ")";
 
-		$res = $mysqli->query($request);
-		$this->id = $mysqli->insert_id;
+		$res = $_mysqli->query($request);
+		$this->id = $_mysqli->insert_id;
 
 		return $this->id;
 	}
 
-	public function Edit()
+	public function Edit($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "UPDATE " . static::tableName . " SET "
 				 . "login = '$this->login', "
@@ -206,7 +199,7 @@ class User extends Object
 				 . "rightsID = " . $this->rights->id . " "
 				 . "WHERE id = $this->id";
 
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		return $res;
 	}

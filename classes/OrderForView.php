@@ -34,45 +34,45 @@ class OrderForView
 		$this->ProductsInOrder = $_orderForView['productsInOrder'];
 	}
 
-	public function SetById($_id)
+	public function SetById($_id, $_mysqli)
 	{
-		$this->order->SetById($_id);
+		$this->order->SetById($_id, $_mysqli);
 
-		$this->productsInOrder = ProductInOrder::GetByOrderId($_id);
+		$this->productsInOrder = ProductInOrder::GetByOrderId($_id, $_mysqli);
 	}
 
-	public function Insert()
+	public function Insert($_mysqli)
 	{
-		$this->order->Insert();
+		$this->order->Insert($_mysqli);
 
 		foreach ($this->productsInOrder as $productInOrder)
 		{
 			$productInOrder->order = $this->order;
-			$productInOrder->Insert();
+			$productInOrder->Insert($_mysqli);
 		}
 	}
 
 
-	public function Edit()
+	public function Edit($_mysqli)
 	{
-		$this->order->Edit();
+		$this->order->Edit($_mysqli);
 
 		foreach ($this->productsInOrder as $productInOrder)
 		{
-			if ($productInOrder->Exist()) $productInOrder->Edit();
-			else $productInOrder->Insert();
+			if ($productInOrder->Exist($_mysqli)) $productInOrder->Edit($_mysqli);
+			else $productInOrder->Insert($_mysqli);
 		}
 
 		// do i have to realize deletion productsToColorAndSize from DB, that doesn't exist in that ProductForView?
 	}
 
-	public function Delete()
+	public function Delete($_mysqli)
 	{
-		$this->order->Delete();
+		$this->order->Delete($_mysqli);
 
 		foreach ($this->productsInOrder as $productInOrder)
 		{
-			$productInOrder->Delete();
+			$productInOrder->Delete($_mysqli);
 		}
 	}	
 }

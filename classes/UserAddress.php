@@ -27,11 +27,10 @@ class UserAddress extends Object
 		$this->postIndex = $_userAddress['postIndex'];
 	}
 
-	public function SetById($_id)
-	{
-		require("DataBase.php");
+	public function SetById($_id, $_mysqli)
+	{\
 		$request = "SELECT * FROM " . static::tableName . " WHERE id = $_id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		if ($res)
 		{
@@ -44,12 +43,11 @@ class UserAddress extends Object
 		}
 	}
 
-	public static function GetByUserId($_id)
+	public static function GetByUserId($_id, $_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT id FROM " . static::tableName . " WHERE userID = $_id";
 
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		$count = $res->num_rows;
 
@@ -61,15 +59,14 @@ class UserAddress extends Object
 			$res->data_seek($i);
 
 			$userAddresses[$i] = new UserAddress();
-			$userAddresses[$i]->SetById($res->fetch_assoc()['id']);
+			$userAddresses[$i]->SetById($res->fetch_assoc()['id'], $_mysqli);
 		}
 
 		return $userAddresses;
 	}
 
-	public function Insert()
+	public function Insert($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "INSERT INTO " . static::tableName . " (userID, country, city, address, postIndex) "
 				. "VALUES (" 
@@ -79,16 +76,15 @@ class UserAddress extends Object
 				'$this->address', 
 				$this->postIndex)";
 
-		$res = $mysqli->query($request);
-		$this->id = $mysqli->insert_id;
+		$res = $_mysqli->query($request);
+		$this->id = $_mysqli->insert_id;
 
 		return $this->id;
 	}
 
 
-	public function Edit()
+	public function Edit($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "UPDATE " . static::tableName . " SET "
 				 . "userID = " . $this->user->id . ", "
@@ -98,7 +94,7 @@ class UserAddress extends Object
 				 . "postIndex = $this->postIndex "
 				 . "WHERE id = $this->id";
 
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		return ($res);
 	}

@@ -7,7 +7,7 @@ $userToDelete->SetByPOST();
 
 if ($user->id == $userToDelete->id || $user->rigths->level == 10)
 {
-	$exception = $userToDelete->Delete();
+	$exception = $userToDelete->Delete($mysqli);
 }
 else $exception = "You don't have permissions to do that";
 

@@ -11,7 +11,7 @@ $data = json_decode($json);
 $filtersUpdater = new FiltersUpdater();
 $filtersUpdater->SetByJSON($data);
 
-$filters = $filtersUpdater->GetFilters();
+$filters = $filtersUpdater->GetFilters($mysqli);
 
 $filters = json_encode($filters);
 

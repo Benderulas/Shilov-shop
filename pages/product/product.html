@@ -1,0 +1,40 @@
+<?php require("product.php"); ?>
+
+
+<div class="row">
+    <div class="col-2 text-center">
+        <?php 
+            if ($user && $user->rights->level == 10) echo ("
+            <br>
+            <button id='edit'>Изменить</button>
+            <button id='saveChanges'>Сохранить</button>
+            <br>
+            <br>
+            <button id='delete'>Удалить</button><br>            
+            ")
+        ?>
+        
+    </div>
+    <div class="col-8 text-left">
+
+        <div name="product">
+            <div name="id"><?php echo($productForView->product->id); ?></div>
+            <div name="title"><?php echo($productForView->product->title); ?></div>
+            <div name="category"><?php echo($productForView->product->category->title); ?></div>
+            <div name="company"><?php echo($productForView->product->company->title); ?></div>
+            <div name="price"><?php echo($productForView->product->price); ?></div>
+            <div name="discount"><?php echo($productForView->product->discount); ?></div>
+            <div name="color and size"><?php 
+                for ($i = 0; $i < count($productForView->productsToColorAndSize); $i++)
+                {
+                    echo ($productForView->productsToColorAndSize[$i]->color->title . " " . $productForView->productsToColorAndSize[$i]->size->title . " " . $productForView->productsToColorAndSize[$i]->amount . "<br>");
+                }
+            ?>
+            </div>
+        </div>
+    
+    </div>
+    <div class="col-2"></div>
+</div> 
+
+<script type="module" src="scripts/product/product.js"></script>   

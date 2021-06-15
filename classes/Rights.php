@@ -17,28 +17,26 @@ class Rights extends MultiCategory
 		$this->level = $_multiCategory['level'];
 	}
 
-	public function Insert()
+	public function Insert($_mysqli)
 	{
-		require("bd.php");
 
-		if ($this->Exist() == false)
+		if ($this->Exist($_mysqli) == false)
 		{
-			$res = $mysqli->query("INSERT INTO " . static::tableName . " (title, level) "
+			$res = $_mysqli->query("INSERT INTO " . static::tableName . " (title, level) "
 				. "VALUES ('$this->title', $this->level)");
 			return $res;
 		}
 		else return false;
 	}
 
-	public function Edit()
+	public function Edit($_mysqli)
 	{
-		require("bd.php");
 
 		$request = "UPDATE " . static::tableName . " SET "
 				 . "title = '$this->title', "
 				 . "level = $this->level "
 				 . "WHERE id = $this->id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 		return $res;
 	}
 

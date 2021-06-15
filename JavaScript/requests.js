@@ -1,5 +1,7 @@
-export async function POST_JSON_request(path, data)
+export async function POST_JSON_request(path, data = 0)
 {
+  path = "http://shilov-shop/" + path;
+  console.log(path);
 
   let response = await fetch(path, {
     method: 'POST',

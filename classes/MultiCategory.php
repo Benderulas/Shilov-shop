@@ -16,11 +16,10 @@ class MultiCategory
 		$this->title = $_multiCategory['title'];
 	}
 
-	public function SetById($_id)
+	public function SetById($_id, $_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT * from " . static::tableName . " WHERE id =  $_id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		if ($res)
 		{
@@ -28,11 +27,11 @@ class MultiCategory
 		}
 	}
 
-	public function Exist()
+	public function Exist($_mysqli)
 	{
 		if (isset($this->id)) return true;
-		require("DataBase.php");
-		if ($res = $mysqli->query("SELECT COUNT(*) as count FROM " . static::tableName . " WHERE title = '$this->title'"))
+
+		if ($res = $_mysqli->query("SELECT COUNT(*) as count FROM " . static::tableName . " WHERE title = '$this->title'"))
 		{
 			$res = $res->fetch_assoc();
 			if ($res['count']) return true;
@@ -45,43 +44,41 @@ class MultiCategory
 		}
 	}
 
-	public function Insert()
+	public function Insert($_mysqli)
 	{
-		require("DataBase.php");
 
-		if ($this->Exist() == false)
+		if ($this->Exist($_mysqli) == false)
 		{
-			$res = $mysqli->query("INSERT INTO " . static::tableName . " (title) "
+			$res = $_mysqli->query("INSERT INTO " . static::tableName . " (title) "
 				. "VALUES ('$this->title')");
 			return $res;
 		}
 		else return false;
 	}
 
-	public function Edit()
+	public function Edit($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "UPDATE " . static::tableName . " SET "
 				 . "title = '$this->title' "
 				 . "WHERE id = $this->id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 		return $res;
 	}
 
-	public function Delete()
+	public function Delete($_mysqli)
 	{
 		require("DataBase.php");
-		$res = $mysqli->query("DELETE FROM " . static::tableName . " WHERE id = $tihs->id");
+		$res = $_mysqli->query("DELETE FROM " . static::tableName . " WHERE id = $tihs->id");
 
 		return $res;
 	}
 
-	public static function GetAllFromDB()
+	public static function GetAllFromDB($_mysqli)
 	{
 		require("DataBase.php");
 		$request = "SELECT * FROM " . static::tableName . " ORDER BY id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		if ($res == false)
 		{
@@ -101,9 +98,8 @@ class MultiCategory
 		return $myltiCategories;
 	}
 
-	public static function GetWithFilters($_filters)
+	public static function GetWithFilters($_filters, $_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT DISTINCT " . static::otherTableName . "." . static::nameInOtherTable . " as id FROM products_to_color_and_size "
 		. "INNER JOIN products ON products_to_color_and_size.productID = products.id "
 		. "WHERE products.id > 0 ";
@@ -123,11 +119,11 @@ class MultiCategory
 
 		$request = $request . "ORDER BY " . static::otherTableName . "." . static::nameInOtherTable;
 
-		$response = $mysqli->query($request);
+		$response = $_mysqli->query($request);
 
-		if ($mysqli->error)
+		if ($_mysqli->error)
 		{
-			$exception = $mysqli->error;
+			$exception = $_mysqli->error;
 			var_dump($exception); echo ("<br><br>");
 			return $exception;
 		}
@@ -139,7 +135,7 @@ class MultiCategory
 			{
 				$response->data_seek($i);
 				$multiCategory[$i] = new $className();
-				$multiCategory[$i]->SetById($response->fetch_assoc()['id']);
+				$multiCategory[$i]->SetById($response->fetch_assoc()['id'], $_mysqli);
 			}
 			
 			return $multiCategory;

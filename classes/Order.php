@@ -65,32 +65,30 @@ class Order extends Object
 		$this->postIndex = $_order['postIndex'];
 	}
 
-	public function SetById($_id)
+	public function SetById($_id, $_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT * FROM " . static::tableName . " WHERE id = $_id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		if ($res)
 		{
 			$product = $res->fetch_assoc();
 
 			$product['user'] = new User();
-			$product['user']->SetById($product['userID']);
+			$product['user']->SetById($product['userID'], $_mysqli);
 
 			$product['status'] = new OrderStatus();
-			$product['status']->SetById($product['statusID']);
+			$product['status']->SetById($product['statusID'], $_mysqli);
 
 			$product['deliveryCompany'] = new DeliveryCompany();
-			$product['deliveryCompany']->SetById($product['deliveryCompanyID']);
+			$product['deliveryCompany']->SetById($product['deliveryCompanyID'], $_mysqli);
 
 			$this->Set($product);
 		}
 	}
 
-	public function Insert()
+	public function Insert($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "INSERT INTO " . static::tableName . " (
 			userID, 
@@ -117,15 +115,14 @@ class Order extends Object
 				$this->postIndex
 				)";
 
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 		$this->id = $mysqli->insert_id;
 
 		return $this->id;
 	}
 
-	public function Edit()
+	public function Edit($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "UPDATE products SET "
 				 . "userID = " . $this->user->id . ", "
@@ -139,7 +136,7 @@ class Order extends Object
 				 . "address = '$this->address', "
 				 . "postIndex = $this->postIndex "
 				 . "WHERE id = $this->id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		return ($res);
 	}

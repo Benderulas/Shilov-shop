@@ -9,19 +9,19 @@ $data = json_decode($json);
 $newUser = new User();
 $newUser->SetByJSON($data);
 
-if ($newUser->ExistByLogin()) 
+if ($newUser->ExistByLogin($mysqli)) 
 {
 	$response['status'] = false;
 	$response['message'] = "login is used already, please, select new one.";
 }
-else if ($newUser->ExistByEmail()) 
+else if ($newUser->ExistByEmail($mysqli)) 
 {
 	$response['status'] = false;
 	$response['message'] = "email is used already, please, select new one.";
 }
 else 
 {
-	if ($newUser->Insert())
+	if ($newUser->Insert($mysqli))
 	{
 		$_SESSION['is_auth'] = true;
 		$_SESSION['login'] = $newUser->login;

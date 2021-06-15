@@ -27,6 +27,17 @@ class ProductForView
 		}
 	}
 
+	public function SetByJSON($_productForView)
+	{
+		$this->product->SetByJSON($_productForView);
+
+		for ($i = 0; $i < count($_productForView->colorsAndSizes); $i++)
+		{
+			$this->productsToColorAndSize[$i] = new ProductToColorAndSize();
+			$this->productsToColorAndSize[$i]->SetByJSON($_productForView->colorsAndSizes[$i]);
+		}
+	}
+
 
 	public function Set($_product)
 	{
@@ -34,47 +45,48 @@ class ProductForView
 		$this->productsToColorAndSize = $_product['productsToColorAndSize'];
 	}
 
-	public function SetById($_id)
+	public function SetById($_id, $_mysqli)
 	{
 		$this->product = new Product();
-		$this->product->SetById($_id);
+		$this->product->SetById($_id, $_mysqli);
 
-		$this->productsToColorAndSize = ProductToColorAndSize::GetByProductId($_id);
+		$this->productsToColorAndSize = ProductToColorAndSize::GetByProductId($_id, $_mysqli);
 	}
 
-	public function Insert()
+	public function Insert($_mysqli)
 	{
-		$this->product->Insert();
+		$this->product->Insert($_mysqli);
 
 		foreach ($this->productsToColorAndSize as $productToColorAndSize)
 		{
 			$productToColorAndSize->product = $this->product;
-			$productToColorAndSize->Insert();
+			$productToColorAndSize->Insert($_mysqli);
 		}
 
 	}
 
 
-	public function Edit()
+	public function Edit($_mysqli)
 	{
-		$this->product->Edit();
+		$this->product->Edit($_mysqli);
 
 		foreach ($this->productsToColorAndSize as $productToColorAndSize)
 		{
-			if ($productToColorAndSize->Exist()) $productToColorAndSize->Edit();
-			else $productToColorAndSize->Insert();
+			$productToColorAndSize->product = $this->product;
+			if ($productToColorAndSize->Exist($_mysqli)) $productToColorAndSize->Edit($_mysqli);
+			else $productToColorAndSize->Insert($_mysqli);
 		}
 
 		// do i have to realize deletion productsToColorAndSize from DB, that doesn't exist in that ProductForView?
 	}
 
-	public function Delete()
+	public function Delete($_mysqli)
 	{
-		$this->product->Delete();
+		$this->product->Delete($_mysqli);
 
 		foreach ($this->productsToColorAndSize as $productToColorAndSize)
 		{
-			$productToColorAndSize->Delete();
+			$productToColorAndSize->Delete($_mysqli);
 		}
 	}	
 }
