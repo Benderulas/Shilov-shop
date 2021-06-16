@@ -35,6 +35,8 @@
 	background: none;
 	color: #740505;
 	border:none;
+	padding-top: 30px;
+	padding-bottom: 30px;
 	padding-left: 15px;
 	padding-right: 15px;
 }
@@ -44,9 +46,14 @@
 	color:#ffe5b4;
 }
 
-.butt>button{
+.btn-bascket{
 	background: none;
 	border:0px;
+	cursor: pointer;
+}
+.btn-buscket>a:visited{
+	border:0px;
+	background:none;
 }
 
 

@@ -3,27 +3,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
-
-    var triggerTabList = [].slice.call(document.querySelectorAll('#myTab a'))
-    triggerTabList.forEach(function (triggerEl) {
-      var tabTrigger = new bootstrap.Tab(triggerEl)
-
-      triggerEl.addEventListener('click', function (event) {
-        event.preventDefault()
-        tabTrigger.show()
-      })
-    })
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
     <meta charset="UTF-8">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <style>
-        <?php echo file_get_contents("my_style.css"); ?>
-        <?php echo file_get_contents("button_style.css"); ?>
-    </style>
     <script src="jquery-3.5.1.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/my_scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="/my_style.css">
+    <link rel="stylesheet" type="text/css" href="/button_style.css">
 
     <meta charset="UTF-8">
 
@@ -38,24 +24,26 @@
                 <button>Мужское</button>
             </div>
             <div class="image"><img src="https://fotoseif.ru/images/2021/06/9xpr8yoij0nin1xqn1oc.png" alt="Соблазн" class="log-img"></div>
-            <div class="butt">
-
+            <div>
                 <a href="#openModal"><img src="https://fotoseif.ru/images/2021/06/445ujivfkqn6toynxulv.png"></a> <!-- авторизация и регистрация -->
                 <div id="openModal" class="modalDialog">
                     <div class="login">
-                        <nav>
+                        <div id="authorization" class="tabcontent">
                             <form action="" class="registration"> <!-- авторизация -->
-                                <H1>Авторизация</H1>
+                                <h1 class="text">Авторизация</h1>
                                 <label for="">Логин</label>
                                 <input type="text" placeholder="Введите ваш логин">
                                 <label for="">Пароль</label>
                                 <input type="password" placeholder="Введите ваш пароль">
-                                <button cclass="button_authorization">Войти</button>
+                                <div class="form-btns">
+                                    <button class="tablinks" onclick="openTab(event,'registration')">Регистрация</button>
+                                    <button type="submit">Войти</button>
+                                </div>
                             </form>
-                        </nav>
-                        <nav>
+                        </div>
+                        <div id="registration" class="tabcontent">
                             <form action="" class="registration"> <!-- регистрация -->
-                                <H1>Регистрация</H1>
+                                <h1 class="text">Регистрация</h1>
                                 <label for="">Логин</label>
                                 <input type="text" placeholder="Введите логин">
                                 <label for="">Пароль</label>
@@ -64,13 +52,16 @@
                                 <input type="text" placeholder="Введите ваше имя">
                                 <label for="">E-mail</label>
                                 <input type="email" placeholder="Введите ваш e-mail">
-                                <button>Зарегистрироваться</button>
+                                <div class="form-btns">
+                                    <button class="tablinks" onclick="openTab(event,'authorization')">Авторизация</button>
+                                    <button type="submit">Зарегистрироваться</button>
+                                </div>
                             </form>
-                        </nav>
+                        </div>
                         <a href="#close" title="Закрыть" class="close"><img src="https://fotoseif.ru/images/2021/06/fsftgb2101wswa7iryv5.png"></a>
                     </div>
                 </div>
-                <button><img src="https://fotoseif.ru/images/2021/06/uda34j799zhluln5sr09.png"></button> <!-- КОРЗИНА -->
+                <a class="btn-buscket"><img src="https://fotoseif.ru/images/2021/06/uda34j799zhluln5sr09.png"></a> <!-- КОРЗИНА -->
             </div>
         </div>
         <div class="down-header">

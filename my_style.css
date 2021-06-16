@@ -30,7 +30,7 @@ a{
 header{
 	padding-top: 15px;
 	padding-bottom: 40px;
-	background: #ffe5b4;
+	background: linear-gradient(0deg, white, #ffe5b4);
 }
 .up-header{
 	display: flex;
@@ -62,11 +62,11 @@ header{
 }
 
 footer{
-	padding-top:30px;
+	padding-top:100px;
 	padding-bottom: 20px;
 	padding-left: 260px;
 	padding-right: 311px;
-	background: #DEB887;
+	background: linear-gradient(0deg, #DEB887, white);
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
@@ -98,18 +98,17 @@ footer{
 }
 
 .neww{
-	background-color: #F0FFFF;
+	background-color: white;
+	padding-bottom: 100px;
 }
 .wrapper-news{
-	margin-left: 458px;
-	margin-left: 458px;
+	margin-left: 390px;
 }
 .news{
 	display: grid;
 	justify-content: space-between;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-gap: 340px 228px;
-	margin-bottom: 147px;
 
 }
 .news .item:nth-child(1){
@@ -119,12 +118,7 @@ footer{
 	margin-bottom: 192px;
 	margin-top: 172px;
 }
-.new{
-	grid-auto-columns: 340px;
-	grid-auto-rows: 228px;
-	grid-auto-rows: 1006px;
-	grid-auto-columns:334px;
-}
+
 
 .modalDialog {
 	position: fixed;
@@ -148,20 +142,21 @@ footer{
 	margin: 40px 30%;
 	padding: 20px 20px 20px 20px;
 	border-radius: 10px;
-	background: linear-gradient(150deg,#fffbf4,#ffce71);
-	border:5px solid #800000;
+	background: linear-gradient(180deg,white,#ffce71);
 }
 .close {
-	margin-left: 600px;
+	margin-left: 640px;
 	position: absolute;
+}
+.close img{
+	width: 40px;
+	height: auto;
 }
 .modalDialog .login{
 	display: flex;
 	flex-direction: column;
 }
-.modalDialog .login>a{
-	align-self: start;
-}
+
 .registration{
 	display: flex;
 	flex-direction: column;
@@ -185,15 +180,32 @@ footer{
 	margin-top: 20px;
 	color: #800000;
 }
-.registration>button{
-	border:2px solid black;
+.registration button{
+	font-family: 'Balsamiq Sans', cursive;
 	background-color: white;
-	width: 40%;
-	padding-top:5px;
-	padding-bottom: 5px;
-	margin-left: 30%;
-	margin-top: 25px;
-	margin-bottom: 25px;
+	color: #800000;
+	width: 35%;
 	border-radius: 10px;
 	font-size: 20px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	border:none;
+
+}
+
+.tabcontent:nth-child(2){
+	display: none;
+}
+
+.form-btns{
+	display: flex;
+	justify-content:space-around;
+	margin-top:50px;
+	margin-bottom: 25px;
+
+}
+.text{
+	color:#800000;
+	font-family: 'Balsamiq Sans', cursive;
+	text-align: center;
 }
