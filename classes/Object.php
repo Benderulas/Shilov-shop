@@ -13,15 +13,14 @@ class Object
 		echo("Undeclared method<br>");
 	}
 
-	public function SetById($_id)
+	public function SetById($_id, $_mysqli)
 	{
 		echo("Undeclared method<br>");
 	}
 
-	public function Exist()
+	public function Exist($_mysqli)
 	{
-		require("DataBase.php");
-		if ($res = $mysqli->query("SELECT COUNT(*) as count FROM " . static::tableName . " WHERE id = $this->id"))
+		if ($res = $_mysqli->query("SELECT COUNT(*) as count FROM " . static::tableName . " WHERE id = $this->id"))
 		{
 			$res = $res->fetch_assoc();
 			if ($res['count']) return true;
@@ -34,20 +33,19 @@ class Object
 		}
 	}
 
-	public function Insert()
+	public function Insert($_mysqli)
 	{
 		echo("Undeclared method<br>");
 	}
 
-	public function Edit()
+	public function Edit($_mysqli)
 	{
 		echo("Undeclared method<br>");
 	}
 
-	public function Delete()
+	public function Delete($_mysqli)
 	{
-		require("DataBase.php");
-		$res = $mysqli->query("DELETE FROM " . static::tableName . " WHERE id = $this->id");
+		$res = $_mysqli->query("DELETE FROM " . static::tableName . " WHERE id = $this->id");
 
 		return $res;
 	}

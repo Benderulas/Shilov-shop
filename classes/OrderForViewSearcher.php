@@ -19,9 +19,8 @@ class OrderForViewSearcher
 		$ordersOnPage = 8,
 		$page = 1;
 
-	public function SearchByFilters()
+	public function SearchByFilters($_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT id FROM orders WHERE 1 ";
 
         if(isset($this->userID)) $request = $request . "AND userID = $this->userID ";
@@ -41,7 +40,7 @@ class OrderForViewSearcher
             . "LIMIT $this->ordersOnPage "
             . "OFFSET " . ($this->page - 1) * $this->ordersOnPage;
 		
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 		
 		if ($res) $ordersCount = $res->num_rows;
 		else $ordersCount = 0;
@@ -63,7 +62,7 @@ class OrderForViewSearcher
 		}
 		else 
 		{
-			var_dump($mysqli->error);
+			var_dump($_mysqli->error);
 			echo("Ошибка запроса");
 		}		
 		return $orders;

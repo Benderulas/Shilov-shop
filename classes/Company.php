@@ -6,6 +6,8 @@ class Company extends MultiCategory
 {
 
 	public const tableName = 'Companies';
+	const nameInOtherTable = 'companyID';
+	const otherTableName = 'products';
 
 }
 

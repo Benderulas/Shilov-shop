@@ -1,0 +1,25 @@
+<?php 
+	require_once("classes/Product.php");
+	require_once("classes/Color.php");
+	require_once("classes/Size.php");
+
+	$product = new Product();
+	$color = new Color();
+	$size = new Size();
+
+	$product->SetById($productInBasket->productID, $mysqli);
+	$color->SetById($productInBasket->colorID, $mysqli);
+	$size->SetById($productInBasket->sizeID, $mysqli);
+
+?>
+
+
+<div name="productInBasket">
+
+	<label name="title"> <?php echo($product->title) ?> </label>
+	<label name="color"> <?php echo($color->title) ?> </label>
+	<label name="size"> <?php echo($size->title) ?> </label>
+	<label name="amount"> <?php echo($productInBasket->amount) ?> </label>
+
+	<button name="removeProductFromBasket" value="<?php echo($i); ?>">Убрать</button>            
+</div>

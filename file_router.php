@@ -32,4 +32,19 @@
 		echo file_get_contents($path);
 		die();
 	}
+
+	if ($fileExtention == 'js') 
+	{
+		header("Content-Type: text/javascript");
+		echo file_get_contents($path);
+		die();
+	}
+
+	if ($fileExtention == 'mjs') 
+	{
+		header("Content-Type: text/javascript");
+		echo file_get_contents($path);
+		die();
+	}
+
 ?>

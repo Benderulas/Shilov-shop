@@ -6,6 +6,8 @@ class Category extends MultiCategory
 {
 
 	public const tableName = 'Categories';
+	const nameInOtherTable = 'categoryID';
+	const otherTableName = 'products';
 
 }
 

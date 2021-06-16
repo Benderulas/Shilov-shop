@@ -1,20 +1,29 @@
-<?php require("product_search_form.php"); ?>
 
 
-<form name="product_search" method="GET" action="products">
-    <input type="hidden" name="page" value="1">
-    <label>Название: <input type="text" name="title" value="<?php
-        echo (htmlspecialchars($productSearcher->title)); 
-        ?>"></label>
-    <label>Мин цена: <input type="text" name="priceMin" value="<?php
-        echo (htmlspecialchars($productSearcher->priceMin)); 
-        ?>"></label>
-    <label>Макс цена: <input type="text" name="priceMax" value="<?php
-        echo (htmlspecialchars($productSearcher->priceMax));             
-        ?>"></label>
-    <?php
-    	require("select_module.php");
-    ?>
-    	
-    <input type="submit" value="Поиск">
-</form>
+
+<input type="hidden" id="page" value="1">
+<label>Название: <input type="text" id="title"></label>
+<label>Мин цена: <input type="text" id="priceMin" ></label>
+<label>Макс цена: <input type="text" id="priceMax"></label>
+
+<div class='form-group d-flex'>
+    <select id='color'>
+    </select>
+</div>
+
+<div class='form-group d-flex'>
+    <select id='size'>
+    </select>
+</div>
+
+<div class='form-group d-flex'>
+    <select id='company'>
+    </select>
+</div>
+
+<div class='form-group d-flex'>
+    <select id='category'>
+    </select>
+</div>
+	
+<button id="search">Поиск</button>

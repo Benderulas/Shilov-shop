@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-2 text-center">
+        
+
+        
+    </div>
+    <div class="col-8 text-left">
+        <div id="basket">
+            <?php
+                if (isset($_SESSION['basket']))
+                {
+                    for ($i = 0; $i < Count($_SESSION['basket']); $i++) 
+                    {
+                        $productInBasket = $_SESSION['basket'][$i];
+                        require("productInBasket.html");
+                    }
+                }
+                
+            ?>
+        </div>
+
+        
+    
+    </div>
+    <div class="col-2"></div>
+</div> 
+
+<script type="module" src="scripts/basket/basket.js"></script>

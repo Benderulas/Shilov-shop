@@ -15,41 +15,64 @@ class ProductInOrder extends Object
 		$amount;
 
 
+	fucntion __construct()
+	{
+		$this->order = new Order;
+		$this->productToColorAndSize = new ProductToColorAndSize();
+	}
+
+
+
+	public function SetByPOST($_number)
+	{
+		if (isset($_POST['productInOrder_id_' . $number])) $this->id = $_POST['productInOrder_id_' . $number];
+
+		$this->productToColorAndSize->id = $_POST['productInOrder_productToColorAndSizeID_' . $number];
+		$this->amount = $_POST['productInOrder_amount_' . $number];
+	}
+
+	public function SetByJSON($_productInOrder)
+	{
+		if (isset($_productInOrder->id)) $this->id = $_productInOrder->id;
+		if (isset($_productInOrder->orderID)) $this->order->id = $_productInOrder->orderID;
+
+		$this->productToColorAndSize->id = $_productInOrder->productToColorAndSizeID;
+		$this->amount = $_productInOrder->amount;
+	}
+
 	public function Set($_object)
 	{
-		if (isset($_object['id'])) $this->id = $_object['id'];
+		$this->id = $_object['id'];
 
 		$this->order = $_object['order'];
 		$this->productToColorAndSize = $_object['productToColorAndSize'];
 		$this->amount = $_object['amount'];
 	}
 
-	public function SetById($_id)
+	public function SetById($_id, $_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT * FROM " . static::tableName . " WHERE id = $_id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		if ($res)
 		{
 			$productInOrder = $res->fetch_assoc();
 
 			$productInOrder['order'] = new Order();
-			$productInOrder['order']->SetById($productInOrder['orderID']);
+			$productInOrder['order']->SetById($productInOrder['orderID'], $_mysqli);
 
 			$productInOrder['productToColorAndSize'] = new ProductToColorAndSize();
-			$productInOrder['productToColorAndSize']->SetById($productInOrder['productToColorAndSizeID']);
+			$productInOrder['productToColorAndSize']->SetById($productInOrder['productToColorAndSizeID'], $_mysqli);
 
 			$this->Set($productInOrder);
 		}
 	}
 
-	public static function GetByOrderId($_id)
+	public static function GetByOrderId($_id, $_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT id FROM " . static::tableName . " WHERE orderID = $_id";
 
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		$count = $res->num_rows;
 
@@ -59,27 +82,25 @@ class ProductInOrder extends Object
 			$res->data_seek($i);
 
 			$productsInOrder[$i] = new ProductInOrder();
-			$productsInOrder[$i]->SetById($res->fetch_assoc()['id']);
+			$productsInOrder[$i]->SetById($res->fetch_assoc()['id'], $_mysqli);
 		}
 
 		return $productsInOrder;
 	}
 
-	public function Insert()
+	public function Insert($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "INSERT INTO " . static::tableName . " (orderID, productToColorAndSizeID, amount) "
-				. "VALUES (" . $this->order->id . ", " .$this->productToColorAndSize->id . ", $this->amount)";
+				. "VALUES (" . $this->order->id . ", " . $this->productToColorAndSize->id . ", $this->amount)";
 
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 		$this->id = $mysqli->insert_id;
 
 		return $this->id;
 	}
-	public function Edit()
+	public function Edit($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "UPDATE " . static::tableName . " SET "
 				 . "orderID = " . $this->order->id . ", "
@@ -87,7 +108,7 @@ class ProductInOrder extends Object
 				 . "amount = $this->amount "
 				 . "WHERE id = $this->id";
 
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		return ($res);
 	}

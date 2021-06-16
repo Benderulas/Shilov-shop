@@ -18,6 +18,40 @@ class Product extends Object
 
 	public const tableName = 'products';
 
+	function __construct()
+	{
+		$this->category = new Category();
+		$this->company = new Company();
+		$this->sex = new Sex();
+	}
+
+
+	public function SetByPOST()
+	{
+		if (isset($_POST['product_id'])) $this->id = $_POST['product_id'];
+		if (isset($_POST['product_img'])) $this->img = $_POST['product_img'];
+		if (isset($_POST['product_discount'])) $this->discount = $_POST['product_discount'];
+		$this->title = $_POST['product_title'];
+		$this->price = $_POST['product_price'];
+
+		$this->category = $_POST['product_categoryID'];
+		$this->company = $_POST['product_companyID'];
+		$this->sex = $_POST['product_sexiD'];
+	}
+
+	public function SetByJSON($_product)
+	{
+		if (isset($_product->id)) $this->id = $_product->id;
+		if (isset($_product->img)) $this->img = $_product->img;
+		if (isset($_product->discount)) $this->discount = $_product->discount;
+		$this->title = $_product->title;
+		$this->price = $_product->price;
+
+		$this->category->id = $_product->categoryID;
+		$this->company->id = $_product->companyID;
+		$this->sex->id = $_product->sexID;
+	}
+
 
 	public function Set($_product)
 	{
@@ -32,33 +66,31 @@ class Product extends Object
 		$this->sex = $_product['sex'];
 	}
 
-	public function SetById($_id)
+	public function SetById($_id, $_mysqli)
 	{
-		require("DataBase.php");
 		$request = "SELECT * FROM " . static::tableName . " WHERE id = $_id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		if ($res)
 		{
 			$product = $res->fetch_assoc();
 
 			$product['category'] = new Category();
-			$product['category']->SetById($product['categoryID']);
+			$product['category']->SetById($product['categoryID'], $_mysqli);
 
 			$product['company'] = new Company();
-			$product['company']->SetById($product['companyID']);
+			$product['company']->SetById($product['companyID'], $_mysqli);
 
 			$product['sex'] = new Sex();
-			$product['sex']->SetById($product['sexID']);
+			$product['sex']->SetById($product['sexID'], $_mysqli);
 
 			$this->Set($product);
 		}
 
 	}
 
-	public function Insert()
+	public function Insert($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "INSERT INTO " . static::tableName . " (title, img, price, discount, categoryID, companyID, sexID) "
 				. "VALUES (
@@ -71,15 +103,14 @@ class Product extends Object
 				. $this->sex->id 
 				. ")";
 
-		$res = $mysqli->query($request);
-		$this->id = $mysqli->insert_id;
+		$res = $_mysqli->query($request);
+		$this->id = $_mysqli->insert_id;
 		return $this->id;
 	}
 
 
-	public function Edit()
+	public function Edit($_mysqli)
 	{
-		require("DataBase.php");
 
 		$request = "UPDATE products SET "
 				 . "title = '$this->title', "
@@ -90,7 +121,7 @@ class Product extends Object
 				 . "companyID = " . $this->company->id . ", "
 				 . "sexID = " . $this->sex->id. " "
 				 . "WHERE id = $this->id";
-		$res = $mysqli->query($request);
+		$res = $_mysqli->query($request);
 
 		return ($res);
 	}
