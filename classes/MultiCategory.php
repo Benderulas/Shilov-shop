@@ -104,6 +104,7 @@ class MultiCategory
 		. "INNER JOIN products ON products_to_color_and_size.productID = products.id "
 		. "WHERE products.id > 0 ";
 
+		if (isset($_filters->productID)) $request = $request . "AND products.id = $_filters->productID ";
 		if (isset($_filters->title)) $request = $request . "AND products.title LIKE '%$_filters->title%' ";
 
 		if (isset($_filters->priceMin)) $request = $request . "AND products.price > $_filters->priceMin ";

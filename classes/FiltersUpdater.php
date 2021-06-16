@@ -8,7 +8,8 @@ require_once("classes/category.php");
 
 class Filters
 {
-	public $title,
+	public $productID,
+		$title,
 		$priceMin,
 		$priceMax,
 
@@ -35,6 +36,7 @@ class FiltersUpdater
 	public function SetByJSON($_filters)
 	{
 		//if (isset($_filters->title)) $this->filters->title = $_filters->title;
+		if (isset($_filters->productID)) $this->filters->productID = $_filters->productID;
 
 		if (isset($_filters->priceMin)) $this->filters->priceMin = $_filters->priceMin;
 		if (isset($_filters->priceMax)) $this->filters->priceMax = $_filters->priceMax;

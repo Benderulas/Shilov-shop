@@ -7,30 +7,29 @@
             if ($user && $user->rights->level == 10) echo ("
             <br>
             <a href='http://shilov-shop/product/edit?id=" . $productForView->product->id . "' id='edit'>Изменить</a>
-            <button id='saveChanges'>Сохранить</button>
             <br>
             <br>
-            <button id='delete'>Удалить</button><br>            
+            <button id='delete'>Удалить</button><br>
+            <br>
+            <button id='addInBasket'>Добавить в корзину</button>            
             ")
         ?>
         
     </div>
     <div class="col-8 text-left">
 
-        <div name="product">
-            <div name="id"><?php echo($productForView->product->id); ?></div>
-            <div name="title"><?php echo($productForView->product->title); ?></div>
-            <div name="category"><?php echo($productForView->product->category->title); ?></div>
-            <div name="company"><?php echo($productForView->product->company->title); ?></div>
-            <div name="price"><?php echo($productForView->product->price); ?></div>
-            <div name="discount"><?php echo($productForView->product->discount); ?></div>
-            <div name="color and size"><?php 
-                for ($i = 0; $i < count($productForView->productsToColorAndSize); $i++)
-                {
-                    echo ($productForView->productsToColorAndSize[$i]->color->title . " " . $productForView->productsToColorAndSize[$i]->size->title . " " . $productForView->productsToColorAndSize[$i]->amount . "<br>");
-                }
-            ?>
+        <div id="product">
+            <label>ID <input readonly="readonly" type="text" id="id" value=" <?php echo($productForView->product->id); ?> "</label>
+            <div id="title"><?php echo($productForView->product->title); ?></div>
+            <div id="category"><?php echo($productForView->product->category->title); ?></div>
+            <div id="company"><?php echo($productForView->product->company->title); ?></div>
+            <div id="price"><?php echo($productForView->product->price); ?></div>
+            <div id="discount"><?php echo($productForView->product->discount); ?></div>
+            <div id="colorAndSize">
+                <select id="color"></select>
+                <select id="size"></select>
             </div>
+            <input id="amount" type="text" value="1">
         </div>
     
     </div>
