@@ -47,6 +47,23 @@ class Order extends Object
 		$this->postIndex = $_POST['order_postIndex'];
 	}
 
+	public function SetByJSON($_order)
+	{
+		if(isset($_order->id)) $this->id = $_order->id;
+
+		$this->user->id = $_order->id;
+		$this->status->id = $_order->statusID;
+		$this->deliveryCompany->id = $_order->deliveryCompanyID;
+
+		$this->firstName = $_order->firstName;
+		$this->secondName = $_order->secondName;
+		$this->phoneNumber = $_order->phoneNumber;
+		$this->country = $_order->country;
+		$this->city = $_order->city;
+		$this->address = $_order->address;
+		$this->postIndex = $_order->porstIndex;
+	}
+
 
 	public function Set($_order)
 	{

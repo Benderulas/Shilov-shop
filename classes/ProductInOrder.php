@@ -31,6 +31,15 @@ class ProductInOrder extends Object
 		$this->amount = $_POST['productInOrder_amount_' . $number];
 	}
 
+	public function SetByJSON($_productInOrder)
+	{
+		if (isset($_productInOrder->id)) $this->id = $_productInOrder->id;
+		if (isset($_productInOrder->orderID)) $this->order->id = $_productInOrder->orderID;
+
+		$this->productToColorAndSize->id = $_productInOrder->productToColorAndSizeID;
+		$this->amount = $_productInOrder->amount;
+	}
+
 	public function Set($_object)
 	{
 		$this->id = $_object['id'];
@@ -83,7 +92,7 @@ class ProductInOrder extends Object
 	{
 
 		$request = "INSERT INTO " . static::tableName . " (orderID, productToColorAndSizeID, amount) "
-				. "VALUES (" . $this->order->id . ", " .$this->productToColorAndSize->id . ", $this->amount)";
+				. "VALUES (" . $this->order->id . ", " . $this->productToColorAndSize->id . ", $this->amount)";
 
 		$res = $_mysqli->query($request);
 		$this->id = $mysqli->insert_id;

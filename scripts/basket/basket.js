@@ -1,6 +1,9 @@
 import { POST_JSON_request } from "/JavaScript/requests.js";
 
-
+async function CreateOrder()
+{
+	console.log(CreateOrder);
+}
 
 
 
@@ -18,14 +21,13 @@ async function RemoveProductFromBasket()
 		for (let i = number + 1; i < removeButtons.length; i++)
 		{
 			console.log(removeButtons[i]);
-			removeButtons[i].value = Number(removeButtons[i].value) - 1;
-
-			let productInBasket = document.getElementsByName("productInBasket")[number];
-
-			productInBasket.parentElement.removeChild(productInBasket);
-
-			document.getElementById("productsInBasket").innerText = response['productsInBasket'];
+			removeButtons[i].value = Number(removeButtons[i].value) - 1;			
 		}
+
+		let productInBasket = document.getElementsByName("productInBasket")[number];
+
+		productInBasket.parentElement.removeChild(productInBasket);
+		document.getElementById("productsInBasket").innerText = response['productsInBasket'];
 	}
 
 

@@ -27,6 +27,19 @@ class OrderForView
 
 	}
 
+	public function SetByJSON($_orderForView)
+	{
+		$this->order = new Order();
+		$this->order->SetByJSON($_orderForView);
+
+		for ($i = 0; $i < $_POST['productsInOrder_Amount']; $i++)
+		{
+			$this->productsInOrder[$] = new ProductInOrder();
+			$productsInOrder[$i]->SetByJSON($_orderForView->productInOrder[$i]);
+		}
+
+	}
+
 
 	public function Set($_orderForView)
 	{
