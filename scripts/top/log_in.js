@@ -11,6 +11,8 @@ async function SendLogInForm()
     password: form.elements.password.value
   };
 
+  console.log(user);
+
   if (user['login'] &&
    user['password'] )
   {
