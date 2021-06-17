@@ -5,37 +5,34 @@ export class UrlManager
     let url = new URL (window.location.href);
 
     let filters = {
-      colorID: url.searchParams.get("colorID"),
-      sizeID: url.searchParams.get("sizeID"),
-      companyID: url.searchParams.get("companyID"),
-      categoryID: url.searchParams.get("categoryID"),
+      colorID: Number(url.searchParams.get("colorID")),
+      sizeID: Number(url.searchParams.get("sizeID")),
+      companyID: Number(url.searchParams.get("companyID")),
+      categoryID: Number(url.searchParams.get("categoryID")),
 
-      priceMin: url.searchParams.get("priceMin"),
-      priceMax: url.searchParams.get("priceMax"),
+      priceMin: Number(url.searchParams.get("priceMin")),
+      priceMax: Number(url.searchParams.get("priceMax")),
       title: url.searchParams.get("title"),
-      sexID: url.searchParams.get("sexID"),
+      sexID: Number(url.searchParams.get("sexID")),
 
-      page: url.searchParams.get("page")
+      page: Number(url.searchParams.get("page"))
     };
 
     return filters;
   }
 
-  static UpdateURLByFitlers(_filters)
+  static UpdateURLByFilters(_filters)
   {
     let url = new URL (window.location.href);
 
-    if (_filters['colorID'] != "null") url.searchParams.set("colorID", _filters['colorID']);
+    if (_filters['colorID']) url.searchParams.set("colorID", _filters['colorID']);
     else url.searchParams.delete("colorID");
 
-    if (_filters['sizeID'] != "null") url.searchParams.set("sizeID", _filters['sizeID']);
+    if (_filters['sizeID']) url.searchParams.set("sizeID", _filters['sizeID']);
     else url.searchParams.delete("sizeID");
 
-    if (_filters['companyID'] != "null") url.searchParams.set("companyID", _filters['companyID']);
+    if (_filters['companyID']) url.searchParams.set("companyID", _filters['companyID']);
     else url.searchParams.delete("companyID");
-
-    if (_filters['categoryID'] != "null") url.searchParams.set("categoryID", _filters['categoryID']);
-    else url.searchParams.delete("categoryID");
 
     if (_filters['priceMin']) url.searchParams.set("priceMin", _filters['priceMin']);
     else url.searchParams.delete("priceMin");

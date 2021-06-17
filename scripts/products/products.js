@@ -4,24 +4,20 @@ import { FiltersManager } from "/scripts/products/FiltersManager.js";
 import { ProductsManager } from "/scripts/products/ProductsManager.js";
 import { PageSelector } from "/JavaScript/PageSelector.js";
 
-let productsOnPage = 8;
+let productsOnPage = 12;
 
 
 async function Search()
 {
   UrlManager.UpdateURLByPage(1);
   let filters = FiltersManager.GetFiltersFromPage();
-  UrlManager.UpdateURLByFitlers(filters);
+  UrlManager.UpdateURLByFilters(filters);
 
 
-
-  filters = FiltersManager.PrepareFiltersForRequest(filters);
   let productsAmount = await ProductsManager.UpdateProducts(filters);
 
   let pagesAmount = Math.floor(productsAmount / productsOnPage);
   if (productsAmount % productsOnPage) pagesAmount++;
-
-
 
   PageSelector.UpdateButtons(1, pagesAmount);
 }
@@ -65,38 +61,18 @@ function OpenProduct()
 
 async function InitializeAll()
 {
+  let filters = await UrlManager.GetFiltersByURL();
+  FiltersManager.InitializeFilters(filters);
+  document.getElementById("searchButton").onclick = Search;
 
-  await FiltersManager.InitializeFilters();
-  UrlManager.GetPageFromUrl();
-
-  let product = document.getElementsByName("product");
-
-  for (let i = 0; i < 8; i++)
-  {
-    product[i].onclick = OpenProduct;
-  }
+  let productsAmount = ProductsManager.UpdateProducts(filters);
 
 
-
-  let filters = FiltersManager.GetFiltersFromPage();
-
-
-  filters = FiltersManager.PrepareFiltersForRequest(filters);
-  let productsAmount = await ProductsManager.UpdateProducts(filters);
 
   let pagesAmount = Math.floor(productsAmount / productsOnPage);
   if (productsAmount % productsOnPage) pagesAmount++;
 
-
-  let page  = UrlManager.GetPageFromUrl();
-  PageSelector.UpdateButtons(page, pagesAmount);
-
-
-
-
-  let searchButton = document.getElementById("search");
-  searchButton.onclick = Search;
-
+  PageSelector.UpdateButtons(1, pagesAmount);
   let pagesButtons = document.getElementsByName("pageButton")
   for (let i = 0; i < 7; i++)
   {

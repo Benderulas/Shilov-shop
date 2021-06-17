@@ -1,0 +1,61 @@
+.but{
+	background: none;
+	padding: 5px;
+	border: 2px solid #9d1c7d;
+	border-radius: 6px;
+	font-weight: 600;
+	transition: .25s;
+	color: white;
+	text-shadow:
+		-0   -1px 1px #000000,
+		 0   -1px 1px #000000,
+		-0    1px 1px #000000,
+		 0    1px 1px #000000,
+		-1px -0   1px #000000,
+		 1px -0   1px #000000,
+		-1px  0   1px #000000,
+		 1px  0   1px #000000,
+		-1px -1px 1px #000000,
+		 1px -1px 1px #000000,
+		-1px  1px 1px #000000,
+		 1px  1px 1px #000000,
+		-1px -1px 1px #000000,
+		 1px -1px 1px #000000,
+		-1px  1px 1px #000000,
+		 1px  1px 1px #000000;
+}
+.but:hover{
+	background: #9d1c7d;
+	color:white;
+}
+
+.sex>button{
+	font-family: 'Balsamiq Sans', cursive;
+	font-size: 24px;
+	background: none;
+	color: #740505;
+	border:none;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.sex>button:hover{
+	background: #740505;
+	border-radius: 10px;
+	color:#ffe5b4;
+}
+
+.btn-bascket{
+	background: none;
+	border:0px;
+	cursor: pointer;
+}
+.btn-buscket>a:visited{
+	border:0px;
+	background:none;
+}
+
+
+
+

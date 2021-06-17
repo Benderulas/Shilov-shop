@@ -1,43 +1,44 @@
-<div class="container-fluid">
-    <br>
-    <div class="row">
-        <div class="col-2">
-            <a href="http://shilov-shop/product/insert" class="navbar-brand">Добавить продукт</a>
-            <?php require("product_search_form.html"); ?>
-        </div>
-        <div class="col-4 text-left">
-
-            <?php require("product.html"); ?>
-            <br><br>
-            <?php require("product.html"); ?>
-            <br><br>
-            <?php require("product.html"); ?>
-            <br><br>
-            <?php require("product.html"); ?>
-        
-        </div>
-        <div class="col-4 text-left">
-
-            <?php require("product.html"); ?>
-            <br><br>
-            <?php require("product.html"); ?>
-            <br><br>
-            <?php require("product.html"); ?>
-            <br><br>
-            <?php require("product.html"); ?>
-            
-        </div>
-    </div>    
-</div>
-
-<div class="container-fluid text-center">
-    <button name="pageButton"><</button>
-    <button name="pageButton">1</button>
-    <button name="pageButton">2</button>
-    <button name="pageButton">3</button>
-    <button name="pageButton">4</button>
-    <button name="pageButton">5</button>
-    <button name="pageButton">></button>
-</div>
-
 <script type="module" src="scripts/products/products.js"></script>
+
+
+<div class="container-catalog">
+    <div class="container">
+        <div class="filter">
+            <div class="filter-up-line">
+                <h3>Штаны и бриджи</h3>
+                <select class="custom-select" id="size">
+                   <option selected="selected" value='none'>Размер</option>
+                </select>
+                <select class="custom-select" id="company">
+                   <option selected="selected" value='none'>Компания</option>
+                </select>
+                <select class="custom-select" id="color">
+                   <option selected="selected" value='none'>Цвет</option>
+                </select>
+            </div>
+            <div class="filter-down-line">
+                <input class="max-spice" type="text" placeholder="Максимальная цена" id="priceMax">
+                <input class="min-spice" type="text" placeholder="Минимальная цена" id="priceMin">
+                <button class="btn btn-outline-danger btn-catalog" type="button" id="searchButton">Найти</button>
+            </div>
+        </div>
+        <div class="products">
+
+            <div class="product" name="product">
+                <div class="product-image"><img src="" alt=""></div>
+                <p class="product-title">Lorem, ipsum.</p>
+                <p class="product-price">Lorem.</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="container-fluid text-center">
+        <button class="btn btn-outline-danger btn-catalog" name="pageButton"><</button>
+        <button class="btn btn-outline-danger btn-catalog" name="pageButton">1</button>
+        <button class="btn btn-outline-danger btn-catalog" name="pageButton">2</button>
+        <button class="btn btn-outline-danger btn-catalog" name="pageButton">3</button>
+        <button class="btn btn-outline-danger btn-catalog" name="pageButton">4</button>
+        <button class="btn btn-outline-danger btn-catalog" name="pageButton">5</button>
+        <button class="btn btn-outline-danger btn-catalog" name="pageButton">></button>
+    </div>
+</div>

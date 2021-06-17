@@ -36,33 +36,31 @@ class FiltersUpdater
 	public function SetByJSON($_filters)
 	{
 		//if (isset($_filters->title)) $this->filters->title = $_filters->title;
-		if (isset($_filters->productID)) $this->filters->productID = $_filters->productID;
+		if ($_filters->productID) $this->filters->productID = $_filters->productID;
 
-		if (isset($_filters->priceMin)) $this->filters->priceMin = $_filters->priceMin;
-		if (isset($_filters->priceMax)) $this->filters->priceMax = $_filters->priceMax;
+		if ($_filters->priceMin) $this->filters->priceMin = $_filters->priceMin;
+		if ($_filters->priceMax) $this->filters->priceMax = $_filters->priceMax;
 
-		if (isset($_filters->categoryID)) $this->filters->categoryID = $_filters->categoryID;
-		if (isset($_filters->sexIDsexID)) $this->filters->sexID = $_filters->sexID;
-		if (isset($_filters->companyID)) $this->filters->companyID = $_filters->companyID;
+		if ($_filters->categoryID) $this->filters->categoryID = $_filters->categoryID;
+		if ($_filters->sexIDsexID) $this->filters->sexID = $_filters->sexID;
+		if ($_filters->companyID) $this->filters->companyID = $_filters->companyID;
+		if ($_filters->sexID) $this->filters->sexID = $_filters->sexID;
 		//if (isset($_filters->discount)) $this->filters->discount = $_filters->discount;
 
-		if (isset($_filters->colorID)) $this->filters->colorID = $_filters->colorID;
-		if (isset($_filters->sizeID)) $this->filters->sizeID = $_filters->sizeID;
+		if ($_filters->colorID) $this->filters->colorID = $_filters->colorID;
+		if ($_filters->sizeID) $this->filters->sizeID = $_filters->sizeID;
 	}
 
 
 
 	public function GetFilters($_mysqli)
 	{
-		$multiCategory['colors'] = Color::GetWithFilters($this->filters, $_mysqli);
-		$multiCategory['sizes'] = Size::GetWithFilters($this->filters, $_mysqli);
+		$filters['colors'] = Color::GetWithFilters($this->filters, $_mysqli);
+		$filters['sizes'] = Size::GetWithFilters($this->filters, $_mysqli);
 
-		$multiCategory['categories'] = Category::GetWithFilters($this->filters, $_mysqli);
-		$multiCategory['companies'] = Company::GetWithFilters($this->filters, $_mysqli);
+		$filters['companies'] = Company::GetWithFilters($this->filters, $_mysqli);
 
-		$multiCategory['sex'] = Sex::GetWithFilters($this->filters, $_mysqli);
-
-		return $multiCategory;
+		return $filters;
 	}
 }
 

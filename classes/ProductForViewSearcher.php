@@ -19,7 +19,7 @@ class ProductForViewSearcher extends Searcher
 		$sizeID,
 
 		$page = 1,
-		$productsOnPage = 8;
+		$productsOnPage = 12;
 
 	public function GetPagesAmountByFilters($_mysqli)
 	{
@@ -108,17 +108,17 @@ class ProductForViewSearcher extends Searcher
 
 	public function SetFiltersByJSON($_data)
 	{
-		if (isset($_data->title) && $_data->title != 'null') $this->title = $_data->title;
-		if (isset($_data->priceMin) && $_data->priceMin != 'null') $this->priceMin = $_data->priceMin;
-		if (isset($_data->priceMax) && $_data->priceMax != 'null') $this->priceMax = $_data->priceMax;
-		if (isset($_data->categoryID) && $_data->categoryID != 'null') $this->categoryID = $_data->categoryID;
-		if (isset($_data->sexID) && $_data->sexID != 'null') $this->sexID = $_data->sexID;
-		if (isset($_data->companyID) && $_data->companyID != 'null') $this->companyID = $_data->companyID;
-		if (isset($_data->discount) && $_data->discount != 'null') $this->discount = $_data->discount;
-		if (isset($_data->colorID) && $_data->colorID != 'null') $this->colorID = $_data->colorID;
-		if (isset($_data->sizeID) && $_data->sizeID != 'null') $this->sizeID = $_data->sizeID;
-		if (isset($_data->page) && $_data->page != 'null') $this->page = $_data->page;
-		if (isset($_data->productsOnPage) && $_data->productsOnPage != 'null') $this->productsOnPage = $_data->productsOnPage;
+		if ($_data->title) $this->title = $_data->title;
+		if ($_data->priceMin) $this->priceMin = $_data->priceMin;
+		if ($_data->priceMax) $this->priceMax = $_data->priceMax;
+		if ($_data->categoryID) $this->categoryID = $_data->categoryID;
+		if ($_data->sexID) $this->sexID = $_data->sexID;
+		if ($_data->companyID) $this->companyID = $_data->companyID;
+		if ($_data->discount) $this->discount = $_data->discount;
+		if ($_data->colorID) $this->colorID = $_data->colorID;
+		if ($_data->sizeID) $this->sizeID = $_data->sizeID;
+		if ($_data->page) $this->page = $_data->page;
+		if ($_data->productsOnPage) $this->productsOnPage = $_data->productsOnPage;
 	}
 }
 ?>
