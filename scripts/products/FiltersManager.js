@@ -7,144 +7,59 @@ export class FiltersManager
 	{
 		let filters = UrlManager.GetFiltersByURL();
 
-		filters['colorID'] = document.getElementById('color').value;
-		filters['sizeID'] = document.getElementById('size').value;
-		filters['companyID'] = document.getElementById('company').value;
-		filters['categoryID'] = document.getElementById('category').value;
+		filters['colorID'] = Number(document.getElementById('color').value);
+		filters['sizeID'] = Number(document.getElementById('size').value);
+		filters['companyID'] = Number(document.getElementById('company').value);
 
-		filters['priceMin'] = document.getElementById('priceMin').value;
-		filters['priceMax'] = document.getElementById('priceMax').value;
+		filters['priceMin'] = Number(document.getElementById('priceMin').value);
+		filters['priceMax'] = Number(document.getElementById('priceMax').value);
 		filters['title'] = document.getElementById('title').value;
 
 		return filters;
 	}
+
 	static async GetSelectsFromDb(_filters)
 	{
-	  let path = "/POST/products/GetSearchFilters.php";
+		let path = "POST/products/GetSearchFilters.php";
 
-	  let data = {
-	    sexID: _filters['sexId']
-	  }
+		let filters = {
+		sexID: _filters['sexID'],
+		categoryID: _filters['categoryID']
+		}
 
-	  let response = await POST_JSON_request(path, data); 
-
-	  return response;  
+		return POST_JSON_request(path, filters);
 	}
 
-	static async GetSelectsFromDb()
+	static SetSelectModule(_options, _selectedOption, _selectModuleId)
 	{
-	  let path = "POST/products/GetSearchFilters.php";
+		let selectModule = document.getElementById(_selectModuleId);
 
-	  let response = await POST_JSON_request(path); 
+		let option;
 
-	  return response;  
-	}
+		for (let i = 0; i < _options.length; i++)
+		{
+			option = document.createElement("option");
+			option.text = _options[i].title;
+			option.value = _options[i].id;
+			if (option.value == _selectedOption) option.selected = "selected";
 
+			selectModule.add(option);
+		}
 
-
-	static PrepareFiltersForRequest(_filters)
-	{
-		_filters['colorID'] = Number(_filters['colorID']);
-		_filters['sizeID'] = Number(_filters['sizeID']);
-		_filters['companyID'] = Number(_filters['companyID']);
-		_filters['categoryID'] = Number(_filters['categoryID']);
-
-		_filters['priceMin'] = Number(_filters['priceMin']);
-		_filters['priceMax'] = Number(_filters['priceMax']);
-
-		_filters['page'] = Number(_filters['page']);
-		_filters['sexID'] = Number(_filters['sexID']);
-
-		return _filters;
 	}
 
 	static SetFiltersList(_response, _filters)
 	{
+		this.SetSelectModule(_response['colors'], _filters['colorID'], "color");
+		this.SetSelectModule(_response['companies'], _filters['companyID'], "company");
+		this.SetSelectModule(_response['sizes'], _filters['sizeID'], "size");
 
-	  let filters = {
-
-	    title: document.getElementById("title"),
-	    priceMin: document.getElementById("priceMin"),
-	    priceMax: document.getElementById("priceMax"),
-	    color: document.getElementById("color"),
-	    size: document.getElementById("size"),
-	    category: document.getElementById("category"),
-	    company: document.getElementById("company")
-	  };
-
-
-	  filters['title'].value = _filters.title;
-	  filters['priceMin'].value = _filters.priceMin;
-	  filters['priceMax'].value = _filters.priceMax;
-
-	  let option = document.createElement("option");
-	  option.value = 'null';
-	  if (_filters['colorID'] == false) option.selected = "selected";
-	  filters['color'].add(option);
-
-	  option = document.createElement("option");
-	  option.value = 'null';
-	  if (_filters['sizeID'] == false) option.selected = "selected";
-	  filters['size'].add(option);
-
-	  option = document.createElement("option");
-	  option.value = 'null';
-	  if (_filters['categoryID'] == false) option.selected = "selected";
-	  filters['category'].add(option);
-
-	  option = document.createElement("option");
-	  option.value = 'null';
-	  if (_filters['companyID'] == false) option.selected = "selected";
-	  filters['company'].add(option);
-
-
-
-
-	  for (let i = 0; _response.colors[i]; i++)
-	  {
-	      option = document.createElement("option");
-	      option.text = _response.colors[i].title;
-	      option.value = _response.colors[i].id;
-	      if (option.value == _filters['colorID']) option.selected = "selected";
-
-	      filters['color'].add(option);
-	  }
-
-	  for (let i = 0; _response.sizes[i]; i++)
-	  {
-	      option = document.createElement("option");
-	      option.text = _response.sizes[i].title;
-	      option.value = _response.sizes[i].id;
-	      if (option.value == _filters['sizeID']) option.selected = "selected";
-
-	      filters['size'].add(option);
-	  }
-
-	  for (let i = 0; _response.categories[i]; i++)
-	  {
-	      option = document.createElement("option");
-	      option.text = _response.categories[i].title;
-	      option.value = _response.categories[i].id;
-	      if (option.value == _filters['categoryID']) option.selected = "selected";
-
-	      filters['category'].add(option);
-	  }
-
-	  for (let i = 0; _response.companies[i]; i++)
-	  {
-	      option = document.createElement("option");
-	      option.text = _response.companies[i].title;
-	      option.value = _response.companies[i].id;
-	      if (option.value == _filters['companyID']) option.selected = "selected";
-
-	      filters['company'].add(option);
-	  }
+		document.getElementById('title').value = _filters['title'];
 	}
 
-	static async InitializeFilters()
+	static async InitializeFilters(_filters)
 	{
-		let filters = await UrlManager.GetFiltersByURL();
-		let response = await this.GetSelectsFromDb(filters);
-		this.SetFiltersList(response, filters);
+		let response = await this.GetSelectsFromDb(_filters);
+		this.SetFiltersList(response, _filters);
 	}
 }

@@ -9,7 +9,8 @@
     $productSearcher->SetFiltersByJSON($data);
 
     $productsForView = $productSearcher->SearchByFilters($mysqli);
-    $productsForView['amount'] = $productSearcher->GetPagesAmountByFilters($mysqli);
+    //$productsForView['amount'] = Count($productsForView);
+    $productsForView['totalAmount'] = $productSearcher->GetPagesAmountByFilters($mysqli);
 
     
     echo(json_encode($productsForView));

@@ -32,45 +32,20 @@
             <div>
                 <a href="#openModal"><img src="https://fotoseif.ru/images/2021/06/445ujivfkqn6toynxulv.png"></a> <!-- авторизация и регистрация -->
                 <div id="openModal" class="modalDialog">
-                    <div class="login">
-                        <div id="authorization" class="tabcontent">
-                            <form action="" class="registration" name="login"> <!-- авторизация -->
-                                <h1 class="text">Авторизация</h1>
-                                <label for="">Логин</label>
-                                <input type="text" name="login" placeholder="Введите ваш логин">
-                                <label for="">Пароль</label>
-                                <input type="password" name="password" placeholder="Введите ваш пароль">
-                                <div class="form-btns">
-                                    <button type="button" class="tablinks" onclick="openTab(event,'registration')">Регистрация</button>
-                                    <button type="button" name="SendLogInForm">Войти</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div id="registration" class="tabcontent">
-                            <form action="" class="registration" name="registration"> <!-- регистрация -->
-                                <h1 class="text">Регистрация</h1>
-                                <label for="">Логин</label>
-                                <input type="text" name="login" placeholder="Введите логин">
-                                <label for="">Пароль</label>
-                                <input type="password" name="password" placeholder="Введите пароль">
-                                <label for="">Имя</label>
-                                <input type="text" name="firstName" placeholder="Введите ваше имя">
-                                <label for="">E-mail</label>
-                                <input type="email" name="email" placeholder="Введите ваш e-mail">
-                                <div class="form-btns">
-                                    <button type="button" class="tablinks" onclick="openTab(event,'authorization')">Авторизация</button>
-                                    <button type="button" name="SendRegistrationForm">Зарегистрироваться</button>
-                                </div>
-                            </form>
-                        </div>
-                        <a href="#close" title="Закрыть" class="close"><img src="https://fotoseif.ru/images/2021/06/fsftgb2101wswa7iryv5.png"></a>
-                    </div>
+                    <?php 
+                        if ($user) require("user_menu.html"); 
+                        else require("authorization_menu.html");
+                    ?>
                 </div>
                 <a class="btn-buscket"><img src="https://fotoseif.ru/images/2021/06/uda34j799zhluln5sr09.png"></a> <!-- КОРЗИНА -->
             </div>
         </div>
         <div class="down-header">
-            <input type="search" class="search" placeholder="Поиск товаров"/>
+            <form method="GET" action="products" name="login"> <!-- авторизация -->
+
+                <input type="text" class="search" name="title" id="title" placeholder="Поиск товаров"/>
+                
+            </form>
         </div>
     </div>
 </header>
