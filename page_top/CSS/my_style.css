@@ -37,9 +37,13 @@ header{
 	justify-content: space-between;
 	align-items: center;
 }
-.wrapper-header{
+.wrapper-header1{
 	margin-left:459px;
 	margin-right:457px;
+}
+.wrapper-header{
+	margin-left:300px;
+	margin-right:300px;
 }
 .down-header{
 	margin-top: 15px;

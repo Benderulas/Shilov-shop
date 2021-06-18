@@ -20,10 +20,20 @@ export class ProductsManager
 	static async IncertProduct(_productForView, _position)
 	{
 		$('<div></div>', {
-			class: 'product'
+			class: 'product',
+			click: function() {
+				let url = new URL ("http://shilov-shop/product");
+
+				url.searchParams.set("id", _productForView.product.id);
+				console.log(url);
+
+				window.location.href = url;
+			}
 		}).appendTo('div.products');
 
 		let product = $('div.product').last();
+
+		console.log(product);
 
 
 		
@@ -38,7 +48,11 @@ export class ProductsManager
 		}).appendTo(product.find('div.product-image'));
 
 
-
+		$('<p></p>', {
+			class: 'product-id',
+			text: _productForView.product.id,
+			hidden: "hidden"
+		}).appendTo(product);
 
 		$('<p></p>', {
 			class: 'product-title',

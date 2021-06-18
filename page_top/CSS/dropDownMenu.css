@@ -1,0 +1,48 @@
+.dropdown{
+	display: inline-block;
+	
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 320px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content-open {
+    display: block;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 320px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #740505;
+    background: white;
+    text-decoration: none;
+    display: inline-block;
+    padding:  5px 15px;
+    margin: 10px 30px;
+}
+
+.dropdown-content a:hover {
+	color: white;
+	background: #740505;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.sexButton:hover  {
+	background: #740505;
+	border-radius: 10px;
+	color:#ffe5b4;
+}
+
+.sexMenu{
+	height: 120;
+}

@@ -62,6 +62,13 @@ class FiltersUpdater
 
 		return $filters;
 	}
+
+	public function GetCategories($_mysqli)
+	{
+		$categories['categories'] = Category::GetWithFilters($this->filters, $_mysqli);
+
+		return $categories['categories'];
+	}
 }
 
 

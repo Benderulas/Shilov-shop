@@ -29,7 +29,7 @@
 	color:white;
 }
 
-.sex>button{
+.sexButton{
 	font-family: 'Balsamiq Sans', cursive;
 	font-size: 24px;
 	background: none;
@@ -39,11 +39,22 @@
 	padding-bottom: 30px;
 	padding-left: 15px;
 	padding-right: 15px;
+	margin-top:  15px;
 }
-.sex>button:hover{
+
+.sexButtonActive{
+	font-family: 'Balsamiq Sans', cursive;
+	font-size: 24px;
 	background: #740505;
 	border-radius: 10px;
+	border:none;
 	color:#ffe5b4;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-top:  15px;
+
 }
 
 .btn-bascket{

@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="page_top/CSS/my_style.css">
     <link rel="stylesheet" type="text/css" href="page_top/CSS/button_style.css">
     <link rel="stylesheet" type="text/css" href="page_top/CSS/catalog.css">
+    <link rel="stylesheet" type="text/css" href="page_top/CSS/dropDownMenu.css">
 
     <meta charset="UTF-8">
 
@@ -23,10 +24,10 @@
 <body class="bg-light">
 <header>
     <div class="wrapper-header">
-        <div class="up-header">
-            <div class="sex">
-                <button value="2" name="sexButton" onclick="SexButtons(2)">Женское</button>
-                <button value="1" name="sexButton" onclick="SexButtons(1)">Мужское</button>
+        <div class="up-header" >
+            <div class="sexMenu" id="sexMenu">
+                <button class="sexButton" value="1" id="maleCategoryButton" onmouseenter="displayMaleCategories()" onmouseleave="hideMaleCategories()">Мужское</button>
+                <button class="sexButton" value="2" id="femaleCategoryButton" onmouseenter="displayFemaleCategories()" onmouseleave="hideFemaleCategories()">Женское</button>                
             </div>
             <div class="image"><img src="https://fotoseif.ru/images/2021/06/9xpr8yoij0nin1xqn1oc.png" alt="Соблазн" class="log-img"></div>
             <div>
@@ -40,6 +41,30 @@
                 <a class="btn-buscket"><img src="https://fotoseif.ru/images/2021/06/uda34j799zhluln5sr09.png"></a> <!-- КОРЗИНА -->
             </div>
         </div>
+
+        <?php 
+            require("page_top/categories.php");
+        ?>
+        <div class="dropdown-content" id="maleCategories" onmouseleave="hideMaleCategories()">
+            <?php
+                foreach($categories['male'] as $category)
+                {
+                    echo ("<a href='products?sexID=1&page=1&categoryID=" . $category->id . " '>" . $category->title . "</a>");
+                }
+            ?>
+            
+        </div>
+
+        <div class="dropdown-content" id="femaleCategories" onmouseleave="hideFemaleCategories()">
+            <?php
+                foreach($categories['female'] as $category)
+                {
+                    echo ("<a href='products?sexID=2&page=1&categoryID=" . $category->id . " '>" . $category->title . "</a>");
+                }
+            ?>            
+        </div>
+
+
         <div class="down-header">
             <form method="GET" action="products" name="login"> <!-- авторизация -->
 

@@ -7,20 +7,7 @@ import { PageSelector } from "/JavaScript/PageSelector.js";
 let productsOnPage = 12;
 
 
-async function Search()
-{
-  UrlManager.UpdateURLByPage(1);
-  let filters = FiltersManager.GetFiltersFromPage();
-  UrlManager.UpdateURLByFilters(filters);
 
-
-  let productsAmount = await ProductsManager.UpdateProducts(filters);
-
-  let pagesAmount = Math.floor(productsAmount / productsOnPage);
-  if (productsAmount % productsOnPage) pagesAmount++;
-
-  PageSelector.UpdateButtons(1, pagesAmount);
-}
 
 
 
@@ -46,13 +33,19 @@ async function OpenPage()
   PageSelector.UpdateButtons(this.value, pagesAmount);
 }
 
-function OpenProduct()
+async function Search()
 {
-  let url = new URL ("http://shilov-shop/product");
+  UrlManager.UpdateURLByPage(1);
+  let filters = FiltersManager.GetFiltersFromPage();
+  UrlManager.UpdateURLByFilters(filters);
 
-  url.searchParams.set("id", this.firstElementChild.innerText);
 
-  window.location.href = url;
+  let productsAmount = await ProductsManager.UpdateProducts(filters);
+
+  let pagesAmount = Math.floor(productsAmount / productsOnPage);
+  if (productsAmount % productsOnPage) pagesAmount++;
+
+  PageSelector.UpdateButtons(1, pagesAmount);
 }
 
 
