@@ -30,31 +30,31 @@
 }
 
 .sexButton{
+	transition: 0.5s;
 	font-family: 'Balsamiq Sans', cursive;
 	font-size: 24px;
 	background: none;
 	color: #740505;
+	border-radius: 10px;
 	border:none;
-	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 	padding-left: 15px;
 	padding-right: 15px;
-	margin-top:  15px;
 }
 
 .sexButtonActive{
+	transition: 0.5s;
 	font-family: 'Balsamiq Sans', cursive;
 	font-size: 24px;
 	background: #740505;
 	border-radius: 10px;
 	border:none;
 	color:#ffe5b4;
-	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 	padding-left: 15px;
-	padding-right: 15px;
-	margin-top:  15px;
-
+	padding-right: 15px;	
 }
 
 .btn-bascket{

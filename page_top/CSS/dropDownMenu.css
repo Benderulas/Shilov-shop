@@ -4,22 +4,15 @@
 }
 
 .dropdown-content {
-    display: none;
+	transition: 0.5s;
+	opacity: 0;
     position: absolute;
+    visibility: hidden;
     background-color: #f1f1f1;
     min-width: 320px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-}
-
-.dropdown-content-open {
-    display: block;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 320px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
+}	
 
 .dropdown-content a {
     color: #740505;
@@ -35,14 +28,13 @@
 	background: #740505;
 }
 
-.dropdown:hover .dropdown-content {display: block;}
-
-.sexButton:hover  {
-	background: #740505;
-	border-radius: 10px;
-	color:#ffe5b4;
+.sexMenu{
+	align-self: stretch;
+	margin-top:  15px;
+	display: flex;
+	align-items: center;
 }
 
-.sexMenu{
-	height: 120;
+.sexMenu button:nth-child(1){
+	margin-right: 5px;
 }

@@ -19,8 +19,9 @@ function hideMaleCategories()
 
     if (event.relatedTarget != sexMenu && event.relatedTarget != categories)
     {
-        categories.style.display = "none";
-        button.className = "sexButton";
+        categories.style.opacity = "0";
+        button.className = "sexButton";       
+        categories.style.visibility = "hidden";           
     }
 }
 
@@ -32,25 +33,38 @@ function hideFemaleCategories()
 
     if (event.relatedTarget != sexMenu && event.relatedTarget != categories)
     {
-        categories.style.display = "none";
-        button.className = "sexButton";
+        categories.style.opacity = "0";
+        button.className = "sexButton";       
+        categories.style.visibility = "hidden";           
     }
+}
+
+function hideCategories()
+{
+    hideMaleCategories();
+    hideFemaleCategories();
 }
 
 function displayMaleCategories()
 {
-    document.getElementById("femaleCategories").style.display = "none";
+    document.getElementById("femaleCategories").style.opacity = "0";
     document.getElementById("femaleCategoryButton").className = "sexButton";
+    document.getElementById("femaleCategories").style.visibility = "hidden";
+    
 
-    document.getElementById("maleCategories").style.display = "block";
+    
+    document.getElementById("maleCategories").style.visibility = "visible";
+    document.getElementById("maleCategories").style.opacity = "1";
     document.getElementById("maleCategoryButton").className = "sexButtonActive";
 }
 
 function displayFemaleCategories()
 {
-    document.getElementById("maleCategories").style.display = "none";
+    document.getElementById("maleCategories").style.opacity = "0";
     document.getElementById("maleCategoryButton").className = "sexButton";
+    document.getElementById("maleCategories").style.visibility = "hidden";
 
-    document.getElementById("femaleCategories").style.display = "block";
+    document.getElementById("femaleCategories").style.visibility = "visible";
+    document.getElementById("femaleCategories").style.opacity = "1";
     document.getElementById("femaleCategoryButton").className = "sexButtonActive";
 }

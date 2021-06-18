@@ -25,20 +25,17 @@
 <header>
     <div class="wrapper-header">
         <div class="up-header" >
-            <div class="sexMenu" id="sexMenu">
-                <button class="sexButton" value="1" id="maleCategoryButton" onmouseenter="displayMaleCategories()" onmouseleave="hideMaleCategories()">Мужское</button>
-                <button class="sexButton" value="2" id="femaleCategoryButton" onmouseenter="displayFemaleCategories()" onmouseleave="hideFemaleCategories()">Женское</button>                
+            <div class="sexMenu" id="sexMenu" onmouseleave="hideCategories()">
+                <button class="sexButton" value="1" id="maleCategoryButton" onmouseenter="displayMaleCategories()">Мужское</button>
+                <button class="sexButton" value="2" id="femaleCategoryButton" onmouseenter="displayFemaleCategories()">Женское</button>                
             </div>
             <div class="image"><img src="https://fotoseif.ru/images/2021/06/9xpr8yoij0nin1xqn1oc.png" alt="Соблазн" class="log-img"></div>
             <div>
-                <a href="#openModal"><img src="https://fotoseif.ru/images/2021/06/445ujivfkqn6toynxulv.png"></a> <!-- авторизация и регистрация -->
-                <div id="openModal" class="modalDialog">
-                    <?php 
-                        if ($user) require("user_menu.html"); 
-                        else require("authorization_menu.html");
-                    ?>
-                </div>
-                <a class="btn-buscket"><img src="https://fotoseif.ru/images/2021/06/uda34j799zhluln5sr09.png"></a> <!-- КОРЗИНА -->
+                <a href="/basket" class="btn-buscket"><img src="https://fotoseif.ru/images/2021/06/uda34j799zhluln5sr09.png"></a> <!-- КОРЗИНА -->
+                <?php 
+                    if ($user) require("profile_link.html"); 
+                    else require("authorization_menu.html");
+                ?>
             </div>
         </div>
 
