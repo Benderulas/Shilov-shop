@@ -14,7 +14,7 @@ function DeleteOptionsInSelectModule(_selectModuleid)
 
 function SetColors(_colors, _selectedColorId = 0)
 {
-	let selectModule = document.getElementById("color");
+	let selectModule = document.getElementById("productColor");
 
 	let option = document.createElement("option");
 	option.value = "null";
@@ -36,7 +36,7 @@ function SetColors(_colors, _selectedColorId = 0)
 function SetSizes(_sizes, _selectedSizeId = 0)
 {
 	
-	let selectModule = document.getElementById("size");
+	let selectModule = document.getElementById("productSize");
 
 	let option = document.createElement("option");
 	option.value = "null";
@@ -60,14 +60,14 @@ async function UpdateColors()
 {
 	let path = "POST/products/GetSearchFilters.php";
 	let filters = {
-		productID: Number(document.getElementById("id").value),
-		sizeID: Number(document.getElementById("size").value)
+		productID: Number(document.getElementById("productID").value),
+		sizeID: Number(document.getElementById("productSize").value)
 	}
 	let response = await POST_JSON_request(path, filters);
 
-	let selectedColorID = Number(document.getElementById("color").value);
+	let selectedColorID = Number(document.getElementById("productColor").value);
 
-	DeleteOptionsInSelectModule("color");
+	DeleteOptionsInSelectModule("productColor");
 	SetColors(response['colors'], selectedColorID);
 }
 
@@ -75,14 +75,14 @@ async function UpdateSizes()
 {
 	let path = "POST/products/GetSearchFilters.php";
 	let filters = {
-		productID: Number(document.getElementById("id").value),
-		colorID: Number(document.getElementById("color").value)
+		productID: Number(document.getElementById("productID").value),
+		colorID: Number(document.getElementById("productColor").value)
 	}
 	let response = await POST_JSON_request(path, filters);
 
-	let selectedSizeID = Number(document.getElementById("size").value);
+	let selectedSizeID = Number(document.getElementById("productSize").value);
 
-	DeleteOptionsInSelectModule("size");
+	DeleteOptionsInSelectModule("productSize");
 	SetSizes(response['sizes'], selectedSizeID);
 }
 
@@ -91,12 +91,12 @@ async function InitializeColorsAndSizes()
 {
 	let path = "POST/products/GetSearchFilters.php";
 	let filters = {
-		productID: Number(document.getElementById("id").value)
+		productID: Number(document.getElementById("productID").value)
 	}
 	let response = await POST_JSON_request(path, filters); 
 
-	document.getElementById("color").onchange = UpdateSizes;
-	document.getElementById("size").onchange = UpdateColors;
+	document.getElementById("productColor").onchange = UpdateSizes;
+	document.getElementById("productSize").onchange = UpdateColors;
 
 
 
@@ -134,10 +134,10 @@ function IsProductInBasketCorrect(_productInBasket)
 async function AddInBasket()
 {
 	let productInBasket = {
-		productID: Number(document.getElementById("id").value),
-		colorID: Number(document.getElementById("color").value),
-		sizeID: Number(document.getElementById("size").value),
-		amount: Number(document.getElementById("amount").value)		
+		productID: Number(document.getElementById("productID").value),
+		colorID: Number(document.getElementById("productColor").value),
+		sizeID: Number(document.getElementById("productSize").value),
+		amount: Number(document.getElementById("productAmount").value)		
 	}
 
 	if (IsProductInBasketCorrect(productInBasket))
@@ -145,7 +145,7 @@ async function AddInBasket()
 		let path = "POST/basket/addProductInBasket.php";
 		let response = await POST_JSON_request(path, productInBasket);
 
-		document.getElementById("productsInBasket").innerText = response['productsInBasket'];
+		//document.getElementById("productsInBasket").innerText = response['productsInBasket'];
 	}
 }
 

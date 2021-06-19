@@ -26,7 +26,16 @@ function SetRightsLevel($_user, $_userProfile, $_rights)
 		echo("</select>");
 	}
 
-	else echo("<input type='text' id='userLevel' readonly='readonly' value='" . $_userProfile->rights->title . "'>");
+	else 
+	{
+		echo("<select id='userLevel'>");
+
+		echo ("<option value='" . $_userProfile->rights->id . "'");
+		echo(" selected='selected'");
+
+		echo(">" . $_userProfile->rights->title . "</option>");
+		echo("</select>");
+	}
 }
 
 ?>

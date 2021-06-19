@@ -16,10 +16,11 @@
 
 <div name="productInBasket">
 
+	<img src="<?php echo($product->img) ?>">
 	<label name="title"> <?php echo($product->title) ?> </label>
 	<label name="color"> <?php echo($color->title) ?> </label>
 	<label name="size"> <?php echo($size->title) ?> </label>
-	<label name="amount"> <?php echo($productInBasket->amount) ?> </label>
+	<label name="amount"> <input type="text" value="<?php echo($productInBasket->amount) ?>"></label>
 
 	<button name="removeProductFromBasket" value="<?php echo($i); ?>">Убрать</button>            
 </div>

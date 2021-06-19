@@ -42,7 +42,7 @@ class Product extends Object
 	public function SetByJSON($_product)
 	{
 		if (isset($_product->id)) $this->id = $_product->id;
-		if (isset($_product->img)) $this->img = $_product->img;
+		if (isset($_product->image)) $this->img = $_product->image;
 		if (isset($_product->discount)) $this->discount = $_product->discount;
 		$this->title = $_product->title;
 		$this->price = $_product->price;
@@ -104,6 +104,9 @@ class Product extends Object
 				. ")";
 
 		$res = $_mysqli->query($request);
+		var_dump($this);
+		var_dump($request);
+
 		$this->id = $_mysqli->insert_id;
 		return $this->id;
 	}
