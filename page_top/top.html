@@ -25,19 +25,19 @@
         <div class="up-header" >
             <div class="sexMenu" id="sexMenu" onmouseleave="hideCategories()">
                 <button class="sexButton" value="1" id="maleCategoryButton" onmouseenter="displayMaleCategories()">Мужское</button>
-                <button class="sexButton" value="2" id="femaleCategoryButton" onmouseenter="displayFemaleCategories()">Женское</button>                
+                <button class="sexButton" value="2" id="femaleCategoryButton" onmouseenter="displayFemaleCategories()">Женское</button>
             </div>
-            <div class="image"><img src="https://fotoseif.ru/images/2021/06/9xpr8yoij0nin1xqn1oc.png" alt="Соблазн" class="log-img"></div>
+            <img src="/page_top/images/logo_1.png" alt="Соблазн" class="log-img">
             <div>
-                <a href="/basket" class="btn-buscket"><img src="https://fotoseif.ru/images/2021/06/uda34j799zhluln5sr09.png"></a> <!-- КОРЗИНА -->
-                <?php 
-                    if ($user) require("profile_link.html"); 
+                <a href="/basket" class="btn-buscket"><img src="/page_top/images/Basket.png"></a> <!-- КОРЗИНА -->
+                <?php
+                    if ($user) require("profile_link.html");
                     else require("authorization_menu.html");
                 ?>
             </div>
         </div>
 
-        <?php 
+        <?php
             require("page_top/categories.php");
         ?>
         <div class="dropdown-content" id="maleCategories" onmouseleave="hideMaleCategories()">
@@ -47,7 +47,7 @@
                     echo ("<a href='products?sexID=1&page=1&categoryID=" . $category->id . " '>" . $category->title . "</a>");
                 }
             ?>
-            
+
         </div>
 
         <div class="dropdown-content" id="femaleCategories" onmouseleave="hideFemaleCategories()">
@@ -56,7 +56,7 @@
                 {
                     echo ("<a href='products?sexID=2&page=1&categoryID=" . $category->id . " '>" . $category->title . "</a>");
                 }
-            ?>            
+            ?>
         </div>
 
 
@@ -64,7 +64,7 @@
             <form method="GET" action="products" name="login"> <!-- авторизация -->
 
                 <input type="text" class="search" name="title" id="title" placeholder="Поиск товаров"/>
-                
+
             </form>
         </div>
     </div>

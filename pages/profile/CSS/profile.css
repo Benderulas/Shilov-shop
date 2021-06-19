@@ -32,6 +32,13 @@
 }
 
 .userError{
+	background-color: white;
 	width: 100%;
-	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 50.5%;
+	font-size: 50px;
+	font-family: 'Balsamiq Sans', cursive;
+	color: #740505;
 }

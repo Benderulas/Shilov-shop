@@ -54,7 +54,7 @@
 	padding-top: 15px;
 	padding-bottom: 15px;
 	padding-left: 15px;
-	padding-right: 15px;	
+	padding-right: 15px;
 }
 
 .btn-bascket{
@@ -67,6 +67,12 @@
 	background:none;
 }
 
-
-
-
+.btn-exit-account{
+	background: none;
+	border:0px;
+	cursor: pointer;
+}
+.btn-exit-account>img{
+	width: 30px;
+	height: 30px;
+}
