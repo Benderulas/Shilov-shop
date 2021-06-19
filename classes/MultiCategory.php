@@ -37,7 +37,7 @@ class MultiCategory
 			if ($res['count']) return true;
 			else return false;
 		}
-		else 
+		else
 		{
 			echo (static::tableName . " Exist  request error");
 			return false;
@@ -91,7 +91,7 @@ class MultiCategory
 		for ($i = 0; $i < $count; $i++)
 		{
 			$res->data_seek($i);
-			
+
 			$myltiCategories[$i] = new $className();
 			$myltiCategories[$i]->Set($res->fetch_assoc());
 		}
@@ -122,13 +122,14 @@ class MultiCategory
 
 		$response = $_mysqli->query($request);
 
+		$multiCategory = false;
 		if ($_mysqli->error)
 		{
 			$exception = $_mysqli->error;
 			var_dump($exception); echo ("<br><br>");
 			return $exception;
 		}
-		else 
+		else
 		{
 			$className = static::class;
 
@@ -138,7 +139,7 @@ class MultiCategory
 				$multiCategory[$i] = new $className();
 				$multiCategory[$i]->SetById($response->fetch_assoc()['id'], $_mysqli);
 			}
-			
+
 			return $multiCategory;
 		}
 	}
