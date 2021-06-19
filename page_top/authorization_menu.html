@@ -1,33 +1,40 @@
-<div class="login">
-    <div id="authorization" class="tabcontent">
-        <form class="registration" name="login"> <!-- авторизация -->
-            <h1 class="text">Авторизация</h1>
-            <label for="">Логин</label>
-            <input type="text" name="login" placeholder="Введите ваш логин">
-            <label for="">Пароль</label>
-            <input type="password" name="password" placeholder="Введите ваш пароль">
-            <div class="form-btns">
-                <button type="button" class="tablinks" onclick="openTab(event,'registration')">Регистрация</button>
-                <button type="button" name="SendLogInForm">Войти</button>
-            </div>
-        </form>
+
+<script type="module" src="/scripts/top/log_in.js"></script>
+<script type="module" src="/scripts/top/registration.js"></script>
+
+<a href="#openModal"><img src="/page_top/images/Profile.png"></a> <!-- авторизация и регистрация -->
+<div id="openModal" class="modalDialog">
+    <div class="login">
+        <div id="authorization" class="tabcontent">
+            <form class="registration" name="login"> <!-- авторизация -->
+                <h1 class="text">Авторизация</h1>
+                <label for="">Логин</label>
+                <input type="text" name="login" placeholder="Введите ваш логин">
+                <label for="">Пароль</label>
+                <input type="password" name="password" placeholder="Введите ваш пароль">
+                <div class="form-btns">
+                    <button type="button" class="tablinks" onclick="openTab(event,'registration')">Регистрация</button>
+                    <button type="button" name="SendLogInForm">Войти</button>
+                </div>
+            </form>
+        </div>
+        <div id="registration" class="tabcontent">
+            <form class="registration" name="registration"> <!-- регистрация -->
+                <h1 class="text">Регистрация</h1>
+                <label for="">Логин</label>
+                <input type="text" name="login" placeholder="Введите логин">
+                <label for="">Пароль</label>
+                <input type="password" name="password" placeholder="Введите пароль">
+                <label for="">Имя</label>
+                <input type="text" name="firstName" placeholder="Введите ваше имя">
+                <label for="">E-mail</label>
+                <input type="email" name="email" placeholder="Введите ваш e-mail">
+                <div class="form-btns">
+                    <button type="button" class="tablinks" onclick="openTab(event,'authorization')">Авторизация</button>
+                    <button type="button" name="SendRegistrationForm">Зарегистрироваться</button>
+                </div>
+            </form>
+        </div>
+        <a href="#close" title="Закрыть" class="close"><img src="https://fotoseif.ru/images/2021/06/fsftgb2101wswa7iryv5.png"></a>
     </div>
-    <div id="registration" class="tabcontent">
-        <form class="registration" name="registration"> <!-- регистрация -->
-            <h1 class="text">Регистрация</h1>
-            <label for="">Логин</label>
-            <input type="text" name="login" placeholder="Введите логин">
-            <label for="">Пароль</label>
-            <input type="password" name="password" placeholder="Введите пароль">
-            <label for="">Имя</label>
-            <input type="text" name="firstName" placeholder="Введите ваше имя">
-            <label for="">E-mail</label>
-            <input type="email" name="email" placeholder="Введите ваш e-mail">
-            <div class="form-btns">
-                <button type="button" class="tablinks" onclick="openTab(event,'authorization')">Авторизация</button>
-                <button type="button" name="SendRegistrationForm">Зарегистрироваться</button>
-            </div>
-        </form>
-    </div>
-    <a href="#close" title="Закрыть" class="close"><img src="https://fotoseif.ru/images/2021/06/fsftgb2101wswa7iryv5.png"></a>
 </div>

@@ -69,7 +69,7 @@ function isProductReady(_product)
 			alert("Укажите размер в паре " + (Number(i) + 1));
 			return false;
 		}
-		if (_product.colorsAndSizes[i].amount == false)
+		if (_product.colorsAndSizes[i].amount < 0)
 		{
 			alert("Укажите количество в паре " + (Number(i) + 1));
 			return false;
@@ -89,16 +89,14 @@ function isProductReady(_product)
 
 async function EditProduct()
 {
-	console.log("EditProduct");
-
 	let product = {
-		id: Number(document.getElementById("id").value),
-		title: document.getElementById("title").value,
-		price: Number(document.getElementById("price").value),
-		discount: Number(document.getElementById("discount").value),
-		categoryID: Number(document.getElementById("category").value),
-		companyID: Number(document.getElementById("company").value),
-		sexID: Number(document.getElementById("sex").value),
+		id: Number(document.getElementById("productID").value),
+		title: document.getElementById("productTitle").value,
+		price: Number(document.getElementById("productPrice").value),
+		discount: Number(document.getElementById("productDiscount").value),
+		categoryID: Number(document.getElementById("productCategory").value),
+		companyID: Number(document.getElementById("productCompany").value),
+		sexID: Number(document.getElementById("productSex").value),
 		colorsAndSizes: []
 	};
 
@@ -200,11 +198,8 @@ async function AddColorAndSizeField()
 
 
 
-async function InitializeColorAndSizeFields(_productToColorAndSize)
-{
-	console.log(_productToColorAndSize);
-	let response = await GetSelectsFromDb();
-	
+function InitializeColorAndSizeFields(_response, _productToColorAndSize)
+{	
 	let colorsAndSizes = document.getElementById("colorsAndSizes");
 	let label = document.createElement("label");
 	let text = document.createTextNode("1 ");
@@ -227,11 +222,11 @@ async function InitializeColorAndSizeFields(_productToColorAndSize)
 	}
 	
 
-	for (let i in response['colors'])
+	for (let i in _response['colors'])
 	{
 		option = document.createElement("option");
-		option.text = response['colors'][i].title;
-		option.value = response['colors'][i].id;
+		option.text = _response['colors'][i].title;
+		option.value = _response['colors'][i].id;
 		if (_productToColorAndSize) 
 		{
 			if (option.value == _productToColorAndSize.color.id) option.selected = "selected";
@@ -254,11 +249,11 @@ async function InitializeColorAndSizeFields(_productToColorAndSize)
 		sizeSelectItem.add(option);
 	}
 
-	for (let i in response['sizes'])
+	for (let i in _response['sizes'])
 	{
 		option = document.createElement("option");
-		option.text = response['sizes'][i].title;
-		option.value = response['sizes'][i].id;
+		option.text = _response['sizes'][i].title;
+		option.value = _response['sizes'][i].id;
 		if (_productToColorAndSize) 
 		{
 			if (option.value == _productToColorAndSize.size.id) option.selected = "selected";
@@ -299,7 +294,7 @@ function DeleteColorAndSizeField()
 
 function InitializeCategories(_categories, _productForView)
 {
-	let selectItem = document.getElementById("category");
+	let selectItem = document.getElementById("productCategory");
 
 	let option;
 
@@ -316,7 +311,7 @@ function InitializeCategories(_categories, _productForView)
 
 function InitializeCompanies(_companies, _productForView)
 {
-	let selectItem = document.getElementById("company");
+	let selectItem = document.getElementById("productCompany");
 
 	let option;
 
@@ -333,7 +328,7 @@ function InitializeCompanies(_companies, _productForView)
 
 function InitializeSex(_sex, _productForView)
 {
-	let selectItem = document.getElementById("sex");
+	let selectItem = document.getElementById("productSex");
 
 	let option;
 
@@ -361,22 +356,22 @@ async function InitializeSelects(_productForView)
 
 	for (let i = 0; i < _productForView.productsToColorAndSize.length; i++)
 	{
-		await InitializeColorAndSizeFields(_productForView.productsToColorAndSize[i]);
+		await InitializeColorAndSizeFields(response, _productForView.productsToColorAndSize[i]);
 	}
 }
 
 function InitializeProduct(_productForView)
 {
-	let id = document.getElementById("id");
+	let id = document.getElementById("productID");
 	id.value = _productForView.product.id;
 
-	let title = document.getElementById("title");
+	let title = document.getElementById("productTitle");
 	title.value = _productForView.product.title;
 
-	let price = document.getElementById("price");
+	let price = document.getElementById("productPrice");
 	price.value = _productForView.product.price;
 
-	let discount = document.getElementById("discount");
+	let discount = document.getElementById("productDiscount");
 	discount.value = _productForView.product.discount;
 
 	InitializeSelects(_productForView);
@@ -393,7 +388,6 @@ async function Initialize()
 
 	let productForView = await POST_JSON_request(path, id);
 
-	console.log(productForView);
 
 
 

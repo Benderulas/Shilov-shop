@@ -1,0 +1,47 @@
+.container-catalog{
+	background:white;
+}
+
+.filter{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	align-items: center;
+	justify-items: end;
+	grid-row-gap: 30px;
+}
+.filter select{
+	width: 230px;
+}
+.filter .btn-catalog{
+	width: 230px;
+}
+.filter input{
+	font-size: 18px;
+	border-radius: 5px;
+	outline: none;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	width: 83%;
+	border: 1px solid lightgrey;
+	padding-left: 10px;
+}
+.filter input::placeholder{
+}
+
+.products{
+	margin-top: 50px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-row-gap: 3em;
+	justify-content:center;
+	min-height: 12%;
+}
+.product .product-image img{
+	border:1px solid black;
+	width: 214px;
+	height: 321px;
+	background:white;
+}
+.product{
+	justify-self:stretch;
+	align-self: stretch;

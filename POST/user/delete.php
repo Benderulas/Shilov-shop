@@ -2,13 +2,31 @@
 
 require_once ("classes/User.php");
 
-$userToDelete = new User();
-$userToDelete->SetByPOST();
+$json = file_get_contents('php://input');
+$data = json_decode($json);
 
-if ($user->id == $userToDelete->id || $user->rigths->level == 10)
+$userToEdit = new User();
+$userToEdit->SetByJSON($data);
+
+if ($user->id == $userToEdit->id || $user->rights->level == 10)
 {
-	$exception = $userToDelete->Delete($mysqli);
+	if ($error = $userToEdit->Delete($mysqli))
+	{
+		$response['status'] = false;
+		$response['error'] = $error;
+	}
+	else 
+	{
+		$response['status'] = true;
+	}
 }
-else $exception = "You don't have permissions to do that";
+else
+{
+	$response['status'] = false;
+	$response['error'] = "You haven't permissions to do that userLevel = " . $user->rights->level;
+}
+
+
+echo(json_encode($response));
 
 ?>

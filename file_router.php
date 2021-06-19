@@ -18,6 +18,12 @@
 		echo file_get_contents($path);
 		die();
 	}
+	if ($fileExtention == 'JPG') 
+	{
+		header("Content-Type: image/jpg");
+		echo file_get_contents($path);
+		die();
+	}
 
 	if ($fileExtention == 'png') 
 	{
