@@ -1,0 +1,15 @@
+
+<script src="scripts/profile/profile.js" type="module"></script>
+<link rel="stylesheet" type="text/css" href="pages/profile/CSS/profile.css">
+
+
+<?php 
+	require("profile.php");
+	if ($userProfile->id) 
+	{
+		require("userData.html");
+		
+		if ($user->id == $userProfile->id || $user->rights->level == 10) require("buttonMenu.html");
+	}
+	else require("userError.html");
+?>

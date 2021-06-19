@@ -82,7 +82,7 @@ class User extends Object
 		$request = "SELECT * FROM " . static::tableName . " WHERE id = $_id";
 		$res = $_mysqli->query($request);
 
-		if ($res)
+		if ($res && $res->num_rows)
 		{
 			$user = $res->fetch_assoc();
 
@@ -201,7 +201,7 @@ class User extends Object
 
 		$res = $_mysqli->query($request);
 
-		return $res;
+		return $_mysqli->error;
 	}
 }
 

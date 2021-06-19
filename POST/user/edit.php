@@ -2,13 +2,31 @@
 
 require_once ("classes/User.php");
 
-$userToEdit = new User();
-$userToEdit->SetByPOST();
+$json = file_get_contents('php://input');
+$data = json_decode($json);
 
-if ($user->id == $userToEdit->id || $user->rigths->level == 10)
+$userToEdit = new User();
+$userToEdit->SetByJSON($data);
+
+if ($user->id == $userToEdit->id || $user->rights->level == 10)
 {
-	$exception = $userToEdit->Edit($mysqli);
+	if ($error = $userToEdit->Edit($mysqli))
+	{
+		$response['status'] = false;
+		$response['error'] = $error;
+	}
+	else 
+	{
+		$response['status'] = true;
+	}
 }
-else $exception = "You don't have permissions to do that";
+else
+{
+	$response['status'] = false;
+	$response['error'] = "You haven't permissions to do that userLevel = " . $user->rights->level;
+}
+
+
+echo(json_encode($response));
 
 ?>
