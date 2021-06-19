@@ -1,5 +1,4 @@
-
-<div class="row">
+    <div class="row">
     <div class="col-2 text-center">
         <?php 
             if ($user && $user->rights->level == 10) echo ("
@@ -12,23 +11,23 @@
     <div class="col-8 text-left">
 
         <div id="product">
-            <label>id: <input type="text" readonly="readonly" id="id"></label><br>
-            <label>Название: <input type="text" id="title"></label><br>
-            <label>Цена: <input type="text" id="price"></label><br>
-            <label>Скидка: <input type="text" id="discount"></label><br>
+            <label>id: <input type="text" readonly="readonly" id="productID"></label><br>
+            <label>Название: <input type="text" id="productTitle"></label><br>
+            <label>Цена: <input type="text" id="productPrice"></label><br>
+            <label>Скидка: <input type="text" id="productDiscount"></label><br>
 
             <label>Категория: 
-            	<select id='category'>
+            	<select id='productCategory'>
     			</select>
     		</label><br>
 
     		<label>Компания: 
-            	<select id='company'>
+            	<select id='productCompany'>
     			</select>
     		</label><br>
 
     		<label>Пол: 
-            	<select id='sex'>
+            	<select id='productSex'>
     			</select>
     		</label><br>
 
@@ -43,4 +42,4 @@
     <div class="col-2"></div>
 </div> 
 
-<script type="module" src="http://shilov-shop/scripts/product/edit.js"></script>   
+<script type="module" src="/scripts/product/edit.js"></script>   

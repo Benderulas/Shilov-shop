@@ -2,7 +2,7 @@ import { POST_JSON_request } from "/JavaScript/requests.js";
 
 async function GetSelectsFromDb()
 {
-	let path = "POST/products/GetSearchFilters.php";
+	let path = "POST/product/GetMultiCategories.php";
 
 	let response = await POST_JSON_request(path); 
 
@@ -81,38 +81,76 @@ function isProductReady(_product)
 
 }
 
+async function AploadImage()
+{
+	let data = new FormData();
+	data.append (0, document.getElementById("productImage").files[0]);
+
+	let response = await $.ajax({
+        url: '/POST/image/add.php',
+        type: 'POST',
+        data: data,
+        cache: false,
+        dataType: 'json',
+        processData: false, // Не обрабатываем файлы (Don't process the files)
+        contentType: false, // Так jQuery скажет серверу что это строковой запрос
+        success: function( respond, textStatus, jqXHR ){
+ 
+            // Если все ОК
+ 
+            if( typeof respond.error === 'undefined' ){
+                // Файлы успешно загружены, делаем что нибудь здесь
+ 
+                // выведем пути к загруженным файлам в блок '.ajax-respond'
+ 
+                var files_path = respond.files;
+                var html = '';
+                $.each( files_path, function( key, val ){ html += val +'<br>'; } )
+                $('.ajax-respond').html( html );
+            }
+            else{
+                console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
+            }
+        },
+        error: function( jqXHR, textStatus, errorThrown ){
+            console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+        }
+    });
+
+    return response['path'];
+}
+
 
 async function InsertProduct()
 {
-	console.log("AddProduct");
-
 	let product = {
-		title: document.getElementById("title").value,
-		price: Number(document.getElementById("price").value),
-		discount: Number(document.getElementById("discount").value),
-		categoryID: Number(document.getElementById("category").value),
-		companyID: Number(document.getElementById("company").value),
-		sexID: Number(document.getElementById("sex").value),
+		image: await AploadImage(),
+		title: document.getElementById("productTitle").value,
+		price: Number(document.getElementById("productPrice").value),
+		discount: Number(document.getElementById("productDiscount").value),
+		categoryID: Number(document.getElementById("productCategory").value),
+		companyID: Number(document.getElementById("productCompany").value),
+		sexID: Number(document.getElementById("productSex").value),
 		colorsAndSizes: []
 	};
 
 	let colorAndSize;
 
-	for (let i = 0; i < document.getElementsByName("color").length; i++)
+	for (let i = 0; i < document.getElementsByName("productColor").length; i++)
 	{
 		colorAndSize = {
-			colorID: Number(document.getElementsByName("color")[i].value),
-			sizeID: Number(document.getElementsByName("size")[i].value),
-			amount: Number(document.getElementsByName("amount")[i].value)
+			colorID: Number(document.getElementsByName("productColor")[i].value),
+			sizeID: Number(document.getElementsByName("productSize")[i].value),
+			amount: Number(document.getElementsByName("productAmount")[i].value)
 			};
 		product.colorsAndSizes.push(colorAndSize);
 	}
-
 
 	if (isProductReady(product)) 
 	{
 		let path = "POST/product/insertProductForView.php";
 		let response = await POST_JSON_request(path, product);
+
 		alert (response['message']);
 	}
 }
@@ -121,14 +159,11 @@ async function AddColorAndSizeField()
 {
 	let response = await GetSelectsFromDb();
 	
-	let colorsAndSizes = document.getElementById("colorsAndSizes");
-	let label = document.createElement("label");
-	let text = document.createTextNode("1 ");
-
-	label.appendChild(text);
+	let colorsAndSizes = document.getElementById("productColorsAndSizes");
+	let div = document.createElement("div");
 
 	let colorSelectItem = document.createElement("select");
-	colorSelectItem.name = "color";
+	colorSelectItem.name = "productColor";
 
 	let option = document.createElement("option");
 	option.value = 'null';
@@ -145,7 +180,7 @@ async function AddColorAndSizeField()
 	}
 
 	let sizeSelecctItem = document.createElement("select");
-	sizeSelecctItem.name = "size";
+	sizeSelecctItem.name = "productSize";
 
 	option = document.createElement("option");
 	option.value = 'null';
@@ -163,34 +198,35 @@ async function AddColorAndSizeField()
 
 	let amountItem = document.createElement("input");
 	amountItem.type = "text";
-	amountItem.name = "amount";
+	amountItem.name = "productAmount";
+
+
+	let deleteButton = document.createElement("button");
+	deleteButton.onclick = DeleteColorAndSizeField;
+	deleteButton.innerText = "Удалить";
 
 
 
-	label.appendChild(colorSelectItem);
-	label.appendChild(sizeSelecctItem);
-	label.appendChild(amountItem);
+
+	div.appendChild(colorSelectItem);
+	div.appendChild(sizeSelecctItem);
+	div.appendChild(amountItem);
+	div.appendChild(deleteButton);
 
 
 
-	colorsAndSizes.appendChild(label);
-	let brItem = document.createElement("br");
-	colorsAndSizes.appendChild(brItem);
+	colorsAndSizes.appendChild(div);
 }
 
 function DeleteColorAndSizeField()
 {
-	let colorsAndSizes = document.getElementById("colorsAndSizes");
-	let lastElement = colorsAndSizes.lastChild;
-
-	colorsAndSizes.removeChild(lastElement);
-	lastElement = colorsAndSizes.lastChild;
-	colorsAndSizes.removeChild(lastElement);
+	let colorsAndSizes = document.getElementById("productColorsAndSizes");
+	this.parentNode.parentNode.removeChild(this.parentNode);
 }
 
 function InitializeCategories(_categories)
 {
-	let selectItem = document.getElementById("category");
+	let selectItem = document.getElementById("productCategory");
 
 	let option = document.createElement("option");
 	option.value = 'null';
@@ -209,7 +245,7 @@ function InitializeCategories(_categories)
 
 function InitializeCompanies(_companies)
 {
-	let selectItem = document.getElementById("company");
+	let selectItem = document.getElementById("productCompany");
 
 	let option = document.createElement("option");
 	option.value = 'null';
@@ -228,7 +264,7 @@ function InitializeCompanies(_companies)
 
 function InitializeSex(_sex)
 {
-	let selectItem = document.getElementById("sex");
+	let selectItem = document.getElementById("productSex");
 
 	let option = document.createElement("option");
 	option.value = 'null';
@@ -260,16 +296,16 @@ async function InitializeSelects()
 
 
 
+
+
+
 function Initialize()
 {
 	let button = document.getElementById("addProduct");
-	button.onclick = InsertProduct;
+	if (button) button.onclick = InsertProduct;
 
 	button = document.getElementById("addColorAndSize");
-	button.onclick = AddColorAndSizeField;
-
-	button = document.getElementById("deleteColorAndSize");
-	button.onclick = DeleteColorAndSizeField;
+	if (button)button.onclick = AddColorAndSizeField;
 
 	InitializeSelects();
 

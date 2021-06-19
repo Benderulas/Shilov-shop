@@ -4,7 +4,7 @@ require_once("classes/Color.php");
 require_once("classes/Company.php");
 require_once("classes/Sex.php");
 require_once("classes/Size.php");
-require_once("classes/category.php");
+require_once("classes/Category.php");
 
 class Filters
 {
@@ -59,6 +59,8 @@ class FiltersUpdater
 		$filters['sizes'] = Size::GetWithFilters($this->filters, $_mysqli);
 
 		$filters['companies'] = Company::GetWithFilters($this->filters, $_mysqli);
+		$filters['categories'] = Category::GetWithFilters($this->filters, $_mysqli);
+		$filters['sex'] = Sex::GetWithFilters($this->filters, $_mysqli);
 
 		return $filters;
 	}
