@@ -33,4 +33,4 @@ async function SendRegistrationForm()
 
 let button = document.getElementsByName("SendRegistrationForm")[0];
 
-button.onclick = SendRegistrationForm;
+if (button) button.onclick = SendRegistrationForm;

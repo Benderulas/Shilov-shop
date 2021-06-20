@@ -145,7 +145,7 @@ async function InsertProduct()
 			};
 		product.colorsAndSizes.push(colorAndSize);
 	}
-
+	
 	if (isProductReady(product)) 
 	{
 		let path = "POST/product/insertProductForView.php";
@@ -159,15 +159,19 @@ async function AddColorAndSizeField()
 {
 	let response = await GetSelectsFromDb();
 	
-	let colorsAndSizes = document.getElementById("productColorsAndSizes");
+	let colorsAndSizes = document.getElementById("ColorsAndSizes");
 	let div = document.createElement("div");
+	div.className = "color-size__item";
 
 	let colorSelectItem = document.createElement("select");
 	colorSelectItem.name = "productColor";
 
 	let option = document.createElement("option");
 	option.value = 'null';
+	option.text = "Цвет";
 	option.selected = "selected";
+	option.disabled = "disabled"
+	option.hidden = "hidden"
 	colorSelectItem.add(option);
 
 	for (let i in response['colors'])
@@ -184,7 +188,10 @@ async function AddColorAndSizeField()
 
 	option = document.createElement("option");
 	option.value = 'null';
+	option.text = "Размер";
 	option.selected = "selected";
+	option.disabled = "disabled"
+	option.hidden = "hidden"
 	sizeSelecctItem.add(option);
 
 	for (let i in response['sizes'])
@@ -199,6 +206,7 @@ async function AddColorAndSizeField()
 	let amountItem = document.createElement("input");
 	amountItem.type = "text";
 	amountItem.name = "productAmount";
+	amountItem.placeholder = "Количество";
 
 
 	let deleteButton = document.createElement("button");
@@ -220,18 +228,14 @@ async function AddColorAndSizeField()
 
 function DeleteColorAndSizeField()
 {
-	let colorsAndSizes = document.getElementById("productColorsAndSizes");
+	let colorsAndSizes = document.getElementById("ColorsAndSizes");
 	this.parentNode.parentNode.removeChild(this.parentNode);
 }
 
 function InitializeCategories(_categories)
 {
 	let selectItem = document.getElementById("productCategory");
-
-	let option = document.createElement("option");
-	option.value = 'null';
-	option.selected = "selected";
-	selectItem.add(option);
+	let option;
 
 	for (let i in _categories)
 	{
@@ -246,11 +250,7 @@ function InitializeCategories(_categories)
 function InitializeCompanies(_companies)
 {
 	let selectItem = document.getElementById("productCompany");
-
-	let option = document.createElement("option");
-	option.value = 'null';
-	option.selected = "selected";
-	selectItem.add(option);
+	let option;
 
 	for (let i in _companies)
 	{
@@ -265,11 +265,7 @@ function InitializeCompanies(_companies)
 function InitializeSex(_sex)
 {
 	let selectItem = document.getElementById("productSex");
-
-	let option = document.createElement("option");
-	option.value = 'null';
-	option.selected = "selected";
-	selectItem.add(option);
+	let option;
 
 	for (let i in _sex)
 	{
@@ -305,9 +301,10 @@ function Initialize()
 	if (button) button.onclick = InsertProduct;
 
 	button = document.getElementById("addColorAndSize");
-	if (button)button.onclick = AddColorAndSizeField;
+	if (button) button.onclick = AddColorAndSizeField;
 
 	InitializeSelects();
+	AddColorAndSizeField();
 
 }
 

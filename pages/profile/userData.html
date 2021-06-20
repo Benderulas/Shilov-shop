@@ -1,60 +1,25 @@
-<div>
-	<div class="titles">
-		<div>
-			<label>ID</label>
-		</div>
-		<div>
-			<label>Логин</label>
-		</div>
-		<div>
-			<label>Пароль</label>
-		</div>
-		<div>
-			<label>Email</label>
-		</div>
-		<div>
-			<label>Имя</label>
-		</div>
-		<div>
-			<label>Фамилия</label>
-		</div>
-		<div>
-			<label>Телефон</label>
-		</div>
-		<div>
-			<label>Уровень доступа</label>
-		</div>
-		
-	</div>
-	<div class="data">
-		<div>
-			<input type="text" id="userID" value='<?php echo($userProfile->id); ?>'>
-		</div>
-		<div>
-			<input type="text" id="userLogin" value='<?php echo($userProfile->login); ?>'>
-		</div>
-		<div>
-			<input type="text" id="userPassword" value='<?php echo($userProfile->password); ?>'>
-		</div>
-		<div>
-			<input type="text" id="userEmail" value='<?php echo($userProfile->email); ?>'>
-		</div>
-		<div>
-			<input type="text" id="userFirstName" value='<?php echo($userProfile->firstName); ?>'>
-		</div>
-		<div>
-			<input type="text" id="userSecondName" value='<?php echo($userProfile->secondName); ?>'>
-		</div>
-		<div>
-			<input type="text" id="userPhone" value='<?php echo($userProfile->phone); ?>'>
-		</div>
-		<div>
-			<?php 
-				SetRightsLevel($user, $userProfile, $rights);
-			?>
-			
-		</div>
+<div class="userProfile">
+	<div class="userProfile-wrapper">
+				<!-- <label>ID</label>
+				<input type="text" id="userID" value='<?php echo($userProfile->id); ?>'> -->
+				<label>Логин</label>
+				<input type="text" id="userLogin" value='<?php echo($userProfile->login); ?>'>
+				<!--<label>Пароль</label>
+				<input type="text" id="userPassword" value='<?php echo($userProfile->password); ?>'> -->
+				<label>Email</label>
+				<input type="text" id="userEmail" value='<?php echo($userProfile->email); ?>'>
+				<label>Имя</label>
+				<input type="text" id="userFirstName" value='<?php echo($userProfile->firstName); ?>'>
+				<label>Фамилия</label>
+				<input type="text" id="userSecondName" value='<?php echo($userProfile->secondName); ?>'>
+				<label>Телефон</label>
+				<input type="text" id="userPhone" value='<?php echo($userProfile->phone); ?>'>
+				<label>Уровень доступа</label>
+				<?php
+					SetRightsLevel($user, $userProfile, $rights);
+				?>
+				<button class="btn buttonMenu" type="button" id="editUser">Сохранить изменения</button>
+				<button class="btn buttonMenu" type="button" id="deleteUser">Удалить пользователя</button>
 	</div>
 </div>
-
 

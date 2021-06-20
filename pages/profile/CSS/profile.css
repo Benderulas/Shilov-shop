@@ -1,13 +1,30 @@
 .titles{
 	display: inline-block;
 	width: 40%;
-	text-align: right;
+}
+.userProfile{
+	background-color: white;
+	min-height: 50.7%;
+}
+.userProfile-wrapper{
+	margin-left:25%;
+	margin-right:25%;
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	justify-content:stretch;
+	grid-row-gap: 10px;
+	padding-top: 70px;
+}
+.userProfile-wrapper input{
+	max-width: 350px;
+}
+.userProfile-wrapper select{
+	max-width: 350px;
 }
 
 .data{
 	display: inline-block;
 	width: 40%;
-	text-align: left;
 }
 
 .titles div{
@@ -22,13 +39,24 @@
 }
 
 .buttonMenu {
-	display: inline-block;
-	text-align: left;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 50px;
+	background: white;
+	max-width: 200px;
+	color: #740505;
+	border-color: #740505;
+}
+.buttonMenu:hover {
+	border-color: #740505;
+	background: #740505;
+	color: white;
 }
 
 .buttonMenu button{
 	display: block;
-	margin-bottom: 10px;
 }
 
 .userError{
@@ -42,3 +70,4 @@
 	font-family: 'Balsamiq Sans', cursive;
 	color: #740505;
 }
+

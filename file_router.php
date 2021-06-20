@@ -11,7 +11,12 @@
 
 	$fileExtention = end(explode('.', $file));
 
-
+	if ($fileExtention == 'jpeg') 
+	{
+		header("Content-Type: image/jpeg");
+		echo file_get_contents($path);
+		die();
+	}
 	if ($fileExtention == 'jpg') 
 	{
 		header("Content-Type: image/jpg");

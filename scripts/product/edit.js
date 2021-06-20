@@ -2,7 +2,7 @@ import { POST_JSON_request } from "/JavaScript/requests.js";
 
 async function GetSelectsFromDb()
 {
-	let path = "POST/products/GetSearchFilters.php";
+	let path = "POST/product/GetMultiCategories.php";
 
 	let response = await POST_JSON_request(path); 
 
@@ -392,13 +392,13 @@ async function Initialize()
 
 
 	let button = document.getElementById("editProduct");
-	button.onclick = EditProduct;
+	if (button) button.onclick = EditProduct;
 
 	button = document.getElementById("addColorAndSize");
-	button.onclick = AddColorAndSizeField;
+	if (button) button.onclick = AddColorAndSizeField;
 
 	button = document.getElementById("deleteColorAndSize");
-	button.onclick = DeleteColorAndSizeField;
+	if (button) button.onclick = DeleteColorAndSizeField;
 
 	InitializeProduct(productForView);
 
