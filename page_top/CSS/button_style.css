@@ -42,7 +42,9 @@
 	padding-left: 15px;
 	padding-right: 15px;
 }
-
+.sexButton:focus{
+	outline: none;
+}
 .sexButtonActive{
 	transition: 0.5s;
 	font-family: 'Balsamiq Sans', cursive;
@@ -55,6 +57,9 @@
 	padding-bottom: 15px;
 	padding-left: 15px;
 	padding-right: 15px;
+}
+.sexButtonActive:focus{
+	outline: none;
 }
 
 .btn-bascket{
@@ -71,6 +76,10 @@
 	background: none;
 	border:0px;
 	cursor: pointer;
+	padding: 15px;
+}
+.btn-exit-account:focus{
+	outline: none;
 }
 .btn-exit-account>img{
 	width: 30px;
