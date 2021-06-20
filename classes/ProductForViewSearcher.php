@@ -41,7 +41,7 @@ class ProductForViewSearcher extends Searcher
 
         if (isset($this->colorID)) $request = $request . "AND products_to_color_and_size.colorID = $this->colorID ";
         if (isset($this->sizeID)) $request = $request . "AND products_to_color_and_size.sizeID = $this->sizeID";
-		
+
 		$res = $_mysqli->query($request);
 
 		if ($res) return $res->fetch_assoc()['COUNT(DISTINCT products_to_color_and_size.productID)'];
@@ -60,8 +60,8 @@ class ProductForViewSearcher extends Searcher
 
         if (isset($this->title)) $request = $request . "AND products.title LIKE '%$this->title%' ";
 
-        if (isset($this->priceMax)) $request = $request . "AND products.price < $this->priceMax ";
-        if (isset($this->priceMin)) $request = $request . "AND products.price > $this->priceMin ";
+        if (isset($this->priceMax)) $request = $request . "AND products.price <= $this->priceMax ";
+        if (isset($this->priceMin)) $request = $request . "AND products.price >= $this->priceMin ";
 
         if (isset($this->categoryID)) $request = $request . "AND products.categoryID = $this->categoryID ";
         if (isset($this->companyID)) $request = $request . "AND products.companyID = $this->companyID ";
@@ -76,10 +76,10 @@ class ProductForViewSearcher extends Searcher
         	. "ORDER BY products_to_color_and_size.productID "
             . "LIMIT $this->productsOnPage "
             . "OFFSET " . ($this->page - 1) * $this->productsOnPage;
-		
+
 
 		$res = $_mysqli->query($request);
-		
+
 		if ($res) $productsCount = $res->num_rows;
 		else $productsCount = 0;
 
@@ -91,17 +91,17 @@ class ProductForViewSearcher extends Searcher
 			for ($i = 0; $i < $productsCount; $i++)
 			{
 				$res->data_seek($i);
-				
+
 				$ProductsForView['status'] = true;
     			$ProductsForView[$i] = new ProductForView();
     			$ProductsForView[$i]->SetById($res->fetch_assoc()['productID'], $_mysqli);
 			}
 		}
-		else 
+		else
 		{
 			$ProductsForView['status'] = false;
 			$ProductsForView['message'] = $_mysqli->error;
-		}		
+		}
 		return $ProductsForView;
 	}
 

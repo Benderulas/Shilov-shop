@@ -12,6 +12,7 @@
 .product-description{
 	display: flex;
 	flex-direction: column;
+
 }
 .product-wrapper img{
 	border:1px solid black;
@@ -21,16 +22,20 @@
 	display: block;
 }
 .product-description input{
-	max-width: 50px;
+	width: 40px;
+	margin-left: 25px;
+	border-radius: 3px;
+	border:1px solid #D3D3D3;
+	height: 40px;
+	text-align: center;
 }
 .btn-product{
 	padding-top: 5px;
 	padding-bottom: 5px;
 	padding-left: 10px;
 	padding-right: 10px;
-	margin-top: 50px;
 	background: white;
-	max-width: 200px;
+	min-width: 200px;
 	color: #740505;
 	border-color: #740505;
 }
@@ -38,4 +43,32 @@
 	border-color: #740505;
 	background: #740505;
 	color: white;
+}
+.btn-product-all{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.product-description label{
+	margin-top: 0.5em;
+}
+.product-description label:nth-child(1){
+	margin-top: 0;
+}
+.product-description select{
+	height: 40px;
+}
+.product-select-color{
+	margin-left: 40px;
+	width: 140px;
+}
+.product-select-size{
+	margin-left: 23px;
+	width: 60px;
+}
+.product-label-price{
+	margin-left: 36px;
+}
+.product-label-discount{
+	margin-left: 25px;
 }

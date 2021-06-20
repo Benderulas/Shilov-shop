@@ -18,6 +18,7 @@ function SetColors(_colors, _selectedColorId = 0)
 
 	let option = document.createElement("option");
 	option.value = "null";
+	option.hidden = "hidden";
 	if (_selectedColorId == 0) option.selected = "selected";
 	selectModule.add(option);
 
@@ -35,11 +36,12 @@ function SetColors(_colors, _selectedColorId = 0)
 
 function SetSizes(_sizes, _selectedSizeId = 0)
 {
-	
+
 	let selectModule = document.getElementById("productSize");
 
 	let option = document.createElement("option");
 	option.value = "null";
+	option.hidden = "hidden";
 	if (_selectedSizeId == 0) option.selected = "selected";
 	selectModule.add(option);
 
@@ -93,7 +95,7 @@ async function InitializeColorsAndSizes()
 	let filters = {
 		productID: Number(document.getElementById("productID").value)
 	}
-	let response = await POST_JSON_request(path, filters); 
+	let response = await POST_JSON_request(path, filters);
 
 	document.getElementById("productColor").onchange = UpdateSizes;
 	document.getElementById("productSize").onchange = UpdateColors;
@@ -106,12 +108,12 @@ async function InitializeColorsAndSizes()
 
 function IsProductInBasketCorrect(_productInBasket)
 {
-	if (isNaN(_productInBasket.productID)) 
+	if (isNaN(_productInBasket.productID))
 	{
 		alert ("Id is corrupted");
 		return false
 	}
-	if (isNaN(_productInBasket.colorID)) 
+	if (isNaN(_productInBasket.colorID))
 	{
 		alert ("Выберите цвет");
 		return false
@@ -121,7 +123,7 @@ function IsProductInBasketCorrect(_productInBasket)
 		alert ("Выберите размер");
 		return false
 	}
-	if (isNaN(_productInBasket.amount)) 
+	if (isNaN(_productInBasket.amount))
 	{
 		alert ("Укажите количество");
 		return false
@@ -137,7 +139,7 @@ async function AddInBasket()
 		productID: Number(document.getElementById("productID").value),
 		colorID: Number(document.getElementById("productColor").value),
 		sizeID: Number(document.getElementById("productSize").value),
-		amount: Number(document.getElementById("productAmount").value)		
+		amount: Number(document.getElementById("productAmount").value)
 	}
 
 	if (IsProductInBasketCorrect(productInBasket))
@@ -152,7 +154,7 @@ async function AddInBasket()
 function Delete()
 {
 	console.log("delete");
-}	
+}
 
 async function Initialize()
 {
@@ -162,7 +164,7 @@ async function Initialize()
 	button = document.getElementById("delete");
 	if (button) button.onclick = Delete;
 
-	InitializeColorsAndSizes();	
+	InitializeColorsAndSizes();
 }
 
 

@@ -7,17 +7,19 @@
             <img src="<?php echo($productForView->product->img); ?>">
         </div>
         <div class="product-description">
-            <label>ID <input readonly="readonly" type="text" id="productID" value=" <?php echo($productForView->product->id); ?> "></label>
+            <label hidden="hidden">ID <input readonly="readonly" type="text" id="productID" value=" <?php echo($productForView->product->id); ?> "></label>
             <label id="producTtitle">Название: <?php echo($productForView->product->title); ?></label>
             <label id="productCategory">Категория: <?php echo($productForView->product->category->title); ?></label>
             <label id="productCompany">Компания: <?php echo($productForView->product->company->title); ?></label>
-            <label id="productPrice">Цена: <?php echo($productForView->product->price); ?></label>
-            <label id="productDiscount">Скидка: <?php echo($productForView->product->discount); ?></label>
-            <label>Цвет <select id="productColor"></select></label>
-            <label>Размер <select id="productSize"></select></label>
-            <label>Кол-во: <input id="productAmount" type="text" value="1"></label>
+                <span>Цена:
+                <label class="product-label-price" id="productPrice"><?php echo($productForView->product->price); ?> р</label></span>
+                <span>Скидка:
+                <label class="product-label-discount" id="productDiscount"><?php echo($productForView->product->discount); ?> %</label></span>
+            <label>Цвет: <select class='custom-select product-select-color' id="productColor"></select></label>
+            <label>Размер: <select class='custom-select product-select-size' id="productSize"></select></label>
+            <label>Кол-во: <input class="" id="productAmount" type="text" value="1"></label>
         </div>
-        <div>
+        <div class="btn-product-all">
             <?php
                 if ($user && $user->rights->level == 10) echo ("
                     <a class='btn btn-product' href='/product/edit?id=" . $productForView->product->id . "' id='edit'>Изменить</a><br>
