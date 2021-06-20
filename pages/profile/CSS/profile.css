@@ -4,7 +4,7 @@
 }
 .userProfile{
 	background-color: white;
-	min-height: 50.5%;
+	min-height: 50.7%;
 }
 .userProfile-wrapper{
 	margin-left:25%;
@@ -13,6 +13,7 @@
 	grid-template-columns: 1fr 3fr;
 	justify-content:stretch;
 	grid-row-gap: 10px;
+	padding-top: 70px;
 }
 .userProfile-wrapper input{
 	max-width: 350px;

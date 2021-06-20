@@ -1,37 +1,30 @@
 <?php require("product.php"); ?>
 <link rel="stylesheet" type="text/css" href="pages/product/CSS/product.css">
-
-
-<div class="row">
-    <div class="col-2 text-center">
-        <?php 
-            if ($user && $user->rights->level == 10) echo ("
-            <a href='/product/edit?id=" . $productForView->product->id . "' id='edit'>Изменить</a><br>
-            <button id='delete'>Удалить</button><br>            
-            ")
-        ?>
-        <button id='addInBasket'>Добавить в корзину</button>
-        
-    </div>
-    <div class="col-8 text-left">
-
-        <div class="product" id="product">
+<script type="module" src="/scripts/product/product.js"></script>
+<div class="product">
+    <div class="product-wrapper">
+        <div id="product">
             <img src="<?php echo($productForView->product->img); ?>">
-            <label>ID <input readonly="readonly" type="text" id="productID" value=" <?php echo($productForView->product->id); ?> "></label>
-            <div id="producTtitle"><?php echo($productForView->product->title); ?></div>
-            <div id="productCategory"><?php echo($productForView->product->category->title); ?></div>
-            <div id="productCompany"><?php echo($productForView->product->company->title); ?></div>
-            <div id="productPrice"><?php echo($productForView->product->price); ?></div>
-            <div id="productDiscount"><?php echo($productForView->product->discount); ?></div>
-            <div id="productColorAndSize">
-                <select id="productColor"></select>
-                <select id="productSize"></select>
-            </div>
-            <input id="productAmount" type="text" value="1">
         </div>
-    
+        <div class="product-description">
+            <label>ID <input readonly="readonly" type="text" id="productID" value=" <?php echo($productForView->product->id); ?> "></label>
+            <label id="producTtitle">Название: <?php echo($productForView->product->title); ?></label>
+            <label id="productCategory">Категория: <?php echo($productForView->product->category->title); ?></label>
+            <label id="productCompany">Компания: <?php echo($productForView->product->company->title); ?></label>
+            <label id="productPrice">Цена: <?php echo($productForView->product->price); ?></label>
+            <label id="productDiscount">Скидка: <?php echo($productForView->product->discount); ?></label>
+            <label>Цвет <select id="productColor"></select></label>
+            <label>Размер <select id="productSize"></select></label>
+            <label>Кол-во: <input id="productAmount" type="text" value="1"></label>
+        </div>
+        <div>
+            <?php
+                if ($user && $user->rights->level == 10) echo ("
+                    <a class='btn btn-product' href='/product/edit?id=" . $productForView->product->id . "' id='edit'>Изменить</a><br>
+                    <button class='btn btn-product' id='delete'>Удалить</button><br>
+                ")
+            ?>
+            <button class="btn btn-product" id='addInBasket'>Добавить в корзину</button>
+        </div>
     </div>
-    <div class="col-2"></div>
-</div> 
-
-<script type="module" src="/scripts/product/product.js"></script>   
+</div>
