@@ -6,14 +6,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="UTF-8">
 
-    <script src="scripts/jquery-3.5.1.js"></script>
+    <script src="/scripts/jquery-3.5.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="scripts/top/top.js"></script>
+    <script type="text/javascript" src="/scripts/top/top.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="page_top/CSS/my_style.css">
-    <link rel="stylesheet" type="text/css" href="page_top/CSS/button_style.css">
-    <link rel="stylesheet" type="text/css" href="page_top/CSS/catalog.css">
-    <link rel="stylesheet" type="text/css" href="page_top/CSS/dropDownMenu.css">
+    <link rel="stylesheet" type="text/css" href="/page_top/CSS/my_style.css">
+    <link rel="stylesheet" type="text/css" href="/page_top/CSS/button_style.css">
+    <link rel="stylesheet" type="text/css" href="/page_top/CSS/dropDownMenu.css">
 
     <meta charset="UTF-8">
 
@@ -30,7 +29,7 @@
             <a href="/"><img src="/page_top/images/logo_1.png" alt="Соблазн" class="log-img"></a>
             <div>
                 <a href="/basket" class="btn-buscket"><img src="/page_top/images/Basket.png"></a> <!-- КОРЗИНА -->
-                <?php
+                <?php 
                     if ($user) require("profile_link.html");
                     else require("authorization_menu.html");
                 ?>
@@ -44,7 +43,7 @@
             <?php
                 foreach($categories['male'] as $category)
                 {
-                    echo ("<a href='products?sexID=1&page=1&categoryID=" . $category->id . " '>" . $category->title . "</a>");
+                    echo ("<a href='/products?sexID=1&page=1&categoryID=" . $category->id . " '>" . $category->title . "</a>");
                 }
             ?>
 
@@ -54,7 +53,7 @@
             <?php
                 foreach($categories['female'] as $category)
                 {
-                    echo ("<a href='products?sexID=2&page=1&categoryID=" . $category->id . " '>" . $category->title . "</a>");
+                    echo ("<a href='/products?sexID=2&page=1&categoryID=" . $category->id . " '>" . $category->title . "</a>");
                 }
             ?>
         </div>

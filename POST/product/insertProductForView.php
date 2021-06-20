@@ -6,6 +6,8 @@
 	$json = file_get_contents('php://input');
     $data = json_decode($json);
 
+    
+
     if ($user && $user->rights->level == 10)
     {
     	$newProductForView = new ProductForView();

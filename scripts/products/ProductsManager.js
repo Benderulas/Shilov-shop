@@ -33,8 +33,6 @@ export class ProductsManager
 
 		let product = $('div.product').last();
 
-		console.log(product);
-
 
 		
 
@@ -43,7 +41,7 @@ export class ProductsManager
 		}).appendTo(product);
 
 		$("<img></img>", {
-			src: "",
+			src: _productForView.product.img,
 			alt: ""
 		}).appendTo(product.find('div.product-image'));
 
