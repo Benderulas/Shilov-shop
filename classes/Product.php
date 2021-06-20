@@ -104,8 +104,6 @@ class Product extends Object
 				. ")";
 
 		$res = $_mysqli->query($request);
-		var_dump($this);
-		var_dump($request);
 
 		$this->id = $_mysqli->insert_id;
 		return $this->id;

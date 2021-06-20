@@ -145,7 +145,7 @@ async function InsertProduct()
 			};
 		product.colorsAndSizes.push(colorAndSize);
 	}
-
+	
 	if (isProductReady(product)) 
 	{
 		let path = "POST/product/insertProductForView.php";

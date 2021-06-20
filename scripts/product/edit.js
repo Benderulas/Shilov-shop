@@ -2,7 +2,7 @@ import { POST_JSON_request } from "/JavaScript/requests.js";
 
 async function GetSelectsFromDb()
 {
-	let path = "POST/products/GetSearchFilters.php";
+	let path = "POST/product/GetMultiCategories.php";
 
 	let response = await POST_JSON_request(path); 
 
