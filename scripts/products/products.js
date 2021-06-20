@@ -70,13 +70,17 @@ async function InitializeAll()
   let pagesButtons = document.getElementsByName("pageButton")
   for (let i = 0; i < 7; i++)
   {
-    pagesButtons[i].onclick = OpenPage;
+    if (pagesButtons[i]) pagesButtons[i].onclick = OpenPage;
   }
 
 
 
 
-  document.getElementById("addNewProduct").onclick = AddNewProduct;
+  let button = document.getElementById("addNewProduct");
+  if (button) button.onclick = AddNewProduct;
+
+  button = document.getElementById("searchButton");
+  if (button) button.onclick = Search;
 }
 
 

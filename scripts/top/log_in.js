@@ -32,7 +32,7 @@ function test()
 {
   let button = document.getElementsByName("SendLogInForm")[0];
 
-  button.onclick = SendLogInForm;
+  if (button) button.onclick = SendLogInForm;
 }
 
 

@@ -305,7 +305,7 @@ function Initialize()
 	if (button) button.onclick = InsertProduct;
 
 	button = document.getElementById("addColorAndSize");
-	if (button)button.onclick = AddColorAndSizeField;
+	if (button) button.onclick = AddColorAndSizeField;
 
 	InitializeSelects();
 
