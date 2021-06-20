@@ -1,47 +1,48 @@
+<link rel="stylesheet" type="text/css" href="/pages/product/insert/CSS/insert.css">
 
 
-
-<div class="row">
-    <div class="col-2 text-center">
-        <?php 
-            if ($user && $user->rights->level == 10) echo ("
-            <br>
-            <button id='addProduct'>Добавить</button>       
-            ")
-        ?>
-        
-    </div>
-    <div class="col-8 text-left">
-
-        <div id="product">
-            <input id="productImage" type="file" accept="image/*"><br>
-            <label>Название: <input type="text" id="productTitle"></label><br>
-            <label>Цена: <input type="text" id="productPrice"></label><br>
-            <label>Скидка: <input type="text" id="productDiscount"></label><br>
-
-            <label>Категория: 
-            	<select id='productCategory'>
-    			</select>
-    		</label><br>
-
-    		<label>Компания: 
-            	<select id='productCompany'>
-    			</select>
-    		</label><br>
-
-    		<label>Пол: 
-            	<select id='productSex'>
-    			</select>
-    		</label><br>
-
-    		<div class="colors-and-sizes" id='productColorsAndSizes'>
-    			<label>Цвет</label><label>Размер</label><label>Количество</label><br>
+<div action="" class="add-form">
+            <div class="wrapper">
+                <div class="add-form__main">
+                    <div class="add-form__img">
+                        <label for="productImage">Добавить фото</label><input id='productImage' type="file"></div>
+                    <div class="add-form__information">
+                        <div class="information__inputs">
+                            <div class="information__input">
+                                <label for="productTitle">Название</label><input type="text" id="productTitle"></div>
+                            <div class="information__input middle">
+                                <label for="productPrice">Цена</label><input type="text" id="productPrice"></div>
+                            <div class="information__input">
+                                <label for="productDiscount">Скидка</label><input type="text" id="productDiscount"></div>
+                        </div>
+                        <div class="information__selects">
+                            <div class="information__select">
+                                <select name="productCategory" id="productCategory">
+                                    <option selected="selected" value="null" hidden="hidden" disabled="disabled">Категория</option>
+                                </select>
+                            </div>
+                            <div class="information__select">
+                                <select name="productCompany" id="productCompany">
+                                    <option selected="selected" value="null" hidden="hidden" disabled="disabled">Компания</option>
+                                </select>
+                            </div>
+                            <div class="information__select">
+                                <select name="productSex" id="productSex">
+                                    <option selected="selected" value="null" hidden="hidden" disabled="disabled">Пол</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-form__buttons">
+                        <button id="addProduct">Добавить товар</button>
+                        <button id="addColorAndSize">Добавить цвет\размер</button>
+                    </div>
+                </div>
+                <div class="color-size" id="ColorsAndSizes">
+                    
+                </div>
             </div>
-            <button id="addColorAndSize">Добавить Цвет\размер</button>
-        </div>
-    
-    </div>
-    <div class="col-2"></div>
-</div> 
+
+        </div> 
 
 <script type="module" src="http://shilov-shop/scripts/product/insert.js"></script>   
