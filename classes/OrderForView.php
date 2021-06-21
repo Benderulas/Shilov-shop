@@ -34,7 +34,7 @@ class OrderForView
 
 		for ($i = 0; $i < $_POST['productsInOrder_Amount']; $i++)
 		{
-			$this->productsInOrder[$] = new ProductInOrder();
+			$this->productsInOrder[$i] = new ProductInOrder();
 			$productsInOrder[$i]->SetByJSON($_orderForView->productInOrder[$i]);
 		}
 
@@ -63,6 +63,7 @@ class OrderForView
 			$productInOrder->order = $this->order;
 			$productInOrder->Insert($_mysqli);
 		}
+		return(true);
 	}
 
 

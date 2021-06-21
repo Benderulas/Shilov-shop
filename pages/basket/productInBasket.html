@@ -14,13 +14,31 @@
 ?>
 
 
-<div name="productInBasket">
+<div class="product-in-basket" name="productInBasket">
 
-	<img src="<?php echo($product->img) ?>">
-	<label name="title"> <?php echo($product->title) ?> </label>
-	<label name="color"> <?php echo($color->title) ?> </label>
-	<label name="size"> <?php echo($size->title) ?> </label>
-	<label name="amount"> <input type="text" value="<?php echo($productInBasket->amount) ?>"></label>
 
-	<button name="removeProductFromBasket" value="<?php echo($i); ?>">Убрать</button>            
+	<div class="product-image"> 
+		<img src="<?php echo($product->img); ?>"> 
+	</div>
+    <div class="product-description"> 
+
+		<label class="price" name="productPrice"><?php echo($product->price); ?> р.</label>
+		<label class="title" name="productTitle"><?php echo($product->title); ?></label>
+		<div>
+			<label>Цвет</label>
+			<label name="color"> <?php echo($color->title); ?></label>
+		</div>
+		<div>
+			<label>Размер</label>
+			<label name="size"><?php echo($size->title); ?></label>
+		</div>
+		<div>
+			<label>Кол-во</label>
+			<input name="amount" type="text" value="<?php echo($productInBasket->amount); ?>">
+		</div>
+
+    </div>
+
+    <button class="delete-button" name="removeProductFromBasket" value="<?php echo($i); ?>"><img src="https://fotoseif.ru/images/2021/06/fsftgb2101wswa7iryv5.png"></button>
+        
 </div>

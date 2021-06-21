@@ -15,7 +15,7 @@ class ProductInOrder extends Object
 		$amount;
 
 
-	fucntion __construct()
+	function __construct()
 	{
 		$this->order = new Order;
 		$this->productToColorAndSize = new ProductToColorAndSize();
@@ -95,7 +95,7 @@ class ProductInOrder extends Object
 				. "VALUES (" . $this->order->id . ", " . $this->productToColorAndSize->id . ", $this->amount)";
 
 		$res = $_mysqli->query($request);
-		$this->id = $mysqli->insert_id;
+		$this->id = $_mysqli->insert_id;
 
 		return $this->id;
 	}

@@ -146,6 +146,26 @@ class ProductToColorAndSize extends Object
 			return false;
 		}
 	}
+
+	static function GetIdByIds($_ids, $_mysqli)
+	{
+		$request = "SELECT id FROM " . static::tableName . " " 
+			. "WHERE productID = " . $_ids->productID . " "
+			. "AND colorID = " . $_ids->colorID . " "
+			. "AND sizeID = " . $_ids->sizeID;
+
+		if ($res = $_mysqli->query($request))
+		{
+			$res = $res->fetch_assoc();
+			return $res['id'];
+		}
+		else 
+		{
+			echo (static::class . " GetIdByIds request error" . $_mysqli->error);
+			var_dump($request);
+			return false;
+		}
+	}
 }
 
 

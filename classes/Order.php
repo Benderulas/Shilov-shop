@@ -25,6 +25,7 @@ class Order extends Object
 	{
 		$this->user = new User();
 		$this->status = new OrderStatus();
+		$this->status->id = 1;
 		$this->deliveryCompany = new DeliveryCompany();
 	}
 
@@ -133,7 +134,7 @@ class Order extends Object
 				)";
 
 		$res = $_mysqli->query($request);
-		$this->id = $mysqli->insert_id;
+		$this->id = $_mysqli->insert_id;
 
 		return $this->id;
 	}

@@ -1,0 +1,46 @@
+.basket{
+	background-color: white;
+}
+.basket-wrapper{
+	margin: 0 25%;
+}
+.product-in-basket{
+	padding: 5px;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+	margin-bottom: 5px;
+}
+
+.product-image img{
+	display: inline-block;
+	width: 91px;
+	height: 150px;
+}
+.product-in-basket label{
+	display: block;
+}
+.product-in-basket div{
+	display: inline-block;
+	margin-right: 5px;
+}
+.product-image
+{
+	display: inline-block;
+}
+.product-description{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.delete-button{
+	display: inline-block;
+	vertical-align: top;
+	background-color: white;
+	border-style: none;
+}
+
+.delete-button img{
+	width: 40px;
+    height: auto;
+}
