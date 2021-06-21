@@ -1,11 +1,11 @@
 <div class="userProfile">
 	<div class="userProfile-wrapper">
-				<!-- <label>ID</label>
-				<input type="text" id="userID" value='<?php echo($userProfile->id); ?>'> -->
+				<label hidden='hidden'>ID</label>
+				<input hidden='hidden' type="text" id="userID" value='<?php echo($userProfile->id); ?>'>
 				<label>Логин</label>
 				<input type="text" id="userLogin" value='<?php echo($userProfile->login); ?>'>
-				<!--<label>Пароль</label>
-				<input type="text" id="userPassword" value='<?php echo($userProfile->password); ?>'> -->
+				<label hidden="hidden">Пароль</label>
+				<input hidden="hidden" type="text" id="userPassword" value='<?php echo($userProfile->password); ?>'>
 				<label>Email</label>
 				<input type="text" id="userEmail" value='<?php echo($userProfile->email); ?>'>
 				<label>Имя</label>
@@ -14,7 +14,7 @@
 				<input type="text" id="userSecondName" value='<?php echo($userProfile->secondName); ?>'>
 				<label>Телефон</label>
 				<input type="text" id="userPhone" value='<?php echo($userProfile->phone); ?>'>
-				<label>Уровень доступа</label>
+				<label <?php if ($user->rights->level !=10) echo("hidden='hidden'");?> > Уровень доступа</label>
 				<?php
 					SetRightsLevel($user, $userProfile, $rights);
 				?>

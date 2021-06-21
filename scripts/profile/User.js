@@ -8,7 +8,7 @@ export class User
 		let user = {
 			id: document.getElementById("userID").value,
 			login: document.getElementById("userLogin").value,
-			password: document.getElementById("userPassword").value,
+			//password: document.getElementById("userPassword").value,
 			email: document.getElementById("userEmail").value,
 			firstName: document.getElementById("userFirstName").value,
 			secondName: document.getElementById("userSecondName").value,

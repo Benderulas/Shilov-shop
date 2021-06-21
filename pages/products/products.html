@@ -5,7 +5,7 @@
 <div class="container-catalog">
     <div class="container">
         <div class="filter">
-            <h3><?php require("products.php"); ?></h3>
+            <h4><?php require("products.php"); ?></h4>
             <select class="custom-select" id="size">
                <option selected="selected" value='none'>Размер</option>
             </select>
@@ -15,7 +15,7 @@
             <select class="custom-select" id="color">
                <option selected="selected" value='none'>Цвет</option>
             </select>
-            <?php 
+            <?php
                 if ($user && $user->rights->level == 10) echo("<button class='btn btn-outline-danger btn-catalog' type='button' id='addNewProduct'> Добавить товар </button>");
             ?>
             <input class="max-spice" type="text" placeholder="Максимальная цена" id="priceMax">

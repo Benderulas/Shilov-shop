@@ -34,7 +34,7 @@ export class ProductsManager
 		let product = $('div.product').last();
 
 
-		
+
 
 		$('<div></div>', {
 			class: 'product-image'
@@ -59,7 +59,7 @@ export class ProductsManager
 
 		$('<p></p>', {
 			class: 'product-price',
-			text: _productForView.product.price
+			text: _productForView.product.price + " руб."
 		}).appendTo(product);
 	}
 
@@ -67,7 +67,7 @@ export class ProductsManager
 	{
 		let path = "POST/products/GetProductsWithFilters.php";
 
-		return POST_JSON_request(path, _filters); 
+		return POST_JSON_request(path, _filters);
 	}
 
 	static DeleteProducts(_position)
