@@ -142,7 +142,7 @@ class Order extends Object
 	public function Edit($_mysqli)
 	{
 
-		$request = "UPDATE products SET "
+		$request = "UPDATE orders SET "
 				 . "userID = " . $this->user->id . ", "
 				 . "statusID = " . $this->status->id . ", "
 				 . "deliveryCompanyID = " . $this->deliveryCompany->id . ", "
@@ -157,6 +157,36 @@ class Order extends Object
 		$res = $_mysqli->query($request);
 
 		return ($res);
+	}
+
+	static function GetAllByUserId($_userID, $_mysqli)
+	{
+		$request = "SELECT * FROM orders WHERE userID = $_userID ORDER BY id";
+
+		$res = $_mysqli->query($request);
+
+		if ($res) 
+		{
+			for($i = 0; $i < $res->num_rows; $i++)
+			{
+				$res->data_seek($i);
+				$order = $res->fetch_assoc();
+
+				$order['user'] = new User();
+				$order['status'] = new OrderStatus();
+				$order['deliveryCompany'] = new DeliveryCompany();
+
+				$order['user']->SetById($order['userID'], $_mysqli);
+				$order['status']->SetById($order['statusID'], $_mysqli);
+				$order['deliveryCompany']->SetById($order['deliveryCompanyID'], $_mysqli);
+
+
+				$orders[$i] = new Order;
+				$orders[$i]->Set($order);
+			}
+			return $orders;
+		}
+		else return false;
 	}
 }
 

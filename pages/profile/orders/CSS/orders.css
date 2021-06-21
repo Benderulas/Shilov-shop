@@ -1,0 +1,35 @@
+.orders{
+	background-color: white;
+}
+
+
+.order:active,
+.order:hover,
+.order{
+	display: block;
+	margin-left: 30%;
+	text-decoration: none;
+	color: black;
+}
+.order>div{
+	display: inline-block;
+}
+.order label{
+	display: block;
+}
+
+.titles{
+	text-align: right;
+}
+
+.orderData{
+	text-align: left;
+	margin-left: 10px;
+}
+
+.orderStatus{
+	vertical-align: top;
+	margin-left: 50px;
+	margin-top: 40px;
+
+}

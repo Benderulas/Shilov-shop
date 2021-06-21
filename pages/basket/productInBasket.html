@@ -24,17 +24,17 @@
 
 		<label class="price" name="productPrice"><?php echo($product->price); ?> р.</label>
 		<label class="title" name="productTitle"><?php echo($product->title); ?></label>
-		<div>
+		<div class="color">
 			<label>Цвет</label>
-			<label name="color"> <?php echo($color->title); ?></label>
+			<label name="color-block"> <?php echo($color->title); ?></label>
 		</div>
 		<div>
-			<label>Размер</label>
+			<label class="size-block">Размер</label>
 			<label name="size"><?php echo($size->title); ?></label>
 		</div>
-		<div>
+		<div class="amount-block">
 			<label>Кол-во</label>
-			<input name="amount" type="text" value="<?php echo($productInBasket->amount); ?>">
+			<input class="amount" name="amount" type="text" value="<?php echo($productInBasket->amount); ?>">
 		</div>
 
     </div>

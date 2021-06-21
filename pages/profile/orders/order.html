@@ -1,0 +1,23 @@
+<a href="/order?orderID=<?php echo($order->id); ?>" class="order">
+
+	<div class="titles">
+		<label>Номер Заказа:</label>
+		<label>Имя получателя:</label>
+		<label>Телефон:</label>
+		<label>Способ Доставки:</label>
+	</div>
+
+	<div class="orderData">
+		<label><?php echo($order->id); ?></label>
+		<label><?php echo($order->firstName . " " . $order->secondName); ?></label>
+		<label><?php echo($order->phoneNumber); ?></label>
+		<label><?php echo($order->deliveryCompany->title); ?></label>
+		
+	</div>
+	<div class="orderStatus">
+		<span class="status"><?php echo($order->status->title); ?></span>
+	</div>
+
+		
+
+</a>

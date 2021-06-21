@@ -1,0 +1,41 @@
+<?php require("order.php"); ?>
+<link rel="stylesheet" type="text/css" href="/pages/order/CSS/order.css">
+
+
+
+<div class="order">
+
+	<div class="order-information">
+		<div class="order-status"> 
+			<span><?php echo($orderForView->order->status->title); ?></span>
+		</div>
+
+		<div class="main-info">
+			<div class="info-start">
+				<span>Номер Заказа: <?php echo($orderForView->order->id); ?></span>
+				<span>Имя получателя: <?php echo($orderForView->order->firstName); ?></span>
+				<span>Фамилия получателя: <?php echo($orderForView->order->secondName); ?></span>
+				<span>Способ доставки: <?php echo($orderForView->order->deliveryCompany->title); ?></span>
+
+			</div>
+			<div class="address">
+				<span>Страна: <?php echo($orderForView->order->country); ?></span>
+				<span>Город: <?php echo($orderForView->order->city); ?></span>
+				<span>Адрес: <?php echo($orderForView->order->address); ?></span>
+				<span>Почтовый индекс: <?php echo($orderForView->order->postIndex); ?></span>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div class="products">
+		<?php
+			foreach($orderForView->productsInOrder as $productInOrder)
+			{
+				require("productInOrder.html");
+			}
+		?>
+	</div>
+
+</div>

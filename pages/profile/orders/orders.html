@@ -1,0 +1,14 @@
+<?php require("orders.php");?>
+<link rel="stylesheet" type="text/css" href="/pages/profile/orders/CSS/orders.css">
+
+
+<div class="orders">
+
+	<?php
+		foreach($orders as $order)
+		{
+			require("order.html");
+		}
+	?>
+
+</div>

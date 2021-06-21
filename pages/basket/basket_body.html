@@ -1,0 +1,43 @@
+<div class="basket">
+    <div class="basket-wrapper">
+
+        <?php
+            if (isset($_SESSION['basket']))
+            {
+                for ($i = 0; $i < Count($_SESSION['basket']); $i++) 
+                {
+                    $productInBasket = $_SESSION['basket'][$i];
+                    require("productInBasket.html");
+                }
+            }
+            
+        ?>
+
+        <button id="fillOrderInformation">Оформить заказ</button>
+                
+    </div>
+</div>
+<div id="OrderForm" class="modalDialog">
+    <div class="login">
+        <label>Имя <input id="firstNameForOrder" type="text"></label>
+        <label>Фамилия <input id="secondNameForOrder" type="text"></label>
+        <label>Телефон <input id="phoneForOrder" type="text"></label>
+        <label>Способ доставки
+            <select id="delivaryCompanyForOrder">
+                <option selected="selected" value="1">Самовывоз</option>
+                <option value="2">Почта России</option>
+                <option value="3">DHL</option>
+            </select>
+        </label>
+        <div hidden="hidden" id="postInformarionForOrder">
+            <label>Страна <input id="countryForOrder" type="text"></label>
+            <label>Город <input id="cityForOrder" type="text"></label>
+            <label>Адрес <input id="addressForOrder" type="text"></label>
+            <label>Индекс <input id="indexForOrder" type="text"></label>
+        </div>
+        
+        <button id="createOrder">Оформить заказ</button>
+        
+        <a href="#" title="Закрыть" class="close"><img src="https://fotoseif.ru/images/2021/06/fsftgb2101wswa7iryv5.png"></a>
+    </div>
+</div>

@@ -32,12 +32,22 @@
 	display: inline-block;
 	vertical-align: top;
 }
+.color{
+	min-width: 100px;
+	display: flex;
+}
+.amount{
+	max-width: 50px;
+}
+
+
 
 .delete-button{
 	display: inline-block;
 	vertical-align: top;
 	background-color: white;
 	border-style: none;
+	float: right;
 }
 
 .delete-button img{

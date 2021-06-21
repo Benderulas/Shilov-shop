@@ -1,0 +1,26 @@
+<div class="product-in-order">
+
+
+	<div class="product-image"> 
+		<img src="<?php echo($productInOrder->productToColorAndSize->product->img); ?>"> 
+	</div>
+    <div class="product-description"> 
+
+		<label class="price" name="productPrice"><?php echo($productInOrder->productToColorAndSize->product->price); ?> р.</label>
+		<label class="title" name="productTitle"><?php echo($productInOrder->productToColorAndSize->product->title); ?></label>
+		<div>
+			<label>Цвет</label>
+			<label> <?php echo($productInOrder->productToColorAndSize->color->title); ?></label>
+		</div>
+		<div>
+			<label>Размер</label>
+			<label><?php echo($productInOrder->productToColorAndSize->size->title); ?></label>
+		</div>
+		<div>
+			<label>Кол-во</label>
+			<label><?php echo($productInOrder->amount); ?></label>
+		</div>
+
+    </div>
+        
+</div>
