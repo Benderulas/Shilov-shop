@@ -12,7 +12,7 @@ $rights = $rights->GetAllFromDB($mysqli);
 
 function SetRightsLevel($_user, $_userProfile, $_rights)
 {
-	if($_user->rights->level == 10) 
+	if($_user->rights->level == 10)
 	{
 		echo("<select id='userLevel'>");
 
@@ -26,9 +26,9 @@ function SetRightsLevel($_user, $_userProfile, $_rights)
 		echo("</select>");
 	}
 
-	else 
+	else
 	{
-		echo("<select id='userLevel'>");
+		echo("<select hidden='hidden' id='userLevel'>");
 
 		echo ("<option value='" . $_userProfile->rights->id . "'");
 		echo(" selected='selected'");
