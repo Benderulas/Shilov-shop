@@ -2,7 +2,7 @@
 	background-color: white;
 }
 .basket-wrapper{
-	margin: 0 25%;
+	margin: 0 30%;
 }
 .product-in-basket{
 	padding: 5px;
@@ -10,6 +10,7 @@
 	border-color: black;
 	border-width: 1px;
 	margin-bottom: 5px;
+	display: block;
 }
 
 .product-image img{
@@ -53,4 +54,9 @@
 .delete-button img{
 	width: 40px;
     height: auto;
+}
+
+.fill-order-button{
+	display: block;
+
 }
